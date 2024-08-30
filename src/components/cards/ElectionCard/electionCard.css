@@ -1,0 +1,160 @@
+.electioncard {
+  display: flex;
+  background-color: rgb(21, 31, 32);
+  padding: 1em;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.5em;
+  margin-bottom: 0.5em;
+  cursor: pointer;
+  position: relative;
+}
+
+.electioncard__options-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  transition: all 0.3s ease;
+}
+
+/* option */
+.electioncard__options {
+  position: absolute;
+  border: 1px solid whitesmoke;
+  right: 25px;
+  top: 15px;
+  z-index: 2;
+  display: none;
+  transform: display 0.3s ease;
+  color: var(--secondary-color);
+  background-color: var(--bg-color);
+  border-radius: 0.5em;
+  overflow: hidden;
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.468);
+}
+
+.electioncard__options ul li {
+  padding: 0.2em 0.5em;
+  display: flex;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.electioncard__options ul li span {
+  margin-right: 0.5em;
+}
+
+.electioncard__options ul li p {
+  font-size: 0.7rem;
+}
+.electioncard__options ul li:hover {
+  background-color: rgb(188, 211, 71);
+}
+
+.electioncard__options .electioncard__options-btn:hover svg {
+  transform: scale(0.9);
+}
+
+.electioncard__options.show {
+  display: block;
+}
+
+.electioncard:hover {
+  background-color: rgba(30, 44, 45, 0.764);
+}
+
+/* grid view */
+
+.grid__view .electioncard {
+  margin-top: 1em;
+  max-width: 300px;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.grid__view .electioncard__header,
+.grid__view .electioncard__content,
+.grid__view .electioncard__footer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 01em;
+}
+
+.grid__view .electioncard__footer {
+  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.grid__view .electioncard__footer-profile {
+  margin-top: 0.8em;
+  right: 0;
+}
+
+.grid__view .electioncard__header h3,
+.grid__view.electioncard__content h4,
+.grid__view .electioncard__footer-profile {
+  margin-bottom: 0.5em;
+  font-size: 0.9rem;
+}
+
+.grid__view .electioncard__footer-remaining {
+  background-color: var(--secondary-color);
+  padding: 0.3em;
+  border-radius: 0.5em;
+  color: var(--bg-color);
+  font-weight: bolder;
+}
+
+.grid__view .electioncard__footer-remaining p {
+  font-weight: bolder;
+}
+/* grid view */
+
+.electioncard__header h3,
+.electioncard__content h4,
+.electioncard__footer-profile {
+  margin-bottom: 1em;
+  font-size: 0.9rem;
+}
+
+.electioncard__header p,
+.electioncard__content p,
+.electioncard__footer-remaining p {
+  font-size: 0.8rem;
+  font-weight: 100;
+}
+
+.electioncard__footer-profile {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.electioncard__footer-profile a {
+  margin-left: 3em;
+  color: var(--icon-color);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.electioncard__footer-profile a:hover {
+  transform: translateY(-0.2em);
+}
+
+.electioncard__footer-remaining {
+  background-color: var(--secondary-color);
+  padding: 0.3em;
+  border-radius: 0.5em;
+  color: var(--bg-color);
+  font-weight: bolder;
+}
+
+.electioncard__footer-remaining p {
+  font-weight: bolder;
+}

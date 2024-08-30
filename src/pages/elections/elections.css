@@ -1,0 +1,65 @@
+.elections {
+  width: 100%;
+  overflow: hidden;
+}
+
+.elections__content {
+  margin: 0 auto;
+  display: grid;
+  gap: 0.8em;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.elections__filter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 1em 0.3em;
+}
+
+.elections__filter-btns {
+  display: inline-block;
+  line-height: 100%;
+  padding: 0.4em;
+  background-color: rgba(255, 255, 255, 0.153);
+  border-radius: 0.3em;
+  border: none;
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+
+.elections__view-btn {
+  line-height: 100%;
+  padding: 0.4em;
+  background-color: rgba(255, 255, 255, 0.153);
+  border-radius: 0.3em;
+  border: none;
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+
+.elections__view-btn.active {
+  background-color: var(--icon-color);
+}
+
+.elections__view-btn.active svg,
+.elections__view-btn.active i {
+  color: whitesmoke;
+}
+
+.elections__filter-btns svg,
+.elections__filter-btns i {
+  font-size: 1.3rem;
+  color: var(--icon-color);
+}
+
+.elections__content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.elections__content.grid__view {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6em;
+}

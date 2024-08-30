@@ -1,0 +1,64 @@
+.customadd__btn {
+  background-color: var(--nav-bg-color);
+  width: 150px;
+  padding: 1em 0.8em;
+  border-radius: 0.5em;
+  border: none;
+  border-radius: 0.5em;
+
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.452);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.customadd__btn:hover {
+  background-color: rgb(35, 34, 34);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.customadd__btn-content {
+  display: flex;
+}
+
+.customadd__btn-content_left {
+  width: 30%;
+  flex-basis: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.customadd__btn-content_left span {
+  display: inline-block;
+  padding: 0.4em;
+  background-color: rgba(255, 255, 255, 0.153);
+  color: whitesmoke;
+  border-radius: 0.3em;
+}
+
+.customadd__btn-content_left span i,
+.customadd__btn-content_left span svg {
+  color: var(--icon-color);
+}
+
+.customadd__btn-content_right {
+  flex-basis: 3;
+  width: 65%;
+  margin-left: 1em;
+  line-height: -100%;
+}
+
+.customadd__btn-content_right p {
+  /* font-weight: 100; */
+  font-size: 0.9rem;
+  text-align: left;
+  margin-bottom: 1em;
+  color: whitesmoke;
+}
+
+.inforcard__content-right h3 {
+  font-size: bolder;
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+}

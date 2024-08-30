@@ -1,0 +1,62 @@
+.section__padding {
+  padding: 6em 10em;
+}
+
+.section__padding-md {
+  padding: 1em 2em;
+}
+
+.section__margin {
+  margin: 2em 1em;
+}
+
+.section__heading {
+  font-size: clamp(2rem, 2.5rem + 1vw, 2.5rem);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  line-height: 1.5em;
+  margin-bottom: 1em;
+}
+
+.section__text {
+  font-size: clamp(1.2rem, 1.2rem + 0vw, 1.25rem);
+  line-height: 1.5em;
+  font-weight: 300;
+  margin-bottom: 0.9em;
+  text-align: left;
+}
+
+.lead__text {
+  font-weight: 200;
+  margin-bottom: 1.2em;
+}
+
+.secondary__btn {
+  padding: 1em 1.5em;
+  font-weight: bold;
+  font-size: 0.7rem;
+  border-radius: 0.4em;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  background-color: var(--secondary-color);
+}
+
+.secondary__btn:hover {
+  opacity: 0.9;
+  color: whitesmoke;
+  transform: scale(0.99);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: gray;
+}
+
+button:disabled:hover {
+  opacity: 1;
+}
+
+.form__control-margin {
+  margin-bottom: 2.5em;
+}

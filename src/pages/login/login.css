@@ -1,0 +1,121 @@
+.login__site {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.login__left {
+  flex-basis: 1;
+  width: 80%;
+  margin-right: 4em;
+  padding: 1em;
+}
+
+.login__right {
+  width: 100%;
+  flex-basis: 1;
+}
+
+.login__right-img {
+  width: 80%;
+}
+
+.form__control {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.form__control-label {
+  font-size: 1.5rem;
+  margin-bottom: 0.2em;
+}
+
+.form__control-input {
+  width: 100%;
+  font-size: 1.3rem;
+  position: relative;
+}
+
+.form__control-input input {
+  width: 100%;
+  margin-left: 0;
+  padding-left: 40px;
+  font-weight: 300;
+  display: block;
+  font-size: 1.4rem;
+  position: relative;
+}
+
+.form__control-input input:focus,
+.form__control-input input:active {
+  background-color: transparent;
+}
+
+.form__control-input_icon {
+  position: absolute;
+  left: 0px;
+  bottom: 3px;
+  width: 30px;
+  margin-bottom: 0;
+}
+
+.form__control-password_toggle {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  cursor: pointer;
+}
+
+.form__control-checkbox label {
+  margin-left: 0.5em;
+  font-size: 1.2rem;
+}
+
+.form__control-reset a {
+  color: var(--secondary-color);
+  font-weight: bolder;
+}
+
+.form__control-input input[type="checkbox"] {
+  border-color: red;
+  margin-right: 0.3em;
+}
+
+.form__control-footnote {
+  margin-top: 0.9em;
+}
+
+.form__control-footnote-link a {
+  color: var(--secondary-color);
+  font-weight: bolder;
+  cursor: pointer;
+  padding-bottom: 0.2em;
+  border-bottom: none;
+  margin-left: 0.3em;
+  transition: border 3ms ease-in-out;
+}
+
+.form__control-input_instructions {
+  display: block;
+  line-height: 1.4;
+  color: #3772ff;
+}
+
+.form__control-input_offscreen {
+  display: none;
+  font-weight: bolder;
+}
+
+.error__icons {
+  color: #c1121f;
+  margin-right: 0.5em;
+}
+
+.form__control-footnote-link:hover {
+  opacity: 0.8;
+  border-bottom: 1px solid var(--secondary-color);
+}

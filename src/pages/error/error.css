@@ -1,0 +1,19 @@
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.error__content {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.error__content-img {
+  width: 350px;
+  height: 350px;
+}

@@ -1,0 +1,6 @@
+.landing__page {
+  display: grid;
+  height: 100dvh;
+  width: 100vw;
+  place-items: center;
+}

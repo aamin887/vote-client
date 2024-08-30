@@ -1,0 +1,24 @@
+.profile-images-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: auto;
+}
+
+.profile-image {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  border: 1px solid greenyellow;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile-images-container .profile-image:nth-child(2) {
+  left: 14px;
+}
+
+.profile-images-container .profile-image:nth-child(3) {
+  left: 40px;
+}

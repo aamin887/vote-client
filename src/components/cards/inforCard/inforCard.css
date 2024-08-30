@@ -1,0 +1,55 @@
+.inforcard {
+  background-color: var(--nav-bg-color);
+  min-width: 200px;
+  padding: 1em 0.8em;
+  border-radius: 0.5em;
+  transition: all 0.3s ease;
+  margin-left: 1em;
+}
+
+.inforcard:hover {
+  opacity: 0.8;
+}
+
+.inforcard__content {
+  display: flex;
+}
+
+.inforcard__content-left {
+  width: 30%;
+  flex-basis: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.inforcard__content-left span {
+  display: inline-block;
+  padding: 0.4em;
+  background-color: rgba(255, 255, 255, 0.153);
+  color: whitesmoke;
+  border-radius: 0.3em;
+}
+
+.inforcard__content-left span i,
+.inforcard__content-left span svg {
+  color: var(--icon-color);
+}
+
+.inforcard__content-right {
+  flex-basis: 3;
+  width: 65%;
+  margin-left: 01em;
+}
+
+.inforcard__content-right p {
+  font-weight: 100;
+  font-size: 0.9rem;
+  margin-bottom: 1em;
+}
+
+.inforcard__content-right h3 {
+  font-size: bolder;
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+}

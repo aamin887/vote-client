@@ -1,0 +1,134 @@
+.dashboard {
+  position: relative;
+}
+
+.dashboard__stats {
+  display: flex;
+  padding: 1em 0.5em;
+  overflow-x: scroll;
+  align-items: center;
+}
+
+.dashboard__content {
+  display: grid;
+  gap: 1.5em;
+  grid-template-columns: 3fr 1fr;
+}
+
+.dashboard__content-election.grid__view .dashboard__content-election_cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6em;
+}
+
+.dashboard__content-election_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 0.3em;
+}
+
+.dashboard__content-election_header-title h5 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+.dashboard__content-election_header-title p {
+  font-weight: 100;
+}
+
+.election__view-btn {
+  display: inline-block;
+  line-height: 100%;
+  padding: 0.4em;
+  background-color: rgba(255, 255, 255, 0.153);
+  border-radius: 0.3em;
+  border: none;
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+
+.election__view-btn:hover {
+  background-color: rgb(200, 206, 190);
+}
+
+.election__view-btn.active {
+  background-color: var(--icon-color);
+}
+
+.election__view-btn svg,
+.election__view-btn i {
+  font-size: 1.3rem;
+  color: var(--icon-color);
+}
+
+.election__view-btn.active svg,
+.election__view-btn.active i {
+  color: rgb(255, 255, 255);
+}
+
+.dashboard__content-right {
+  height: 100%;
+  background-color: rgb(21, 31, 32);
+  border: none;
+  border-radius: 0.5em;
+}
+
+.logs__card {
+  padding: 1em 2em;
+  border: none;
+  position: relative;
+  border-radius: 0.5em;
+}
+
+.logs__card-title {
+  position: relative;
+  padding: 2em 0;
+}
+
+.logs__card-title h5 {
+  padding-bottom: 1em;
+  font-size: 1.2rem;
+}
+
+.logs__card-title::after {
+  content: "";
+  position: absolute;
+  height: 0.1em;
+  width: 100%;
+  background-color: rgba(159, 159, 159, 0.744);
+}
+
+.logs__card-content {
+  overflow-x: scroll;
+  max-height: 450px;
+}
+
+.logs__card-content ul li {
+  background-color: rgb(90, 90, 90);
+  padding: 0.5em;
+  margin-bottom: 0.2em;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.logs__card-content ul li:hover {
+  background-color: rgb(133, 133, 133);
+}
+
+.logs__card-content ul li h6 {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.2em;
+}
+
+.logs__card-content ul li p {
+  font-weight: 300;
+  font-size: 0.8rem;
+}
+
+.dashboard__content-election_cards {
+  overflow-x: scroll;
+  max-height: 450px;
+}

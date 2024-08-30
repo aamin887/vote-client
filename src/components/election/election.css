@@ -1,0 +1,30 @@
+.election {
+  padding: 0.5em 2em;
+  box-shadow: 0 0 0.2em grey;
+  border-radius: 1em;
+  transition: all 0.3s ease-in-out;
+  margin-bottom: 0.5em;
+}
+
+.election:hover {
+  transform: scale(0.98);
+}
+
+.election__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.election__content-logo {
+  width: 40px;
+}
+
+.election__content-title h5 {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.election__content-due {
+  align-self: flex-end;
+}

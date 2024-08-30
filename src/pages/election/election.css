@@ -1,0 +1,106 @@
+.election__page-profile {
+  max-width: 100%;
+  width: 800px;
+  padding: 20px;
+}
+
+.election__page-profile_left {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.election__page-profile_photo {
+  width: 15em;
+  margin-right: 20px;
+}
+
+.election__page-profile_right {
+  flex: 1;
+}
+
+.election__page-profile_right-btns {
+  margin-top: 10px;
+  display: flex;
+}
+
+.election__page-profile_right-btns .btn {
+  font-size: 0.9rem;
+  width: auto;
+  margin-right: 0.5em;
+}
+
+.election__page-profile_btn-edit {
+  margin-right: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+}
+
+.election__page-profile_btn-delete {
+  margin-right: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f44336;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* card details ===>()<==== */
+
+.election__page-profile_right-details,
+.election__page-profile_right-details_fl {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 0.8em;
+}
+/* inside the form user details */
+.election__page-profile-details_control {
+  width: calc(100% / 2 - 10px);
+}
+
+.election__page-profile-details_control p {
+  font-weight: 100;
+}
+
+.election__page-profile_right-details_fl
+  .election__page-profile-details_control {
+  width: calc(100%);
+  margin-top: 0;
+}
+
+.election__page-profile-details_control .details {
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+}
+.election__page-profile-details_control input,
+.election__page-profile-details_control textarea {
+  height: 45px;
+  width: 100%;
+  overflow-x: hidden;
+  resize: vertical;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid var(--main-grey);
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.election__page-profile-details_control textarea {
+  height: 5em;
+}
+
+.election__page-profile-details_control input:focus,
+.election__page-profile-details_control input:valid,
+.election__page-profile-details_control textarea:focus,
+.election__page-profile-details_control textarea:valid,
+.election__page-profile-details_control textarea.valid {
+  border-color: var(--main-purple);
+}

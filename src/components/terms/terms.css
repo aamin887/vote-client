@@ -1,0 +1,81 @@
+.terms__modal {
+  position: fixed;
+  background-color: #0e0f108c;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+  height: 100dvh;
+  z-index: 10;
+}
+
+.terms {
+  background-color: rgb(39, 37, 37);
+  max-width: 900px;
+  width: 100%;
+  margin: auto;
+  margin-top: 2em;
+  color: var(--secondary-bg-color);
+  padding: 5em 6em 3em 6em;
+}
+
+.terms__content h2 {
+  font-weight: bold;
+}
+
+.terms__content-text p {
+  margin-bottom: 1em;
+  line-height: 1.4;
+}
+
+.terms__content-text_steps h4 {
+  color: var(--secondary-color);
+  font-weight: bolder;
+  margin-bottom: 1em;
+}
+
+.terms__content-text_steps ol {
+  list-style: none;
+  /* list-style-type: s; */
+  counter-reset: li;
+  margin-bottom: 1em;
+}
+
+.terms__content-text_steps li::before {
+  content: counter(li);
+  color: var(--secondary-color);
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.terms__content-text_steps li {
+  counter-increment: li;
+  margin-bottom: 01em;
+}
+
+.terms__footnote-control {
+  margin-bottom: 1em;
+}
+
+.terms__footnote-control label {
+  margin-left: 0.5em;
+}
+
+.terms__footnote-control label,
+.terms__footnote-control input {
+  cursor: pointer;
+}
+
+.terms__footnote-buttons {
+  padding: 1em 0;
+  display: flex;
+}
+
+.terms__footnote-buttons button {
+  margin-right: 1em;
+}

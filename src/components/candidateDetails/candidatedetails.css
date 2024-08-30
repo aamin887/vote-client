@@ -1,0 +1,42 @@
+.candidates {
+  display: flex;
+}
+
+.candidates__left {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  margin-right: 4em;
+}
+
+.candidates__left-content_img {
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.candidates__right-footer {
+  display: flex;
+}
+
+.candidates__right-footer button {
+  margin-right: 1em;
+}
+
+.candidates__right-content_details {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.candidates__right-content_details h3 {
+  font-weight: bolder;
+  margin-bottom: 0.2em;
+}
+
+.candidates__right-content_details p {
+  font-weight: 300;
+}
