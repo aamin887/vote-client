@@ -2,12 +2,22 @@ import { useState, useEffect, useRef } from "react";
 import "./election.css";
 import { useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
+import { IoGrid, IoList } from "react-icons/io5";
+import { CustomElectionCard } from "../../components";
 
 function Election() {
   const descRef = useRef();
   const params = useParams();
   const [electionDetails, setElectionDetails] = useState({});
   const [toogleEdit, setToogleEdit] = useState(false);
+  const [toogleGridView, setToogleGridView] = useState(false);
+
+  const handleGridView = () => {
+    setToogleGridView(true);
+  };
+  const handleListView = () => {
+    setToogleGridView(false);
+  };
 
   const handleChange = (e) => {
     setElectionDetails({ ...electionDetails, [e.target.name]: e.target.value });
@@ -148,8 +158,36 @@ function Election() {
 
         {/* positions Section */}
         <div className="election__page-content">
-          <div className="election__page-content_position">
-            <p>No positions yet, add a position</p>
+          <div className="election__page-content_header">
+            <div className="election__page-content_header-title">
+              <h5>Positions</h5>
+              <p>These are all the position for this elections</p>
+            </div>
+            <div className="dashboard__content-election_header-btns">
+              <button
+                className={`election__view-btn ${
+                  !toogleGridView ? "active" : ""
+                }`}
+                onClick={handleListView}
+              >
+                <IoList />
+              </button>
+              <button
+                className={`election__view-btn ${
+                  toogleGridView ? "active" : ""
+                }`}
+                onClick={handleGridView}
+              >
+                <IoGrid />
+              </button>
+            </div>
+          </div>
+          {/*  */}
+          <div className={`${toogleGridView ? "grid__view" : ""}`}>
+            <CustomElectionCard />
+            <CustomElectionCard />
+            <CustomElectionCard />
+            <CustomElectionCard />
           </div>
         </div>
       </div>

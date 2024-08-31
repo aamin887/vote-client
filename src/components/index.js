@@ -10,6 +10,7 @@ export { default as AdminHeader } from "./AdminHeader/AdminHeader";
 export { default as CreateElection } from "./createElection/CreateElection";
 export { default as ProfileImage } from "./profileImage/ProfileImage";
 export { default as InforCard } from "./cards/inforCard/InforCard";
+export { default as CustomElectionCard } from "./cards/CustomElectionCard/PositionCard";
 export { default as CandidateCard } from "./candidatecard/CandidateCard";
 export { default as AddCandidateForm } from "./addCandidate/AddCandidate";
 export { default as ElectionCard } from "./cards/ElectionCard/ElectionCard";

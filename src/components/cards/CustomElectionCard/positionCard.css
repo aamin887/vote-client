@@ -1,0 +1,122 @@
+.positioncard {
+  display: flex;
+  background-color: rgb(21, 31, 32);
+  padding: 1em;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.5em;
+  margin-bottom: 0.5em;
+  cursor: pointer;
+  position: relative;
+}
+
+.positioncard__content-inline {
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.positioncard__content-inline p {
+  margin-right: 1em;
+}
+
+.positioncard__footer-remaining {
+  background-color: var(--secondary-color);
+  padding: 0.3em;
+  border-radius: 0.5em;
+}
+
+/* grid view */
+.grid__view .positioncard {
+  margin-top: 1em;
+  max-width: 300px;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.grid__view .positioncard__header,
+.grid__view .positioncard__content,
+.grid__view .positioncard__footer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 01em;
+}
+
+.grid__view .positioncard__footer {
+  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.grid__view .positioncard__footer-profile {
+  margin-top: 0.8em;
+  right: 0;
+}
+
+.grid__view .positioncard__header h3,
+.grid__view .positioncard__content h4,
+.grid__view .positioncard__footer-profile {
+  margin-bottom: 0.5em;
+  font-size: 0.9rem;
+}
+
+.grid__view .positioncard__footer-remaining {
+  background-color: var(--secondary-color);
+  padding: 0.3em;
+  border-radius: 0.5em;
+  color: var(--bg-color);
+  font-weight: bolder;
+}
+
+.grid__view .positioncard__footer-remaining p {
+  font-weight: bolder;
+}
+/* grid view */
+
+.positioncard__header h3,
+.positioncard__content h4,
+.positioncard__footer-profile {
+  margin-bottom: 1em;
+  font-size: 0.9rem;
+}
+
+.positioncard__header p,
+.positioncard p,
+.positioncard__footer-remaining p {
+  font-size: 0.8rem;
+  font-weight: 100;
+}
+
+.electioncard__footer-profile {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.electioncard__footer-profile a {
+  margin-left: 3em;
+  color: var(--icon-color);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.electioncard__footer-profile a:hover {
+  transform: translateY(-0.2em);
+}
+
+.electioncard__footer-remaining {
+  background-color: var(--secondary-color);
+  padding: 0.3em;
+  border-radius: 0.5em;
+  color: var(--bg-color);
+  font-weight: bolder;
+}
+
+.electioncard__footer-remaining p {
+  font-weight: bolder;
+}

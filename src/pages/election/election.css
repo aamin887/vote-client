@@ -1,11 +1,11 @@
 .election__page-profile {
-  max-width: 100%;
-  width: 800px;
+  width: 100%;
   padding: 20px;
 }
 
 .election__page-profile_left {
   display: flex;
+  max-width: 800px;
   margin-bottom: 20px;
 }
 
@@ -75,6 +75,7 @@
 
 .election__page-profile-details_control .details {
   font-weight: 500;
+  color: var(--secondary-color);
   margin-bottom: 5px;
   display: block;
 }
@@ -102,5 +103,58 @@
 .election__page-profile-details_control textarea:focus,
 .election__page-profile-details_control textarea:valid,
 .election__page-profile-details_control textarea.valid {
-  border-color: var(--main-purple);
+  border-color: var(--icon-color);
+}
+
+/* content and forms */
+
+/* .election__page-content {
+} */
+
+.election__page-content_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 1em;
+  background-color: #4caf4f16;
+}
+
+.election__page-content_header-title h5 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+.election__page-content_header-title p {
+  font-weight: 100;
+}
+
+.election__view-btn {
+  display: inline-block;
+  line-height: 100%;
+  padding: 0.4em;
+  background-color: rgba(255, 255, 255, 0.153);
+  border-radius: 0.3em;
+  border: none;
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+
+.election__view-btn:hover {
+  background-color: rgb(200, 206, 190);
+}
+
+.election__view-btn.active {
+  background-color: var(--icon-color);
+}
+
+.election__view-btn svg,
+.election__view-btn i {
+  font-size: 1.3rem;
+  color: var(--icon-color);
+}
+
+.election__view-btn.active svg,
+.election__view-btn.active i {
+  color: rgb(255, 255, 255);
 }
