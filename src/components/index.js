@@ -2,7 +2,6 @@ export { default as PrivateRoute } from "./privateRoute/PrivateRoute";
 export { default as Navbar } from "./navbar/Navbar";
 export { default as Terms } from "./terms/Terms";
 export { default as Loader } from "./loader/Loader";
-export { default as Election } from "./elections/Election";
 export { default as AdminNav } from "./AdminDashNav/Admin";
 export { default as Layout } from "./layout/Layout";
 export { default as PersistLogin } from "./persistLogin/PersistLogin";

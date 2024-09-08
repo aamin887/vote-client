@@ -3,6 +3,7 @@ import {
   Home,
   Login,
   Register,
+  AddCandidate,
   PasswordReset,
   Admin,
   Vote,
@@ -13,11 +14,10 @@ import {
   Election,
   ChangePassword,
   PasswordRequest,
-  PasswordResetSuccess,
   CreateElection,
 } from "./pages";
 
-import { PrivateRoute, AddCandidateForm } from "./components";
+import { PrivateRoute } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider";
 import NavigationProvider from "./context/NavigationProvider";
@@ -35,30 +35,35 @@ function App() {
             <Route element={<Register />} path="/register" />
             <Route element={<PasswordReset />} path="/password-reset" />
             <Route element={<ChangePassword />} path="/password-change" />
-            <Route
-              element={<PasswordResetSuccess />}
-              path="/password-reset-change"
-            />
+
             <Route element={<PasswordRequest />} path="/password-success" />
 
             {/* protected routes */}
             <Route element={<PersistLogin />}>
               <Route element={<PrivateRoute />}>
                 <Route element={<Layout />}>
-                  <Route element={<Dashboard />} path="dashboard" />
+                  <Route element={<Dashboard />} path="/dashboard" />
+
                   {/* elections */}
                   <Route path="elections">
+                    {/* index */}
                     <Route element={<Elections />} index />
+                    {/* election by id */}
                     <Route element={<Election />} path="/elections/:id" />
+                    {/* create new election */}
                     <Route
                       element={<CreateElection />}
                       path="/elections/create"
+                    />
+                    <Route
+                      element={<AddCandidate />}
+                      path="/elections/positions/:positionId/candidates/add"
                     />
                   </Route>
 
                   {/* positions */}
                   <Route element={<Candidates />} path="candidates" />
-                  <Route element={<AddCandidateForm />} path="add-candidates" />
+                  <Route element={<AddCandidate />} path="/candidates/add" />
 
                   {/*  */}
 

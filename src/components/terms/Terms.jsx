@@ -1,13 +1,17 @@
 import "./terms.css";
 
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import useLogout from "../../hooks/useLogout";
 
-function Terms({ id }) {
+function Terms() {
   const axiosPrivate = useAxiosPrivate();
+
+  const logout = useLogout();
+
   const handleAcceptTerms = async (e) => {
     e.preventDefault();
-    const res = await axiosPrivate.put(`/auth/accept-terms/${id}`, {
-      acceptTerms: true,
+    const res = await axiosPrivate.put(`/auth/accept-terms/`, {
+      verified: true,
     });
     console.log(res.data);
   };
@@ -16,6 +20,7 @@ function Terms({ id }) {
   };
   const handleDeclineTerms = async (e) => {
     e.preventDefault();
+    return logout();
   };
 
   return (

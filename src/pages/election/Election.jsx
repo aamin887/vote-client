@@ -1,16 +1,25 @@
-import { useState, useEffect, useRef } from "react";
 import "./election.css";
-import { useParams } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
 import { IoGrid, IoList } from "react-icons/io5";
 import { CustomElectionCard } from "../../components";
+import { toast } from "react-toastify";
 
 function Election() {
+  const navigate = useNavigate();
   const descRef = useRef();
   const params = useParams();
   const [electionDetails, setElectionDetails] = useState({});
+  const [newPosition, setNewPosition] = useState("");
+  const [allPosition, setAllPosition] = useState([]);
   const [toogleEdit, setToogleEdit] = useState(false);
   const [toogleGridView, setToogleGridView] = useState(false);
+  const [tooglePosition, setTooglePosition] = useState(false);
+
+  const handlePosition = () => {
+    setTooglePosition(!tooglePosition);
+  };
 
   const handleGridView = () => {
     setToogleGridView(true);
@@ -35,7 +44,12 @@ function Election() {
 
   const handleEditProfile = () => {
     // Add logic for editing the profile
-    setToogleEdit(!toogleEdit);
+    if (toogleEdit === false) {
+      return setToogleEdit(true);
+    }
+    if (toogleEdit === true) {
+      return setToogleEdit(false);
+    }
     // alert("Edit profile clicked!");
   };
 
@@ -44,11 +58,33 @@ function Election() {
     alert("Delete profile clicked!");
   };
 
+  const handleAddPosition = async () => {
+    const res = await axiosPrivate.post("/api/v1/positions", {
+      position: newPosition,
+      description: electionDetails?.description,
+      electionId: electionDetails?._id,
+    });
+
+    if (res.status === 201) {
+      toast.success("new position added");
+      setAllPosition((prev) => [...prev, res.data.position]);
+      setTooglePosition(!tooglePosition);
+      setNewPosition("");
+    }
+  };
+
   useEffect(() => {
     const getElection = async function () {
       const res = await axiosPrivate.get(`/api/v1/elections/${params.id}`);
 
-      console.log(res?.data.election);
+      if (res.status == 200) {
+        const resPosition = await axiosPrivate.get(
+          `/api/v1/positions/${params.id}`
+        );
+        console.log(resPosition);
+
+        setAllPosition([...resPosition.data]);
+      }
 
       setElectionDetails({ ...res?.data.election });
     };
@@ -141,20 +177,87 @@ function Election() {
             {/* Edit and Delete Buttons */}
             <div className="election__page-profile_right-btns">
               <button
-                className="election__page-profile_btn-edit"
+                className="election__page-profile_btn-edit btn"
                 onClick={handleEditProfile}
+                disabled={tooglePosition}
               >
                 {toogleEdit ? "Save" : "Edit"}
               </button>
               <button
-                className=" election__page-profile_btn-delete"
+                className=" btn election__page-profile_btn-delete"
                 onClick={handleDeleteProfile}
               >
                 Delete
               </button>
+              <button
+                className={`btn election__page-content_btn ${
+                  tooglePosition ? "cancel-btn" : ""
+                }`}
+                onClick={handlePosition}
+              >
+                {tooglePosition
+                  ? "Abort new position"
+                  : "Create a new Position"}
+              </button>
+              {allPosition.length > 0 && (
+                <button
+                  className={`btn election__page-content_btn ${
+                    tooglePosition ? "cancel-btn" : ""
+                  }`}
+                  onClick={() =>
+                    navigate(
+                      `/elections/positions/${electionDetails?._id}/candidates/add`,
+                      {
+                        state: electionDetails,
+                      }
+                    )
+                  }
+                >
+                  Add a candidate
+                </button>
+              )}
             </div>
           </div>
         </div>
+
+        {tooglePosition && (
+          <div className="election__page-form">
+            <div className="election__page-profile_right-details">
+              {/* new position*/}
+              <div className="election__page-profile-details_control fl">
+                <span className="details">New Position</span>
+                <input
+                  type="text"
+                  name="newPosition"
+                  placeholder="E.g President or Treasurer"
+                  value={newPosition}
+                  onChange={(e) => {
+                    setNewPosition(e.target.value);
+                  }}
+                  required
+                />
+              </div>
+              <div className="election__page-profile-details_control fl">
+                <span className="details">New Position</span>
+                <textarea
+                  name="description"
+                  placeholder="What does the position represent?"
+                  value={description}
+                  onChange={handleChange}
+                  required
+                  ref={descRef}
+                  onBlur={handleFocus}
+                ></textarea>
+              </div>
+              {/* elections end date*/}
+              <div className="election__page-profile-details_control">
+                <button className="btn" onClick={handleAddPosition}>
+                  Add positionnk
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* positions Section */}
         <div className="election__page-content">
@@ -182,12 +285,20 @@ function Election() {
               </button>
             </div>
           </div>
+
           {/*  */}
-          <div className={`${toogleGridView ? "grid__view" : ""}`}>
-            <CustomElectionCard />
-            <CustomElectionCard />
-            <CustomElectionCard />
-            <CustomElectionCard />
+          <div
+            className={`election__page-content_container ${
+              toogleGridView ? "grid__view" : ""
+            }`}
+          >
+            {allPosition?.map((position, idx) => (
+              <CustomElectionCard
+                data={position}
+                election={electionDetails}
+                key={idx}
+              />
+            ))}
           </div>
         </div>
       </div>

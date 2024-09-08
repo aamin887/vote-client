@@ -2,8 +2,6 @@ import "./register.css";
 import one from "../../assets/Group13.png";
 import axios from "../../api/axios";
 
-import { Error } from "../../components/toasts/Main";
-
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -43,7 +41,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !uniqueNumber || !password || !confirmPassword) {
-      return toast.error(<Error message={"Fill all fields"} />, {
+      return toast.error("Fill all fields", {
         toastId: "emptyFields",
       });
     }
@@ -65,7 +63,7 @@ function Register() {
       );
 
       if (response.status === 204) {
-        toast.success(<Error message={"Account successfully created."} />, {
+        toast.success("Account successfully created.", {
           toastId: "emptyFields",
         });
 
@@ -80,19 +78,19 @@ function Register() {
       }
     } catch (error) {
       if (!error?.response) {
-        return toast.error(<Error message={"Network error "} />, {
+        return toast.error("Network error ", {
           toastId: "networkError",
         });
       } else if (error?.response.status === 400) {
-        return toast.error(<Error message={"Fill all fields"} />, {
+        return toast.error("Fill all fields", {
           toastId: "emptyFields",
         });
       } else if (error?.response.status === 403) {
-        return toast.error(<Error message={"User already taken!"} />, {
+        return toast.error("User already taken!", {
           toastId: "userTaken",
         });
       } else {
-        return toast.error(<Error message={"Network error "} />, {
+        return toast.error("Network error ", {
           toastId: "networkError",
         });
       }
@@ -159,7 +157,7 @@ function Register() {
                 >
                   <CgDanger
                     size={20}
-                    color={"#b3790c"}
+                    // color={"#b3790c"}
                     className="error__icons"
                   />
                   <br />

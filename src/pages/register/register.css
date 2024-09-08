@@ -81,7 +81,7 @@
 }
 
 .form__control-input input[type="checkbox"] {
-  border-color: red;
+  border-color: var(--warning-color);
   margin-right: 0.3em;
 }
 
@@ -102,7 +102,7 @@
 .form__control-input_instructions {
   display: block;
   line-height: 1.4;
-  color: #3772ff;
+  color: var(--main-blue);
 }
 
 .form__control-input_offscreen {
@@ -111,7 +111,7 @@
 }
 
 .error__icons {
-  color: #c1121f;
+  color: var(--warning-color);
   margin-right: 0.5em;
 }
 

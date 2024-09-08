@@ -39,13 +39,13 @@
   bottom: 0;
 }
 
-.createelection__form-details,
+/* .createelection__form-details,
 .createelection__form-categories-control {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   margin: 20px 0 12px 0;
-}
+} */
 
 /* inside the form user details */
 .createelection__form-details_control,

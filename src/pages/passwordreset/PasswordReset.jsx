@@ -9,7 +9,6 @@ import { FaCheck } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 import { SlEnvolope } from "react-icons/sl";
-import { Error } from "../../components/toasts/Main";
 
 function PasswordReset() {
   const refEmail = useRef();
@@ -31,7 +30,7 @@ function PasswordReset() {
     console.log("hello");
 
     if (!email) {
-      return toast.error(<Error message={"Fill all fields "} />, {
+      return toast.error("Fill all fields ", {
         toastId: "emptyFields",
       });
     }
@@ -52,16 +51,13 @@ function PasswordReset() {
       });
     } catch (error) {
       if (!error?.response) {
-        return toast.error(<Error message={"Network error "} />, {
+        return toast.error("Network error ", {
           toastId: "networkError",
         });
       } else if (error?.response.status === 404) {
-        return toast.error(
-          <Error message={"Account not found. make sure email is correct!"} />,
-          {
-            toastId: "notFound",
-          }
-        );
+        return toast.error("Account not found. make sure email is correct!", {
+          toastId: "notFound",
+        });
       } else if (error?.response.status === 401) {
         console.log(error?.response.data.msg);
       } else {

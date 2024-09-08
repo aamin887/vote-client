@@ -1,32 +1,25 @@
 import "./dashboard.css";
 import { useState, useEffect } from "react";
 import { IoGrid, IoList } from "react-icons/io5";
-import { PiUsersThreeFill } from "react-icons/pi";
+import { FaPlus } from "react-icons/fa";
+
 import { GiVote } from "react-icons/gi";
-import { LuUserSquare2 } from "react-icons/lu";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-
-// import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import { Terms } from "../../components";
-
 import useAuth from "../../hooks/useAuth";
 import useNav from "../../hooks/useNav";
 import InforCard from "../../components/cards/inforCard/InforCard";
 import CustomAdd from "../../components/customAdd/CustomAdd";
 import ElectionCard from "../../components/cards/ElectionCard/ElectionCard";
+import { Link } from "react-router-dom";
 
 function Dashboard() {
   const { toogleGridView, setToogleGridView } = useNav();
   const [electionData, setElectionData] = useState([]);
-  const [addElection, setAddElection] = useState(false);
   const axiosPrivate = useAxiosPrivate();
 
   const { auth } = useAuth();
 
   const organisationId = auth.id;
-
-  // const axiosPrivate = useAxiosPrivate();
-  // if (!auth?.verified) return <Terms id={auth.id} />;
 
   const handleListView = function () {
     setToogleGridView(false);
@@ -55,66 +48,86 @@ function Dashboard() {
 
   return (
     <div className="dashboard section__padding-md">
-      {/* {!auth?.verified && <Terms />} */}
-      {/* {addElection && <CreateElection setAddElection={setAddElection} />} */}
       <div className="dashboard__content">
         <div className="dashboard__content-left">
           <div className="dashboard__stats">
             <CustomAdd />
-            <InforCard />
-            <InforCard />
-            <InforCard />
+            <InforCard
+              icon={<GiVote size={26} />}
+              title="Elections"
+              stats={electionData.length}
+            />
+            {/* all voters */}
+            <InforCard
+              icon={<GiVote size={26} />}
+              title="Elections"
+              stats={electionData.length}
+            />
+            {/* all candidates */}
+            <InforCard
+              icon={<GiVote size={26} />}
+              title="Elections"
+              stats={electionData.length}
+            />
           </div>
+
           <div
             className={`dashboard__content-election ${
               toogleGridView ? "grid__view" : ""
             }`}
           >
-            <div className="dashboard__content-election_header">
-              <div className="dashboard__content-election_header-title">
-                <h5>Elections</h5>
-                <p>These are all the elections you ever created</p>
+            {electionData.length > 0 && (
+              <div className="dashboard__content-election_header">
+                <div className="dashboard__content-election_header-title">
+                  <h5>Elections</h5>
+                  <p>These are all the elections you ever created</p>
+                </div>
+                <div className="dashboard__content-election_header-btns">
+                  <button
+                    className={`election__view-btn ${
+                      !toogleGridView ? "active" : ""
+                    }`}
+                    onClick={handleListView}
+                  >
+                    <IoList />
+                  </button>
+                  <button
+                    className={`election__view-btn ${
+                      toogleGridView ? "active" : ""
+                    }`}
+                    onClick={handleGridView}
+                  >
+                    <IoGrid />
+                  </button>
+                </div>
               </div>
-              <div className="dashboard__content-election_header-btns">
-                <button
-                  className={`election__view-btn ${
-                    !toogleGridView ? "active" : ""
-                  }`}
-                  onClick={handleListView}
-                >
-                  <IoList />
-                </button>
-                <button
-                  className={`election__view-btn ${
-                    toogleGridView ? "active" : ""
-                  }`}
-                  onClick={handleGridView}
-                >
-                  <IoGrid />
-                </button>
+            )}
+            {electionData.length > 0 && (
+              <div className="dashboard__content-election_cards">
+                {electionData?.map((election, idx) => {
+                  return <ElectionCard data={election} key={idx} />;
+                })}
               </div>
-            </div>
+            )}
 
-            <div className="dashboard__content-election_cards">
-              {/* <ElectionCard />
-              <ElectionCard />
-              <ElectionCard />
-              <ElectionCard />
-              <ElectionCard />
-              <ElectionCard />
-              <ElectionCard />
-              <ElectionCard />
-              <ElectionCard />
-              <ElectionCard />
-              <ElectionCard />
-              <ElectionCard /> */}
-
-              {electionData?.map((election, idx) => {
-                return <ElectionCard data={election} key={idx} />;
-              })}
-            </div>
+            {electionData.length === 0 && (
+              <div className="dashboard__content-election_empty">
+                <p>
+                  There are no elections available. Please create a new one to
+                  get started.
+                </p>
+                <Link
+                  to={"/elections/create"}
+                  className="dashboard__content-election_empty-btn"
+                >
+                  <FaPlus />
+                  Create an election
+                </Link>
+              </div>
+            )}
           </div>
         </div>
+
         <div className="dashboard__content-right">
           <div className="dashboard__content-logs">
             <div className="logs__card">

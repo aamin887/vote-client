@@ -6,13 +6,11 @@ function InforCard({ icon, title, stats }) {
     <div className="inforcard">
       <div className="inforcard__content">
         <div className="inforcard__content-left">
-          <span>
-            <FaWallet size={26} />
-          </span>
+          <span>{icon}</span>
         </div>
         <div className="inforcard__content-right">
-          <p>Staff</p>
-          <h3>200</h3>
+          <p>{title}</p>
+          <h3>{stats}</h3>
         </div>
       </div>
     </div>

@@ -16,22 +16,12 @@ import {
   IoLockClosedOutline,
 } from "react-icons/io5";
 
-import { Error, Success } from "../../components/toasts/Main";
-
-const Msg = ({ closeToast, toastProps }) => (
-  <div>
-    Lorem ipsum dolor {toastProps.position}
-    <button>Retry</button>
-    <button onClick={closeToast}>Close</button>
-  </div>
-);
-
 function Login() {
   const refEmail = useRef();
 
   const navigate = useNavigate();
   const location = useLocation();
-  // check to see where we came from otherwise to the dashboard
+  // check to see where we came from, otherwise to the dashboard
   const from = location.state?.from?.pathname || "/dashboard";
 
   const { setAuth, persist, setPersist } = useAuth();
@@ -52,7 +42,7 @@ function Login() {
     e.preventDefault();
 
     if (!email || !password) {
-      return toast.error(<Error message={"Fill all fields"} />, {
+      return toast.error("Fill all fields", {
         toastId: "emptyFields",
       });
     }
@@ -78,7 +68,7 @@ function Login() {
       });
 
       if (response.status === 200) {
-        toast.success(<Error message={"welcome"} />, {
+        toast.success("welcome", {
           toastId: "loginSuccessful",
         });
       }
@@ -86,19 +76,19 @@ function Login() {
       navigate(from, { replace: true });
     } catch (error) {
       if (!error?.response) {
-        return toast.error(<Error message={"Network error "} />, {
+        return toast.error("Network error ", {
           toastId: "networkError",
         });
       } else if (error?.response.status === 400) {
-        return toast.error(<Error message={"Fill all fields"} />, {
+        return toast.error("Fill all fields", {
           toastId: "emptyFields",
         });
       } else if (error?.response.status === 401) {
-        return toast.error(<Error message={"Incorrect email or password"} />, {
+        return toast.error("Incorrect email or password", {
           toastId: "incorrectCredentials",
         });
       } else {
-        return toast.error(<Error message={"Network error "} />, {
+        return toast.error("Network error ", {
           toastId: "networkError",
         });
       }
@@ -243,7 +233,7 @@ function Login() {
         </div>
         <div className="login__right">
           <div className="login__right-img">
-            <img src={one} style={{}} alt="illustration" className="noselect" />
+            <img src={one} alt="illustration" className="noselect" />
           </div>
           <div className="login__right-heading">
             <h2 className="">Votes</h2>

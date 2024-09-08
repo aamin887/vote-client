@@ -2,17 +2,40 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
+  --app-container: #00523f;
+  --secondary-color: #ffc42a;
+  --layout-bg-color: #0f0c0c;
+
+  --main-dark: #0e0f108c;
+  --main-color: #fff;
+  --main-blue: #3772ff;
+  --main-red: #c1121f;
+  --light-green: #1fcb4f;
+  --warning-color: #b3790c;
+
+  --projects-section: #1f2937;
+  --link-color: rgba(255, 255, 255, 0.8);
+  --link-color-hover: rgba(195, 207, 244, 0.1);
+  --link-color-active-bg: rgba(195, 207, 244, 0.2);
+  --button-bg: #1f2937;
+  --search-area-bg: #1f2937;
+  --message-box-hover: #243244;
+  --message-box-border: rgba(255, 255, 255, 0.1);
+  --star: #ffd92c;
+  --light-font: rgba(255, 255, 255, 0.8);
+  --more-list-bg: #2f3142;
+  --more-list-bg-hover: rgba(195, 207, 244, 0.1);
+  --more-list-shadow: rgba(195, 207, 244, 0.1);
+  --message-btn: rgba(195, 207, 244, 0.1);
+
   --main-color-card: #dbf6fd;
 
   /* dashboard */
   --nav-bg-color: #1a1c22;
-  --layout-bg-color: #282c35;
-  --icon-color: #1fcb4f;
   --text-color: #ffffff;
   --nav-text-color: #a9a9a9;
 
   /* authentication */
-  --bg-color: #00523f;
   --secondary-color: #ffc42a;
   --font-family: "Montserrat", sans-serif;
 
@@ -88,7 +111,7 @@
 html,
 body {
   font-family: "Montserrat", sans-serif;
-  background-color: var(--bg-color);
+  background-color: var(--app-container);
   color: var(--text-color);
   font-size: 16px;
 }
@@ -114,6 +137,7 @@ ul {
 }
 
 input,
+select,
 textarea {
   background-color: transparent;
   border: none;

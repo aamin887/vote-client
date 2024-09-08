@@ -132,3 +132,41 @@
   overflow-x: scroll;
   max-height: 450px;
 }
+
+.dashboard__content-election_empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+  padding: 1em;
+  background-color: rgba(172, 132, 212, 0.273);
+}
+
+.dashboard__content-election_empty button {
+  text-transform: capitalize;
+  padding: 0.5em 1em;
+}
+
+.dashboard__content-election_empty-btn {
+  padding: 0.5em 1em;
+  text-transform: capitalize;
+
+  margin-top: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid gray;
+}
+
+.dashboard__content-election_empty-btn:hover {
+  opacity: 0.9;
+  color: rgba(21, 195, 21, 0.093);
+  color: rgb(194, 192, 192);
+}
+
+.dashboard__content-election_empty-btn svg {
+  line-height: 100%;
+  color: rgb(21, 195, 21);
+  margin-right: 0.5em;
+}

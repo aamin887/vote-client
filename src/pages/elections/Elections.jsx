@@ -6,6 +6,9 @@ import { IoGrid, IoList } from "react-icons/io5";
 import useNav from "../../hooks/useNav";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router-dom";
+import { FaPlus } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 function Elections() {
   const [electionData, setElectionData] = useState([]);
@@ -15,12 +18,6 @@ function Elections() {
 
   const organisationId = auth.id;
 
-  // const handleElections = async function () {
-  //   const res = await axiosPrivate.get("/api/v1/candidates");
-
-  //   console.log(res);
-  // };
-
   const handleListView = function () {
     setToogleGridView(false);
     localStorage.setItem("election-card-view", JSON.stringify(toogleGridView));
@@ -29,6 +26,20 @@ function Elections() {
   const handleGridView = function () {
     setToogleGridView(true);
     localStorage.setItem("election-card-view", JSON.stringify(toogleGridView));
+  };
+
+  const handleDelete = async function (id) {
+    try {
+      const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
+      if (res.status === 200) {
+        setElectionData(electionData.filter((data) => data._id !== id));
+      }
+      toast.success("deleted");
+      console.log(res);
+      return;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -45,6 +56,20 @@ function Elections() {
 
     getAllElections();
   }, []);
+  useEffect(() => {
+    const getAllElections = async function () {
+      const res = await axiosPrivate.get(
+        `/api/v1/elections/?org=${organisationId}`
+      );
+
+      console.log(res.data);
+      if (res.status === 200) {
+        setElectionData(res.data.elections);
+      }
+    };
+
+    getAllElections();
+  }, [electionData]);
 
   return (
     <div
@@ -82,16 +107,29 @@ function Elections() {
       <div
         className={`elections__content ${toogleGridView ? "grid__view" : ""}`}
       >
-        {/* <ElectionCard />
-        <ElectionCard />
-        <ElectionCard />
-        <ElectionCard />
-        <ElectionCard />
-        <ElectionCard />
-        <ElectionCard /> */}
-
+        {electionData.length === 0 && (
+          <div className="dashboard__content-election_empty">
+            <p>
+              There are no elections available. Please create a new one to get
+              started.
+            </p>
+            <Link
+              to={"/elections/create"}
+              className="dashboard__content-election_empty-btn"
+            >
+              <FaPlus />
+              Create an election llll
+            </Link>
+          </div>
+        )}
         {electionData?.map((election, idx) => {
-          return <ElectionCard data={election} key={idx} />;
+          return (
+            <ElectionCard
+              data={election}
+              handleDelete={handleDelete}
+              key={idx}
+            />
+          );
         })}
       </div>
     </div>

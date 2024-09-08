@@ -12,7 +12,6 @@ import {
   IoEyeOffOutline,
   IoLockClosedOutline,
 } from "react-icons/io5";
-import { Error } from "../../components/toasts/Main";
 
 function ChangePassword() {
   const refNewPassword = useRef();
@@ -51,7 +50,7 @@ function ChangePassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!newPassword || !confirmNewPassword) {
-      return toast.error(<Error message={"Fill in fields"} />, {
+      return toast.error("Fill in fields", {
         toastId: "emptyFields",
       });
     }
@@ -67,7 +66,7 @@ function ChangePassword() {
       console.log(response);
 
       if (response.status === 204) {
-        toast.success(<Error message={"Password change successful "} />, {
+        toast.success("Password change successful ", {
           toastId: "loginSuccessful",
         });
         setFormData({
@@ -75,24 +74,24 @@ function ChangePassword() {
           confirmNewPassword: "",
         });
 
-        navigate("/login", { replace: true });
+        navigate("/password-success", { replace: true });
       }
     } catch (error) {
       if (!error?.response) {
-        return toast.error(<Error message={"Network error "} />, {
+        return toast.error("Network error ", {
           toastId: "networkError",
         });
       } else if (error?.response.status === 400) {
-        return toast.error(<Error message={"Check form fields"} />, {
+        return toast.error("Check form fields", {
           toastId: "emptyField",
         });
       } else if (error?.response.status === 403) {
-        toast.error(<Error message={"Password reset link expired"} />, {
+        toast.error("Password reset link expired", {
           toastId: "tokenExpired",
         });
         return navigate("/password-reset", { replace: true });
       } else {
-        return toast.error(<Error message={"Network error "} />, {
+        return toast.error("Network error ", {
           toastId: "networkError",
         });
       }
@@ -110,7 +109,7 @@ function ChangePassword() {
       });
 
       if (response.status === 429) {
-        toast.warn(<Error message={"Reset used, request a new one"} />, {
+        toast.warn("Reset used, request a new one", {
           toastId: "usedToken",
         });
         return navigate("/login", { replace: true });

@@ -4,16 +4,16 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
 import { useState } from "react";
+import { axiosPrivate } from "../../../api/axios";
 import { MdDeleteSweep } from "react-icons/md";
 import { FaCircleInfo } from "react-icons/fa6";
-import { FaEdit } from "react-icons/fa";
 
 const images = [
   "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80",
   "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80",
 ];
 
-function ElectionCard({ data }) {
+function ElectionCard({ data, handleDelete }) {
   const [options, setOption] = useState(false);
   const showOptions = function () {
     setOption(true);
@@ -48,22 +48,21 @@ function ElectionCard({ data }) {
                 <p>View </p>
               </li>
             </Link>
-            <Link to={`/elections/${data?._id}`}>
-              <li>
-                <span>
-                  <FaEdit />
-                </span>
-                <p>Edit </p>
-              </li>
-            </Link>
-            <Link to={"/elections/:id"}>
+
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                handleDelete(data._id);
+              }}
+            >
               <li>
                 <span>
                   <MdDeleteSweep />
                 </span>
                 <p>Delete </p>
               </li>
-            </Link>
+            </button>
           </ul>
         </div>
 
@@ -77,7 +76,6 @@ function ElectionCard({ data }) {
         {/*  */}
         <div className="electioncard__content ">
           <h4>Election Date</h4>
-          {/* <p>12-12-20</p> */}
           <p>{data?.startDate}</p>
         </div>
         {/*  */}

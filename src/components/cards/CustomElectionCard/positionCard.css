@@ -21,14 +21,14 @@
 }
 
 .positioncard__footer-remaining {
-  background-color: var(--secondary-color);
   padding: 0.3em;
+  display: flex;
+  flex-direction: column;
   border-radius: 0.5em;
 }
 
 /* grid view */
 .grid__view .positioncard {
-  margin-top: 1em;
   max-width: 300px;
   align-items: flex-start;
   flex-direction: column;
@@ -38,17 +38,12 @@
 .grid__view .positioncard__content,
 .grid__view .positioncard__footer {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   flex-direction: column;
-  margin-bottom: 01em;
+  margin-bottom: 0.5em;
 }
 
 .grid__view .positioncard__footer {
-  position: relative;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
   margin-bottom: 0;
   width: 100%;
 }
@@ -66,9 +61,12 @@
 }
 
 .grid__view .positioncard__footer-remaining {
-  background-color: var(--secondary-color);
   padding: 0.3em;
+  display: flex;
   border-radius: 0.5em;
+  gap: 0.5em;
+  justify-content: space-between;
+  flex-direction: row;
   color: var(--bg-color);
   font-weight: bolder;
 }
@@ -110,7 +108,7 @@
 }
 
 .electioncard__footer-remaining {
-  background-color: var(--secondary-color);
+  background-color: var(--icon-color);
   padding: 0.3em;
   border-radius: 0.5em;
   color: var(--bg-color);
@@ -119,4 +117,28 @@
 
 .electioncard__footer-remaining p {
   font-weight: bolder;
+}
+
+.positioncard__footer-remaining_btn {
+  background-color: darkgoldenrod;
+  color: whitesmoke;
+  padding: 0.5em;
+  border: none;
+  font-size: 0.8rem;
+  text-transform: capitalize;
+  border-radius: 0.5em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-bottom: 0.6em;
+}
+
+.positioncard__footer-remaining_btn svg {
+  margin-right: 0.5em;
+}
+
+.positioncard__footer-remaining_btn:hover {
+  opacity: 0.9;
 }

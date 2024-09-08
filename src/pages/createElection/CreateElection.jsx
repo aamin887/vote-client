@@ -1,20 +1,10 @@
 import "./createelection.css";
-// import CreateElectionForm from "../../components/createElection/CreateElection";
-
-// function CreateElection() {
-//   return (
-//     <div>
-//       <CreateElectionForm />
-//     </div>
-//   );
-// }
-
-// export default CreateElection;
 
 import { useState, useRef } from "react";
 import useAuth from "../../hooks/useAuth";
 import { axiosPrivate } from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CreateElection = () => {
   const [formData, setFormData] = useState({
@@ -46,38 +36,48 @@ const CreateElection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const organisationId = auth.id;
 
-    const organisationId = auth.id;
-    const res = await axiosPrivate.post("/api/v1/elections", {
-      electionName,
-      description,
-      startDate,
-      organisation: organisationId,
-    });
+      const res = await axiosPrivate.post("/api/v1/elections", {
+        electionName,
+        description,
+        startDate,
+        organisation: organisationId,
+      });
 
-    console.log(res.status);
+      console.log(res.status);
 
-    if (res.status === 201) {
-      console.log("dd");
-      return navigate("/elections");
+      if (res.status === 201) {
+        toast.success("Election successfully created");
+        return navigate("/elections");
+      }
+    } catch (error) {
+      console.log(error);
+
+      if (error.response.data.status === 409) {
+        return toast.error(`Election already exists.`);
+      } else {
+        return toast.error(`Could complete request`);
+      }
     }
   };
 
   const { electionName, startDate, description } = formData;
   return (
-    <div className="addcandidate">
-      <div className="addcandidate__content">
-        <div className="addcandidate__content-title">
-          <h2 className="section__heading">Create an election</h2>
+    <div className="createelection">
+      <div className="createelection__content">
+        <div className="createelection__content-title">
+          <h2 className="section__heading">Create a new election</h2>
           <p className="section__text lead__text">
             Fill in all required field to create election
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="addcandidate__form">
-          <div className="addcandidate__form-details">
+        <form onSubmit={handleSubmit} className="createelection__form">
+          <div className="createelection__form-details">
             {/* elections name */}
-            <div className="addcandidate__form-details_control">
+            <div className="createelection__form-details_control">
               <span className="details">Election Title</span>
               <input
                 type="text"
@@ -88,7 +88,7 @@ const CreateElection = () => {
                 required
               />
             </div>
-            <div className="addcandidate__form-details_control">
+            <div className="createelection__form-details_control">
               <span className="details">Election Date</span>
               <input
                 type="text"
@@ -100,6 +100,7 @@ const CreateElection = () => {
               />
             </div>
           </div>
+
           <div className="addcandidate__form-details-fl">
             {/* elections name */}
             <div className="addcandidate__form-details_control">
@@ -111,13 +112,13 @@ const CreateElection = () => {
                 placeholder="What is the election about?"
                 onChange={handleChange}
                 value={description}
+                required
               ></textarea>
             </div>
           </div>
-
           <div className="button">
-            <button type="submit">Submit</button>
-            <button type="button">Cancel</button>
+            <button type="submit">create election</button>
+            {/* <button type="button">Cancel</button> */}
           </div>
         </form>
       </div>

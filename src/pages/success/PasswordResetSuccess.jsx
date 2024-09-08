@@ -1,10 +1,9 @@
 import "./style.css";
 import error from "../../assets/404.png";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function PasswordRequest() {
   const location = useLocation();
-  const navigate = useNavigate();
 
   // check database for token to allow access to this page
   // create an endpoint on server to check tokens

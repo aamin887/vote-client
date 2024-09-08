@@ -1,0 +1,1 @@
+import { axiosPrivate } from "./axios";
