@@ -11,35 +11,55 @@ import InforCard from "../../components/cards/inforCard/InforCard";
 import CustomAdd from "../../components/customAdd/CustomAdd";
 import ElectionCard from "../../components/cards/ElectionCard/ElectionCard";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import { Loader } from "../../components";
 
 function Dashboard() {
-  const { toogleGridView, setToogleGridView } = useNav();
+  const { toogleGridView, handleGridView, handleListView } = useNav();
   const [electionData, setElectionData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const axiosPrivate = useAxiosPrivate();
 
   const { auth } = useAuth();
 
   const organisationId = auth.id;
 
-  const handleListView = function () {
-    setToogleGridView(false);
-    localStorage.setItem("election-card-view", JSON.stringify(toogleGridView));
-  };
+  const handleDelete = async function (id) {
+    try {
+      const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
+      if (res.status === 204) {
+        setElectionData(electionData.filter((data) => data._id !== id));
+        await axiosPrivate.delete(`/api/v1/positions/elections/${id}`);
+      }
 
-  const handleGridView = function () {
-    setToogleGridView(true);
-    localStorage.setItem("election-card-view", JSON.stringify(toogleGridView));
+      setLoading(true);
+      toast.success("deleted");
+      console.log(res);
+      return;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     const getAllElections = async function () {
-      const res = await axiosPrivate.get(
-        `/api/v1/elections/?org=${organisationId}`
-      );
-
-      console.log(res.data);
-      if (res.status === 200) {
-        setElectionData(res.data.elections);
+      try {
+        const res = await axiosPrivate.get(
+          `/api/v1/elections/?org=${organisationId}`
+        );
+        console.log(res.data);
+        if (res.status === 200) {
+          setElectionData(res.data.elections);
+        }
+      } catch (error) {
+        if (error.response.status === 400) {
+          return toast.error("Network error");
+        }
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -76,7 +96,8 @@ function Dashboard() {
               toogleGridView ? "grid__view" : ""
             }`}
           >
-            {electionData.length > 0 && (
+            {loading && <Loader />}
+            {electionData.length > 0 && loading === false && (
               <div className="dashboard__content-election_header">
                 <div className="dashboard__content-election_header-title">
                   <h5>Elections</h5>
@@ -102,10 +123,16 @@ function Dashboard() {
                 </div>
               </div>
             )}
-            {electionData.length > 0 && (
+            {electionData.length > 0 && loading === false && (
               <div className="dashboard__content-election_cards">
                 {electionData?.map((election, idx) => {
-                  return <ElectionCard data={election} key={idx} />;
+                  return (
+                    <ElectionCard
+                      data={election}
+                      handleDelete={handleDelete}
+                      key={idx}
+                    />
+                  );
                 })}
               </div>
             )}

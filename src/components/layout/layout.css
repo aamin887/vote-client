@@ -1,6 +1,7 @@
 .app__layout {
   background-color: var(--layout-bg-color);
   min-height: 100dvh;
+  position: relative;
 }
 
 .app__layout-content_left {

@@ -3,20 +3,28 @@ import "./createelection.css";
 import { useState, useRef } from "react";
 import useAuth from "../../hooks/useAuth";
 import { axiosPrivate } from "../../api/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const CreateElection = () => {
+  // textarea reference
+  const descRef = useRef();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { auth } = useAuth();
+  const from = location.state?.from?.pathname || "/dashboard";
+
+  // form data state
   const [formData, setFormData] = useState({
     electionName: "",
     startDate: "",
+    endDate: "",
     description: "",
   });
-  const descRef = useRef();
-  const navigate = useNavigate();
 
-  const { auth } = useAuth();
-
+  // changing form fields
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -24,9 +32,9 @@ const CreateElection = () => {
     });
   };
 
-  const handleFocus = function (e) {
+  // handle Focus form TextArea to add border to indicate input availability
+  const handleFocusTextArea = function (e) {
     const desValue = descRef.current;
-
     if (desValue.value.length > 0) {
       desValue.classList.add("valid");
     } else {
@@ -34,36 +42,42 @@ const CreateElection = () => {
     }
   };
 
+  // form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const organisationId = auth.id;
-
       const res = await axiosPrivate.post("/api/v1/elections", {
         electionName,
         description,
         startDate,
+        endDate,
         organisation: organisationId,
       });
-
-      console.log(res.status);
 
       if (res.status === 201) {
         toast.success("Election successfully created");
         return navigate("/elections");
       }
     } catch (error) {
-      console.log(error);
-
-      if (error.response.data.status === 409) {
+      const statusCode = error.response.data.status;
+      if (statusCode === 409) {
         return toast.error(`Election already exists.`);
+      } else if (statusCode === 422) {
+        return toast.error(
+          `check form inputs to make sure all fields are valid`
+        );
+      } else if (statusCode === 400) {
+        return toast.error(`could not create election`);
       } else {
-        return toast.error(`Could complete request`);
+        return toast.error(`network error`);
       }
     }
   };
 
-  const { electionName, startDate, description } = formData;
+  // form data
+  const { electionName, startDate, description, endDate } = formData;
+
   return (
     <div className="createelection">
       <div className="createelection__content">
@@ -75,10 +89,11 @@ const CreateElection = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="createelection__form">
-          <div className="createelection__form-details">
+          {/* election name */}
+          <div className="createelection__form-details-fl">
             {/* elections name */}
             <div className="createelection__form-details_control">
-              <span className="details">Election Title</span>
+              <span className="details">Election Name</span>
               <input
                 type="text"
                 placeholder="E.g 2022 Leadership"
@@ -88,13 +103,28 @@ const CreateElection = () => {
                 required
               />
             </div>
+          </div>
+
+          <div className="createelection__form-details">
+            {/* elections dates */}
             <div className="createelection__form-details_control">
-              <span className="details">Election Date</span>
+              <span className="details">Start Date</span>
               <input
                 type="text"
-                name="startDate"
                 placeholder="E.g 2022 Leadership"
+                onChange={handleChange}
+                name="startDate"
                 value={startDate}
+                required
+              />
+            </div>
+            <div className="createelection__form-details_control">
+              <span className="details">End Date</span>
+              <input
+                type="text"
+                name="endDate"
+                placeholder="E.g 2022"
+                value={endDate}
                 onChange={handleChange}
                 required
               />
@@ -108,7 +138,7 @@ const CreateElection = () => {
               <textarea
                 name="description"
                 ref={descRef}
-                onBlur={handleFocus}
+                onBlur={handleFocusTextArea}
                 placeholder="What is the election about?"
                 onChange={handleChange}
                 value={description}
@@ -118,7 +148,14 @@ const CreateElection = () => {
           </div>
           <div className="button">
             <button type="submit">create election</button>
-            {/* <button type="button">Cancel</button> */}
+            <button
+              type="button"
+              onClick={() => {
+                navigate(from, { replace: true });
+              }}
+            >
+              Cancel
+            </button>
           </div>
         </form>
       </div>
@@ -127,27 +164,3 @@ const CreateElection = () => {
 };
 
 export default CreateElection;
-
-{
-  /* <div className="gender__details">
-            <input type="radio" name="gender" id="dot-1" />
-            <input type="radio" name="gender" id="dot-2" />
-            <input type="radio" name="gender" id="dot-3" />
-            <span className="gender__title">Gender</span>
-
-            <div className="category">
-              <label htmlFor="dot-1">
-                <span className="dot one"></span>
-                <span>Male</span>
-              </label>
-              <label htmlFor="dot-2">
-                <span className="dot two"></span>
-                <span>Female</span>
-              </label>
-              <label htmlFor="dot-3">
-                <span className="dot three"></span>
-                <span>Prefer not to say</span>
-              </label>
-            </div>
-          </div> */
-}

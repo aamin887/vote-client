@@ -26,9 +26,21 @@ function AddCandidate() {
     { name: "", position: "", manifesto: "" },
   ]);
 
+  const handleCreatePosition = async (data) => {
+    try {
+      const res = await axiosPrivate.post("/api/v1/candidates", data);
+      if (res.status === 204) {
+        setOffices([{ fullName: "", position: "", manifesto: "" }]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // add candidate
-  const handleAddOffice = () =>
-    setOffices([...offices, { name: "", position: "", manifesto: "" }]);
+  const handleAddOffice = () => {
+    setOffices([...offices, { fullName: "", position: "", manifesto: "" }]);
+  };
 
   //👇🏻 removes a selected item from the list
   const handleRemoveOffice = (index) => {
@@ -47,6 +59,10 @@ function AddCandidate() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(offices);
+
+    handleCreatePosition(offices);
+
+    setOffices([{ fullName: "", position: "", manifesto: "" }]);
   };
 
   useEffect(() => {
@@ -62,7 +78,7 @@ function AddCandidate() {
   }, []);
 
   const positionSelectionOptions = positions.map((data, idx) => (
-    <option value={data.positionName} key={idx}>
+    <option value={data._id} key={idx}>
       {data.positionName}
     </option>
   ));
@@ -133,12 +149,15 @@ function AddCandidate() {
                       <div className="addcandidate__form-categories-control">
                         <div className="addcandidate__form-categories-control_details">
                           <span className="details">Name</span>
+                          {idx >= 0 && idx !== offices.length - 1 && (
+                            <p>{office.name}</p>
+                          )}
                           <input
                             type="text"
                             placeholder="eg. Amin Alhassan"
                             required
-                            name="name"
-                            value={office.name}
+                            name="fullName"
+                            value={office.fullName}
                             onChange={(e) => handleUpdateOffices(e, idx)}
                           />
                         </div>
@@ -150,7 +169,12 @@ function AddCandidate() {
                             value={office.position}
                             onChange={(e) => handleUpdateOffices(e, idx)}
                           >
-                            {positionSelectionOptions}
+                            {[
+                              <option value={""} key={idx}>
+                                {"Select a position"}
+                              </option>,
+                              ...positionSelectionOptions,
+                            ]}
                           </select>
                         </div>
                       </div>
@@ -168,7 +192,7 @@ function AddCandidate() {
                           ></textarea>
                         </div>
                       </div>
-                      {idx > 0 && (
+                      {idx >= 0 && offices.length > 1 && (
                         <button
                           className="addcandidate__form-categories-btn"
                           onClick={() => handleRemoveOffice(idx)}

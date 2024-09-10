@@ -8,68 +8,64 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
+import { Loader } from "../../components";
 import { toast } from "react-toastify";
 
 function Elections() {
   const [electionData, setElectionData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const axiosPrivate = useAxiosPrivate();
-  const { toogleGridView, setToogleGridView } = useNav();
+  const { toogleGridView, handleGridView, handleListView } = useNav();
   const { auth } = useAuth();
 
   const organisationId = auth.id;
 
-  const handleListView = function () {
-    setToogleGridView(false);
-    localStorage.setItem("election-card-view", JSON.stringify(toogleGridView));
-  };
-
-  const handleGridView = function () {
-    setToogleGridView(true);
-    localStorage.setItem("election-card-view", JSON.stringify(toogleGridView));
-  };
-
-  const handleDelete = async function (id) {
+  // delete an election
+  const handleDeleteElection = async function (id) {
     try {
       const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
-      if (res.status === 200) {
+      if (res.status === 204) {
+        await axiosPrivate.delete(`/api/v1/positions/elections/${id}`);
         setElectionData(electionData.filter((data) => data._id !== id));
+        setLoading(true);
+        return toast.success("deleted");
       }
-      toast.success("deleted");
-      console.log(res);
       return;
     } catch (error) {
-      console.log(error);
+      const statusCode = error.response.data.status;
+
+      if (statusCode === 404) {
+        return toast.error("election does not exit");
+      } else if (statusCode === 400) {
+        return toast.error("network error");
+      } else {
+        return toast.error("network error");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
     const getAllElections = async function () {
-      const res = await axiosPrivate.get(
-        `/api/v1/elections/?org=${organisationId}`
-      );
-
-      console.log(res.data);
-      if (res.status === 200) {
-        setElectionData(res.data.elections);
+      try {
+        const res = await axiosPrivate.get(
+          `/api/v1/elections/?org=${organisationId}`
+        );
+        console.log(res.data);
+        if (res.status === 200) {
+          setElectionData(res.data.elections);
+        }
+      } catch (error) {
+        if (error.response.status === 400) {
+          return toast.error("Network error");
+        }
+      } finally {
+        setLoading(false);
       }
     };
-
     getAllElections();
   }, []);
-  useEffect(() => {
-    const getAllElections = async function () {
-      const res = await axiosPrivate.get(
-        `/api/v1/elections/?org=${organisationId}`
-      );
-
-      console.log(res.data);
-      if (res.status === 200) {
-        setElectionData(res.data.elections);
-      }
-    };
-
-    getAllElections();
-  }, [electionData]);
 
   return (
     <div
@@ -104,34 +100,39 @@ function Elections() {
         </div>
       </div>
 
-      <div
-        className={`elections__content ${toogleGridView ? "grid__view" : ""}`}
-      >
-        {electionData.length === 0 && (
-          <div className="dashboard__content-election_empty">
-            <p>
-              There are no elections available. Please create a new one to get
-              started.
-            </p>
-            <Link
-              to={"/elections/create"}
-              className="dashboard__content-election_empty-btn"
-            >
-              <FaPlus />
-              Create an election llll
-            </Link>
-          </div>
-        )}
-        {electionData?.map((election, idx) => {
-          return (
-            <ElectionCard
-              data={election}
-              handleDelete={handleDelete}
-              key={idx}
-            />
-          );
-        })}
-      </div>
+      {loading && <Loader />}
+
+      {electionData.length === 0 && loading === false && (
+        <div className="dashboard__content-election_empty">
+          <p>
+            There are no elections available. Please create a new one to get
+            started.
+          </p>
+          <Link
+            to={"/elections/create"}
+            className="dashboard__content-election_empty-btn"
+          >
+            <FaPlus />
+            Create an election
+          </Link>
+        </div>
+      )}
+
+      {electionData.length > 0 && loading === false && (
+        <div
+          className={`elections__content ${toogleGridView ? "grid__view" : ""}`}
+        >
+          {electionData?.map((election, idx) => {
+            return (
+              <ElectionCard
+                data={election}
+                handleDelete={handleDeleteElection}
+                key={idx}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

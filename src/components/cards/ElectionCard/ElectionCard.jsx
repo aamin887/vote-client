@@ -15,6 +15,7 @@ const images = [
 
 function ElectionCard({ data, handleDelete }) {
   const [options, setOption] = useState(false);
+
   const showOptions = function () {
     setOption(true);
   };
@@ -68,9 +69,7 @@ function ElectionCard({ data, handleDelete }) {
 
         {/* end options */}
         <div className="electioncard__header">
-          {/* <h3>2020 Academic Election</h3> */}
           <h3>{data?.electionName}</h3>
-          {/* <p>University of cape coast</p> */}
           <p>{data?.organisation}</p>
         </div>
         {/*  */}
@@ -84,7 +83,10 @@ function ElectionCard({ data, handleDelete }) {
             {/* <div className="electioncard__footer-profile_img"> */}
             {<ProfileImage images={images} />}
             {/* </div> */}
-            <Link title="Add a candidate" to={"/add-candidates"}>
+            <Link
+              title="Add a candidate"
+              to={`/elections/positions/${data?._id}/candidates/add`}
+            >
               {<IoMdAddCircle size={20} />}
             </Link>
           </div>

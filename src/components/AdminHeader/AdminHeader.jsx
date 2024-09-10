@@ -40,10 +40,7 @@ function AdminHeader() {
           </label>
         </div>
         <Link to={"/elections/create"}>
-          <div
-            className="navigation__topnav-right_icons"
-            // onClick={() => console.log("Hiii")}
-          >
+          <div className="navigation__topnav-right_icons">
             <IoMdAddCircle
               size={23}
               style={{ color: "#fffff" }}

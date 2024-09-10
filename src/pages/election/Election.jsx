@@ -5,31 +5,54 @@ import { axiosPrivate } from "../../api/axios";
 import { IoGrid, IoList } from "react-icons/io5";
 import { CustomElectionCard } from "../../components";
 import { toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
+import useNav from "../../hooks/useNav";
 
 function Election() {
   const navigate = useNavigate();
   const descRef = useRef();
   const params = useParams();
   const [electionDetails, setElectionDetails] = useState({});
-  const [newPosition, setNewPosition] = useState("");
+  const [newPosition, setNewPosition] = useState({
+    positionName: "",
+    positionDescription: "",
+  });
+
+  const { auth } = useAuth();
+
+  const { handleGridView, handleListView, toogleGridView } = useNav();
+
+  const organisationId = auth.id;
   const [allPosition, setAllPosition] = useState([]);
   const [toogleEdit, setToogleEdit] = useState(false);
-  const [toogleGridView, setToogleGridView] = useState(false);
+
   const [tooglePosition, setTooglePosition] = useState(false);
+
+  const handleDeleteProfile = async function (id) {
+    try {
+      const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
+      if (res.status === 204) {
+        await axiosPrivate.delete(`/api/v1/positions/elections/${id}`);
+        return navigate("/elections");
+      }
+      return;
+    } catch (error) {
+      const statusCode = error.response.data.status;
+
+      console.log(error);
+    }
+  };
 
   const handlePosition = () => {
     setTooglePosition(!tooglePosition);
   };
 
-  const handleGridView = () => {
-    setToogleGridView(true);
-  };
-  const handleListView = () => {
-    setToogleGridView(false);
-  };
-
   const handleChange = (e) => {
     setElectionDetails({ ...electionDetails, [e.target.name]: e.target.value });
+  };
+
+  const handlePositionChanges = (e) => {
+    setNewPosition({ ...newPosition, [e.target.name]: e.target.value });
   };
 
   const handleFocus = function () {
@@ -53,15 +76,10 @@ function Election() {
     // alert("Edit profile clicked!");
   };
 
-  const handleDeleteProfile = () => {
-    // Add logic for deleting the profile
-    alert("Delete profile clicked!");
-  };
-
   const handleAddPosition = async () => {
     const res = await axiosPrivate.post("/api/v1/positions", {
-      position: newPosition,
-      description: electionDetails?.description,
+      position: positionName,
+      description: positionDescription,
       electionId: electionDetails?._id,
     });
 
@@ -75,24 +93,36 @@ function Election() {
 
   useEffect(() => {
     const getElection = async function () {
-      const res = await axiosPrivate.get(`/api/v1/elections/${params.id}`);
-
-      if (res.status == 200) {
-        const resPosition = await axiosPrivate.get(
-          `/api/v1/positions/${params.id}`
+      try {
+        // all election details
+        const res = await axiosPrivate.get(
+          `/api/v1/elections/${params.id}?org=${organisationId}`
         );
-        console.log(resPosition);
-
-        setAllPosition([...resPosition.data]);
+        // get all position associated with election
+        if (res.status == 200) {
+          const resPosition = await axiosPrivate.get(
+            `/api/v1/positions/${params.id}?org=${organisationId}`
+          );
+          setAllPosition([...resPosition.data]);
+        }
+        setElectionDetails({ ...res?.data.election });
+      } catch (error) {
+        const statusCode = error.response.data.status;
+        if (statusCode === 401) {
+          return toast.error("not allowed!");
+        } else if (statusCode === 400) {
+          return toast.error("network error");
+        } else {
+          return toast.error("network error");
+        }
       }
-
-      setElectionDetails({ ...res?.data.election });
     };
 
     getElection();
   }, []);
 
   const { electionName, description, startDate, endDate } = electionDetails;
+  const { positionName, positionDescription } = newPosition;
 
   return (
     <div className="election__page section__padding-md">
@@ -127,7 +157,6 @@ function Election() {
               <div className="election__page-profile-details_control">
                 <span className="details">Description</span>
                 {!toogleEdit && <p>{description}</p>}
-
                 {toogleEdit && (
                   <textarea
                     name="description"
@@ -184,26 +213,22 @@ function Election() {
                 {toogleEdit ? "Save" : "Edit"}
               </button>
               <button
-                className=" btn election__page-profile_btn-delete"
-                onClick={handleDeleteProfile}
+                className=" btn election__page-profile_btn cancel"
+                onClick={() => handleDeleteProfile(electionDetails._id)}
               >
                 Delete
               </button>
-              <button
-                className={`btn election__page-content_btn ${
-                  tooglePosition ? "cancel-btn" : ""
-                }`}
-                onClick={handlePosition}
-              >
-                {tooglePosition
-                  ? "Abort new position"
-                  : "Create a new Position"}
-              </button>
+              {!tooglePosition && (
+                <button
+                  className={`btn election__page-content_btn add `}
+                  onClick={handlePosition}
+                >
+                  Create a new Position
+                </button>
+              )}
               {allPosition.length > 0 && (
                 <button
-                  className={`btn election__page-content_btn ${
-                    tooglePosition ? "cancel-btn" : ""
-                  }`}
+                  className={`btn election__page-content_btn add`}
                   onClick={() =>
                     navigate(
                       `/elections/positions/${electionDetails?._id}/candidates/add`,
@@ -228,22 +253,20 @@ function Election() {
                 <span className="details">New Position</span>
                 <input
                   type="text"
-                  name="newPosition"
+                  name="positionName"
                   placeholder="E.g President or Treasurer"
-                  value={newPosition}
-                  onChange={(e) => {
-                    setNewPosition(e.target.value);
-                  }}
+                  value={positionName}
+                  onChange={handlePositionChanges}
                   required
                 />
               </div>
               <div className="election__page-profile-details_control fl">
-                <span className="details">New Position</span>
+                <span className="details">Description</span>
                 <textarea
-                  name="description"
+                  name="positionDescription"
                   placeholder="What does the position represent?"
-                  value={description}
-                  onChange={handleChange}
+                  value={positionDescription}
+                  onChange={handlePositionChanges}
                   required
                   ref={descRef}
                   onBlur={handleFocus}
@@ -251,8 +274,11 @@ function Election() {
               </div>
               {/* elections end date*/}
               <div className="election__page-profile-details_control">
-                <button className="btn" onClick={handleAddPosition}>
-                  Add positionnk
+                <button className="btn add" onClick={handleAddPosition}>
+                  Add position
+                </button>
+                <button className="btn cancel" onClick={handlePosition}>
+                  Cancel
                 </button>
               </div>
             </div>

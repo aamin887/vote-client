@@ -6,12 +6,33 @@ function NavigationProvider({ children }) {
   const [toogle, setToogle] = useState(
     JSON.parse(localStorage.getItem("toggle_nav")) || true
   );
+
   const [toogleGridView, setToogleGridView] = useState(
-    JSON.parse(localStorage.getItem("election-card-view")) || true
+    typeof JSON.parse(localStorage.getItem("election-card-view")) !== "boolean"
+      ? true
+      : JSON.parse(localStorage.getItem("election-card-view"))
   );
+
+  const handleListView = function () {
+    setToogleGridView(false);
+    return localStorage.setItem("election-card-view", JSON.stringify(false));
+  };
+
+  const handleGridView = function () {
+    setToogleGridView(true);
+    return localStorage.setItem("election-card-view", JSON.stringify(true));
+  };
+
   return (
     <NavContext.Provider
-      value={{ setToogle, toogle, toogleGridView, setToogleGridView }}
+      value={{
+        setToogle,
+        toogle,
+        toogleGridView,
+        setToogleGridView,
+        handleGridView,
+        handleListView,
+      }}
     >
       {children}
     </NavContext.Provider>

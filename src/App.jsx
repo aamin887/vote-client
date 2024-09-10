@@ -46,15 +46,15 @@ function App() {
 
                   {/* elections */}
                   <Route path="elections">
-                    {/* index */}
-                    <Route element={<Elections />} index />
-                    {/* election by id */}
-                    <Route element={<Election />} path="/elections/:id" />
                     {/* create new election */}
                     <Route
                       element={<CreateElection />}
                       path="/elections/create"
                     />
+                    {/* index */}
+                    <Route element={<Elections />} index />
+                    {/* election by id */}
+                    <Route element={<Election />} path="/elections/:id" />
                     <Route
                       element={<AddCandidate />}
                       path="/elections/positions/:positionId/candidates/add"
@@ -62,7 +62,8 @@ function App() {
                   </Route>
 
                   {/* positions */}
-                  <Route element={<Candidates />} path="candidates" />
+                  <Route element={<Candidates />} path="/positions/:id" />
+                  <Route element={<Candidates />} path="/candidates" />
                   <Route element={<AddCandidate />} path="/candidates/add" />
 
                   {/*  */}

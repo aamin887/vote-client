@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
 import { RiDeleteBin2Fill } from "react-icons/ri";
 
-function PositionCard({ data, election }) {
+function PositionCard({ data }) {
   const navigate = useNavigate();
-  console.log(data, ">>><<<>><<");
+
   return (
     <div className="positioncard">
       <div className="positioncard__header">
@@ -22,20 +22,20 @@ function PositionCard({ data, election }) {
       {/*  */}
       <div className=" positioncard__footer">
         <div className="positioncard__footer-remaining">
-          <button className="positioncard__footer-remaining_btn">
-            {<RiDeleteBin2Fill size={20} />}
-            delete position
-          </button>
-
           <button
             className="positioncard__footer-remaining_btn"
-            onClick={() =>
-              navigate(`/elections/positions/${data?._id}`, {
-                state: election,
-              })
-            }
+            onClick={() => navigate(`/positions/${data?._id}`)}
           >
             {<IoMdAddCircle size={20} />}View
+          </button>
+          <button
+            className="positioncard__footer-remaining_btn"
+            onClick={() => {
+              alert(data?._id);
+            }}
+          >
+            {<RiDeleteBin2Fill size={20} />}
+            delete
           </button>
         </div>
       </div>

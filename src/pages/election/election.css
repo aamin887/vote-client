@@ -41,15 +41,6 @@
   cursor: pointer;
 }
 
-.election__page-profile_btn-delete {
-  background-color: #f44336;
-}
-
-.election__page-profile_btn-edit,
-.election__page-content_btn {
-  background-color: #4caf50;
-}
-
 /* card details ===>()<==== */
 
 .election__page-profile_right-details,
@@ -80,6 +71,18 @@
   margin-bottom: 5px;
   display: block;
 }
+
+.election__page-profile-details_control button {
+  margin-right: 0.4em;
+}
+
+.election__page-profile-details_control button.add {
+  background-color: var(--light-green);
+}
+.election__page-profile-details_control button.cancel {
+  background-color: var(--main-red);
+}
+
 .election__page-profile-details_control input,
 .election__page-profile-details_control textarea {
   height: 45px;
