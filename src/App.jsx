@@ -15,6 +15,7 @@ import {
   ChangePassword,
   PasswordRequest,
   CreateElection,
+  Position,
 } from "./pages";
 
 import { PrivateRoute } from "./components";
@@ -59,10 +60,13 @@ function App() {
                       element={<AddCandidate />}
                       path="/elections/positions/:positionId/candidates/add"
                     />
+                    <Route
+                      element={<Position />}
+                      path="/elections/positions/:id"
+                    />
                   </Route>
 
                   {/* positions */}
-                  <Route element={<Candidates />} path="/positions/:id" />
                   <Route element={<Candidates />} path="/candidates" />
                   <Route element={<AddCandidate />} path="/candidates/add" />
 

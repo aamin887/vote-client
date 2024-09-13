@@ -2,8 +2,9 @@ import "./addcandidate.css";
 
 import { useEffect, useRef, useState } from "react";
 import { RiDeleteBin4Fill } from "react-icons/ri";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
+import { toast } from "react-toastify";
 
 function AddCandidate() {
   const location = useLocation();
@@ -11,6 +12,8 @@ function AddCandidate() {
 
   const { state } = location;
   const descRef = useRef();
+
+  const navigate = useNavigate();
 
   const handleFocus = function (e) {
     const desValue = descRef.current;
@@ -29,11 +32,20 @@ function AddCandidate() {
   const handleCreatePosition = async (data) => {
     try {
       const res = await axiosPrivate.post("/api/v1/candidates", data);
-      if (res.status === 204) {
+      if (res.status === 201) {
+        toast.success("candidates added successfully");
         setOffices([{ fullName: "", position: "", manifesto: "" }]);
       }
     } catch (error) {
       console.log(error);
+      const statusCode = error.response.data.status;
+      if (statusCode === 404) {
+        return toast.error("not found");
+      } else if (statusCode === 401) {
+        return toast.error("not allowed ");
+      } else {
+        return toast.error("network error ");
+      }
     }
   };
 
@@ -131,7 +143,7 @@ function AddCandidate() {
               <div className="createelection__form-details-fl">
                 {/* candidate message */}
                 <div className="createelection__form-details_control">
-                  <span className="details">Manifesto</span>
+                  <span className="details">What is the election about?</span>
                   <p>{state.description}</p>
                 </div>
               </div>
@@ -213,7 +225,13 @@ function AddCandidate() {
               <button className="btn" type="submit">
                 Submit
               </button>
-              <button className="btn" type="button">
+              <button
+                className="btn"
+                type="button"
+                onClick={() => {
+                  navigate(-1, { replace: true });
+                }}
+              >
                 Cancel
               </button>
             </div>

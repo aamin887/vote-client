@@ -7,11 +7,13 @@ import { CustomElectionCard } from "../../components";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import useNav from "../../hooks/useNav";
+import { Loader } from "../../components";
 
 function Election() {
   const navigate = useNavigate();
   const descRef = useRef();
   const params = useParams();
+  const [loading, setLoading] = useState(true);
   const [electionDetails, setElectionDetails] = useState({});
   const [newPosition, setNewPosition] = useState({
     positionName: "",
@@ -30,6 +32,8 @@ function Election() {
 
   const handleDeleteProfile = async function (id) {
     try {
+      setLoading(true);
+
       const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
       if (res.status === 204) {
         await axiosPrivate.delete(`/api/v1/positions/elections/${id}`);
@@ -37,9 +41,39 @@ function Election() {
       }
       return;
     } catch (error) {
-      const statusCode = error.response.data.status;
+      const statusCode = error?.response?.data?.status;
+      if (statusCode === 404) {
+        return toast.error("election not found");
+      } else {
+        return toast.error("network error");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
-      console.log(error);
+  const handleUpdateProfile = async function (id, formData) {
+    setLoading(true);
+    try {
+      const res = await axiosPrivate.put(
+        `/api/v1/elections/${id}?org=${organisationId}`,
+        formData
+      );
+      if (res.status === 204) {
+        return toast.success("updated!");
+      }
+      return;
+    } catch (error) {
+      const statusCode = error.response.data.status;
+      if (statusCode === 404) {
+        return toast.error("profile not found!");
+      } else if (statusCode === 401) {
+        return toast.error("not allowed!");
+      } else {
+        return toast.error("network error!");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -71,23 +105,33 @@ function Election() {
       return setToogleEdit(true);
     }
     if (toogleEdit === true) {
+      handleUpdateProfile(params.id, electionDetails);
       return setToogleEdit(false);
     }
-    // alert("Edit profile clicked!");
   };
 
   const handleAddPosition = async () => {
-    const res = await axiosPrivate.post("/api/v1/positions", {
-      position: positionName,
-      description: positionDescription,
-      electionId: electionDetails?._id,
-    });
+    try {
+      setLoading(true);
+      const res = await axiosPrivate.post("/api/v1/positions", {
+        position: positionName,
+        description: positionDescription,
+        electionId: electionDetails?._id,
+      });
 
-    if (res.status === 201) {
-      toast.success("new position added");
-      setAllPosition((prev) => [...prev, res.data.position]);
-      setTooglePosition(!tooglePosition);
-      setNewPosition("");
+      if (res.status === 201) {
+        toast.success("new position added");
+        setAllPosition((prev) => [...prev, res.data.position]);
+        setTooglePosition(!tooglePosition);
+        setNewPosition("");
+      }
+    } catch (error) {
+      const statusCode = error.response.data.status;
+      if (statusCode === 400) {
+        return toast.error("network error");
+      }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -106,6 +150,7 @@ function Election() {
           setAllPosition([...resPosition.data]);
         }
         setElectionDetails({ ...res?.data.election });
+        setLoading(false);
       } catch (error) {
         const statusCode = error.response.data.status;
         if (statusCode === 401) {
@@ -115,6 +160,8 @@ function Election() {
         } else {
           return toast.error("network error");
         }
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -126,6 +173,7 @@ function Election() {
 
   return (
     <div className="election__page section__padding-md">
+      {loading && <Loader />}
       <div className="election__page-profile">
         <div className="election__page-profile_left">
           {/* Profile Image */}

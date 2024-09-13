@@ -24,7 +24,7 @@ function PositionCard({ data }) {
         <div className="positioncard__footer-remaining">
           <button
             className="positioncard__footer-remaining_btn"
-            onClick={() => navigate(`/positions/${data?._id}`)}
+            onClick={() => navigate(`/elections/positions/${data?._id}`)}
           >
             {<IoMdAddCircle size={20} />}View
           </button>

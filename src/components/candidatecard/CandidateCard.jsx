@@ -2,7 +2,7 @@ import "./candidatecard.css";
 import photo from "../../assets/User.png";
 import { FaInfo } from "react-icons/fa";
 
-function CandidateCard() {
+function CandidateCard({}) {
   return (
     <div className="candidatecard">
       <div className="candidatecard__top">

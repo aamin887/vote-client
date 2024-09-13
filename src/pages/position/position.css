@@ -1,0 +1,195 @@
+.election__page-profile {
+  width: 100%;
+  padding: 20px;
+  margin: auto;
+}
+
+.election__page-profile_left {
+  display: flex;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.election__page-profile_photo {
+  width: 15em;
+  margin-right: 20px;
+}
+
+.election__page-profile_right {
+  flex: 1;
+}
+
+.election__page-profile_right-btns {
+  margin-top: 10px;
+  display: flex;
+}
+
+.election__page-profile_right-btns .btn {
+  font-size: 0.9rem;
+  width: auto;
+  margin-right: 0.5em;
+}
+
+.election__page-profile_btn-edit,
+.election__page-content_btn,
+.election__page-profile_btn-delete {
+  margin-right: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* card details ===>()<==== */
+
+.election__page-profile_right-details,
+.election__page-profile_right-details_fl {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 0.8em;
+}
+/* inside the form user details */
+.election__page-profile-details_control {
+  width: calc(100% / 2 - 10px);
+}
+
+.election__page-profile-details_control p {
+  font-weight: 100;
+}
+
+.election__page-profile_right-details_fl
+  .election__page-profile-details_control {
+  width: calc(100%);
+  margin-top: 0;
+}
+
+.election__page-profile-details_control .details {
+  font-weight: 500;
+  color: var(--secondary-color);
+  margin-bottom: 5px;
+  display: block;
+}
+
+.election__page-profile-details_control button {
+  margin-right: 0.4em;
+}
+
+.election__page-profile-details_control button.add {
+  background-color: var(--light-green);
+}
+.election__page-profile-details_control button.cancel {
+  background-color: var(--main-red);
+}
+
+.election__page-profile-details_control input,
+.election__page-profile-details_control textarea {
+  height: 45px;
+  width: 100%;
+  overflow-x: hidden;
+  resize: vertical;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid var(--main-grey);
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.election__page-profile-details_control textarea {
+  height: 5em;
+}
+
+.election__page-profile-details_control input:focus,
+.election__page-profile-details_control input:valid,
+.election__page-profile-details_control textarea:focus,
+.election__page-profile-details_control textarea:valid,
+.election__page-profile-details_control textarea.valid {
+  border-color: var(--icon-color);
+}
+
+/* content and forms */
+
+/* .election__page-content {
+} */
+
+.election__page-content_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 1em;
+  background-color: #4caf4f16;
+}
+
+.election__page-content_header-title h5 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5em;
+}
+
+.election__page-content_header-title p {
+  font-weight: 100;
+}
+
+.election__view-btn {
+  display: inline-block;
+  line-height: 100%;
+  padding: 0.4em;
+  background-color: rgba(255, 255, 255, 0.153);
+  border-radius: 0.3em;
+  border: none;
+  margin-left: 0.5em;
+  cursor: pointer;
+}
+
+.election__view-btn:hover {
+  background-color: rgb(200, 206, 190);
+}
+
+.election__view-btn.active {
+  background-color: var(--icon-color);
+}
+
+.election__view-btn svg,
+.election__view-btn i {
+  font-size: 1.3rem;
+  color: var(--icon-color);
+}
+
+.election__view-btn.active svg,
+.election__view-btn.active i {
+  color: rgb(255, 255, 255);
+}
+
+.election__page-form {
+  background-color: #4caf4f46;
+  padding: 0.5em;
+}
+
+.election__page-form .btn {
+  margin-top: 1.2em;
+  width: 200px;
+}
+
+.election__page-form .election__page-profile-details_control.fl {
+  width: calc(100% / 1.8 - 10px);
+}
+.election__page-form .election__page-profile-details_control.sl {
+  width: calc(100% / 4 - 10px);
+}
+
+.cancel-btn {
+  background-color: #f44336;
+}
+
+.election__page-content_container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8em;
+}
+
+.election__page-content_container.grid__view {
+  grid-template-columns: repeat(4, 1fr);
+}
