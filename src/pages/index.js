@@ -19,3 +19,4 @@ export { default as Error } from "./error/Error";
 export { default as Candidates } from "./candidates/Candidates";
 export { default as CreateElection } from "./createElection/CreateElection";
 export { default as CreatePosition } from "./addCandidate/AddCandidate";
+export { default as CandidateDetails } from "./candidatedetails/CandidateDetails.jsx";

@@ -1,7 +1,8 @@
 import "./positionCard.css";
 import { Link, useNavigate } from "react-router-dom";
-import { IoMdAddCircle } from "react-icons/io";
+
 import { RiDeleteBin2Fill } from "react-icons/ri";
+import { FaFolderOpen } from "react-icons/fa6";
 
 function PositionCard({ data }) {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ function PositionCard({ data }) {
             className="positioncard__footer-remaining_btn"
             onClick={() => navigate(`/elections/positions/${data?._id}`)}
           >
-            {<IoMdAddCircle size={20} />}View
+            {<FaFolderOpen size={20} />}View
           </button>
           <button
             className="positioncard__footer-remaining_btn"

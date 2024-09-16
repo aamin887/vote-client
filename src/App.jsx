@@ -14,6 +14,7 @@ import {
   Election,
   ChangePassword,
   PasswordRequest,
+  CandidateDetails,
   CreateElection,
   Position,
 } from "./pages";
@@ -58,21 +59,26 @@ function App() {
                     <Route element={<Election />} path="/elections/:id" />
                     <Route
                       element={<AddCandidate />}
-                      path="/elections/positions/:positionId/candidates/add"
+                      path="/elections/:electionId/positions/candidates/add"
                     />
+                    {/* view a position */}
                     <Route
                       element={<Position />}
                       path="/elections/positions/:id"
                     />
                   </Route>
 
+                  <Route
+                    element={<CandidateDetails />}
+                    path="/candidates/:candidateId"
+                  />
+
                   {/* positions */}
                   <Route element={<Candidates />} path="/candidates" />
-                  <Route element={<AddCandidate />} path="/candidates/add" />
 
                   {/*  */}
 
-                  <Route element={<Candidates />} path="candidates/:id" />
+                  <Route element={<Candidates />} path="candidates/test" />
                   <Route element={<Vote />} path="results" />
                   <Route element={<Vote />} path="reset-passwords" />
                   <Route element={<Vote />} path="reset-passwords/:id" />

@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 import { axiosPrivate } from "../../api/axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { DateTimePicker } from "../../components";
 
 const CreateElection = () => {
   // textarea reference
@@ -108,7 +109,7 @@ const CreateElection = () => {
           <div className="createelection__form-details">
             {/* elections dates */}
             <div className="createelection__form-details_control">
-              <span className="details">Start Date</span>
+              {/* <span className="details">Start Date</span>
               <input
                 type="text"
                 placeholder="E.g 2022 Leadership"
@@ -116,17 +117,29 @@ const CreateElection = () => {
                 name="startDate"
                 value={startDate}
                 required
+              /> */}
+
+              <DateTimePicker
+                label={"Start Date"}
+                name={"startDate"}
+                setDate={setFormData}
               />
             </div>
             <div className="createelection__form-details_control">
-              <span className="details">End Date</span>
-              <input
+              {/* <span className="details">End Date</span> */}
+              {/* <input
                 type="text"
                 name="endDate"
                 placeholder="E.g 2022"
                 value={endDate}
                 onChange={handleChange}
                 required
+              /> */}
+
+              <DateTimePicker
+                label={"End Date"}
+                name={"endDate"}
+                setDate={setFormData}
               />
             </div>
           </div>

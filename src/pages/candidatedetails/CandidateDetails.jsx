@@ -1,60 +1,61 @@
-import "./position.css";
+import "./candidatedetails.css";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
 import { IoGrid, IoList } from "react-icons/io5";
+import { CustomElectionCard } from "../../components";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import useNav from "../../hooks/useNav";
-import { CandidateCard } from "../../components";
+import { Loader } from "../../components";
 
-function Position() {
+function CandidateDetails() {
   const navigate = useNavigate();
   const descRef = useRef();
-  const params = useParams();
-  const [positionDetails, setPositionDetails] = useState({});
+  const { candidateId } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [electionDetails, setElectionDetails] = useState({});
 
   const { auth } = useAuth();
 
-  console.log(params.id);
-
-  const { handleGridView, handleListView, toogleGridView } = useNav();
-
   const organisationId = auth.id;
-  const [allPosition, setAllPosition] = useState([]);
+
   const [toogleEdit, setToogleEdit] = useState(false);
 
   const handleDeleteProfile = async function (id) {
     try {
-      const res = await axiosPrivate.delete(`/api/v1/positions/${id}`);
+      setLoading(true);
+
+      const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
       if (res.status === 204) {
-        await axiosPrivate.delete(`/api/v1/candidates/positions/${id}`);
-        return navigate(`/elections`);
-        // /elections/positions/${electionDetails?._id}/candidates/add
+        await axiosPrivate.delete(`/api/v1/positions/elections/${id}`);
+        return navigate("/elections");
       }
       return;
     } catch (error) {
-      const statusCode = error.response.data.status;
-
+      const statusCode = error?.response?.data?.status;
       if (statusCode === 404) {
-        return toast.error("profile not found!");
-      } else if (statusCode === 401) {
-        return toast.error("not allowed!");
+        return toast.error("election not found");
       } else {
-        return toast.error("network error!");
+        return toast.error("network error");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleUpdateProfile = async function (id, formData) {
+    setLoading(true);
     try {
-      const res = await axiosPrivate.put(`/api/v1/positions/${id}`, formData);
+      const res = await axiosPrivate.put(
+        `/api/v1/elections/${id}?org=${organisationId}`,
+        formData
+      );
       if (res.status === 204) {
         return toast.success("updated!");
       }
       return;
     } catch (error) {
-      console.log(error);
       const statusCode = error.response.data.status;
       if (statusCode === 404) {
         return toast.error("profile not found!");
@@ -63,15 +64,22 @@ function Position() {
       } else {
         return toast.error("network error!");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   const handleChange = (e) => {
-    setPositionDetails({ ...positionDetails, [e.target.name]: e.target.value });
+    setElectionDetails({ ...electionDetails, [e.target.name]: e.target.value });
   };
 
   const handleFocus = function () {
     const desValue = descRef.current;
+
     if (desValue.value.length > 0) {
       desValue.classList.add("valid");
     } else {
@@ -80,34 +88,32 @@ function Position() {
   };
 
   const handleEditProfile = () => {
+    // Add logic for editing the profile
     if (toogleEdit === false) {
       return setToogleEdit(true);
     }
     if (toogleEdit === true) {
-      handleUpdateProfile(params.id, positionDetails);
+      handleUpdateProfile(candidateId, electionDetails);
       return setToogleEdit(false);
     }
   };
 
   useEffect(() => {
-    const getPosition = async function () {
+    const getCandidateInfo = async function () {
       try {
         // all election details
         const res = await axiosPrivate.get(
-          `/api/v1/positions/one/${params.id}`
+          `/api/v1/candidates/one/${candidateId}`
         );
-        console.log(res.data);
         // get all position associated with election
+
+        console.log(res.data, candidateId);
         if (res.status == 200) {
-          const resPosition = await axiosPrivate.get(
-            `/api/v1/candidates/${params.id}`
-          );
-          console.log(resPosition);
-          setAllPosition([...resPosition.data]);
+          setElectionDetails({ ...res?.data.candidate });
         }
-        setPositionDetails(res?.data);
+        setLoading(false);
       } catch (error) {
-        const statusCode = error?.response?.data?.status;
+        const statusCode = error.response.data.status;
         if (statusCode === 401) {
           return toast.error("not allowed!");
         } else if (statusCode === 400) {
@@ -115,34 +121,43 @@ function Position() {
         } else {
           return toast.error("network error");
         }
+      } finally {
+        setLoading(false);
       }
     };
 
-    getPosition();
+    getCandidateInfo();
   }, []);
 
-  const { positionName, positionDescription, votes, candidates } =
-    positionDetails;
+  const { fullName, manifesto, position } = electionDetails;
 
   return (
     <div className="election__page section__padding-md">
+      {loading && <Loader />}
+
       <div className="election__page-profile">
-        <button className="back-btn" onClick={() => navigate(-1)}>
-          Go back
-        </button>
         <div className="election__page-profile_left">
+          <button className="back-btn" onClick={handleBack}>
+            Go back
+          </button>
+          {/* Profile Image */}
+          <div className="election__page-profile_photo">
+            <img src="https://via.placeholder.com/150" alt="Profile" />
+          </div>
+
           {/* Profile Details */}
           <div className="election__page-profile_right">
             {/* elections name */}
             <div className="election__page-profile_right-details_fl">
               <div className="election__page-profile-details_control">
-                <span className="details">Title</span>
-                {!toogleEdit && <p>{positionDetails?.positionName}</p>}
+                <span className="details">Name</span>
+                {!toogleEdit && <p>{fullName}</p>}
                 {toogleEdit && (
                   <input
                     type="text"
-                    name="positionName"
-                    value={positionName}
+                    name="electionName"
+                    placeholder="E.g 2022 Leadership"
+                    value={fullName}
                     onChange={handleChange}
                     required
                   />
@@ -153,12 +168,20 @@ function Position() {
             <div className="election__page-profile_right-details_fl">
               <div className="election__page-profile-details_control">
                 <span className="details">Description</span>
-                {!toogleEdit && <p>{positionDescription}</p>}
+                {!toogleEdit && (
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                    Veritatis, exercitationem. Doloremque, impedit cupiditate
+                    aliquam laudantium nulla, porro ex sunt fugiat tenetur unde
+                    sed quo, quos soluta deserunt? Dignissimos, numquam dolore.
+                  </p>
+                )}
+                {/* {!toogleEdit && <p>{manifesto}</p>} */}
                 {toogleEdit && (
                   <textarea
-                    name="positionDescription"
+                    name="manifesto"
                     placeholder="E.g 2022 Leadership"
-                    value={positionDescription}
+                    value={manifesto}
                     onChange={handleChange}
                     required
                     ref={descRef}
@@ -170,13 +193,23 @@ function Position() {
             <div className="election__page-profile_right-details">
               {/* elections start date*/}
               <div className="election__page-profile-details_control">
-                <span className="details">Candidates</span>
-                <p>{candidates?.length}</p>
+                <span className="details">Total votes</span>
+                <p>{0}</p>
               </div>
               {/* elections end date*/}
               <div className="election__page-profile-details_control">
-                <span className="details">Votes</span>
-                <p>{votes?.length}</p>
+                <span className="details">Position</span>
+                {!toogleEdit && <p>{position}</p>}
+                {toogleEdit && (
+                  <input
+                    type="text"
+                    name="endDate"
+                    placeholder="E.g 2022 Leadership"
+                    value={position}
+                    onChange={handleChange}
+                    required
+                  />
+                )}
               </div>
             </div>
 
@@ -190,50 +223,12 @@ function Position() {
               </button>
               <button
                 className=" btn election__page-profile_btn cancel"
-                onClick={() => handleDeleteProfile(positionDetails._id)}
+                onClick={() => handleDeleteProfile(electionDetails._id)}
+                disabled={toogleEdit}
               >
                 Delete
               </button>
             </div>
-          </div>
-        </div>
-
-        {/* positions Section */}
-        <div className="election__page-content">
-          <div className="election__page-content_header">
-            <div className="election__page-content_header-title">
-              <h5>Positions</h5>
-              <p>These are all the position for this elections</p>
-            </div>
-            <div className="dashboard__content-election_header-btns">
-              <button
-                className={`election__view-btn ${
-                  !toogleGridView ? "active" : ""
-                }`}
-                onClick={handleListView}
-              >
-                <IoList />
-              </button>
-              <button
-                className={`election__view-btn ${
-                  toogleGridView ? "active" : ""
-                }`}
-                onClick={handleGridView}
-              >
-                <IoGrid />
-              </button>
-            </div>
-          </div>
-
-          {/*  */}
-          <div
-            className={`election__page-content_container ${
-              toogleGridView ? "grid__view" : ""
-            }`}
-          >
-            {allPosition?.map((position, idx) => (
-              <CandidateCard data={position} key={idx} />
-            ))}
           </div>
         </div>
       </div>
@@ -241,4 +236,4 @@ function Position() {
   );
 }
 
-export default Position;
+export default CandidateDetails;

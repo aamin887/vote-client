@@ -1,0 +1,34 @@
+.user-card {
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 15px;
+  padding: 20px;
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.user-card:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.user-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-card-header h3 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.more-options {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.more-options:hover {
+  color: #007bff;
+}

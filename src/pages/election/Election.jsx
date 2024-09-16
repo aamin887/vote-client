@@ -77,6 +77,10 @@ function Election() {
     }
   };
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   const handlePosition = () => {
     setTooglePosition(!tooglePosition);
   };
@@ -174,8 +178,12 @@ function Election() {
   return (
     <div className="election__page section__padding-md">
       {loading && <Loader />}
+
       <div className="election__page-profile">
         <div className="election__page-profile_left">
+          <button className="back-btn" onClick={handleBack}>
+            Go back
+          </button>
           {/* Profile Image */}
           <div className="election__page-profile_photo">
             <img src="https://via.placeholder.com/150" alt="Profile" />
@@ -279,7 +287,7 @@ function Election() {
                   className={`btn election__page-content_btn add`}
                   onClick={() =>
                     navigate(
-                      `/elections/positions/${electionDetails?._id}/candidates/add`,
+                      `/elections/${electionDetails?._id}/positions/candidates/add`,
                       {
                         state: electionDetails,
                       }
@@ -309,7 +317,7 @@ function Election() {
                 />
               </div>
               <div className="election__page-profile-details_control fl">
-                <span className="details">Description</span>
+                <span className="details">Describe the role</span>
                 <textarea
                   name="positionDescription"
                   placeholder="What does the position represent?"

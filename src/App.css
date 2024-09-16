@@ -60,3 +60,16 @@ button:disabled:hover {
 .form__control-margin {
   margin-bottom: 2.5em;
 }
+
+.back-btn {
+  position: absolute;
+  top: 20px;
+  background-color: var(--secondary-color);
+  padding: 0.5em 0.9em;
+  color: whitesmoke;
+  text-transform: capitalize;
+  border: none;
+  border-radius: 0.2em;
+  font-weight: 900;
+  right: 15px;
+}

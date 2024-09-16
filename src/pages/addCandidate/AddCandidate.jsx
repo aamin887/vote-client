@@ -2,13 +2,15 @@ import "./addcandidate.css";
 
 import { useEffect, useRef, useState } from "react";
 import { RiDeleteBin4Fill } from "react-icons/ri";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
 import { toast } from "react-toastify";
+import Candidates from "../candidates/Candidates";
 
 function AddCandidate() {
   const location = useLocation();
   const [positions, setPositions] = useState([]);
+  const { electionId } = useParams();
 
   const { state } = location;
   const descRef = useRef();
@@ -26,7 +28,7 @@ function AddCandidate() {
   };
 
   const [offices, setOffices] = useState([
-    { name: "", position: "", manifesto: "" },
+    { fullName: "", position: "", manifesto: "", passportPhoto: "" },
   ]);
 
   const handleCreatePosition = async (data) => {
@@ -34,10 +36,12 @@ function AddCandidate() {
       const res = await axiosPrivate.post("/api/v1/candidates", data);
       if (res.status === 201) {
         toast.success("candidates added successfully");
-        setOffices([{ fullName: "", position: "", manifesto: "" }]);
+        setOffices([
+          { fullName: "", position: "", manifesto: "", passportPhoto: "" },
+        ]);
+        return navigate(`/elections/${electionId}`);
       }
     } catch (error) {
-      console.log(error);
       const statusCode = error.response.data.status;
       if (statusCode === 404) {
         return toast.error("not found");
@@ -51,7 +55,10 @@ function AddCandidate() {
 
   // add candidate
   const handleAddOffice = () => {
-    setOffices([...offices, { fullName: "", position: "", manifesto: "" }]);
+    setOffices([
+      ...offices,
+      { fullName: "", position: "", manifesto: "", passportPhoto: "" },
+    ]);
   };
 
   //👇🏻 removes a selected item from the list
@@ -62,10 +69,17 @@ function AddCandidate() {
   };
   //👇🏻 updates an item within the list
   const handleUpdateOffices = (e, index) => {
-    const { name, value } = e.target;
+    const { name, value, type } = e.target;
     const list = [...offices];
+
+    if (type === "file") {
+      list[index][name] = URL.createObjectURL(e.target.files[0]);
+    }
     list[index][name] = value;
+
     setOffices(list);
+
+    console.log(offices);
   };
 
   const handleSubmit = (e) => {
@@ -74,7 +88,9 @@ function AddCandidate() {
 
     handleCreatePosition(offices);
 
-    setOffices([{ fullName: "", position: "", manifesto: "" }]);
+    setOffices([
+      { fullName: "", position: "", manifesto: "", passportPhoto: "" },
+    ]);
   };
 
   useEffect(() => {
@@ -90,7 +106,7 @@ function AddCandidate() {
   }, []);
 
   const positionSelectionOptions = positions.map((data, idx) => (
-    <option value={data._id} key={idx}>
+    <option value={data._id} key={idx + "-options"}>
       {data.positionName}
     </option>
   ));
@@ -99,6 +115,9 @@ function AddCandidate() {
     <div>
       <div className="addcandidate">
         <div className="addcandidate__content">
+          <button className="back-btn" onClick={() => navigate(-1)}>
+            Go back
+          </button>
           <div className="addcandidate__modal-title">
             <h2 className="section__heading">
               You are about add a candidate to {state.electionName}
@@ -188,6 +207,20 @@ function AddCandidate() {
                               ...positionSelectionOptions,
                             ]}
                           </select>
+                        </div>
+                      </div>
+                      <div className="createelection__form-details-fl">
+                        {/* candidate message */}
+                        <div className="createelection__form-details_control">
+                          <span className="details">Photo</span>
+                          <input
+                            type="file"
+                            placeholder="Choose a photo"
+                            required
+                            name="passportPhoto"
+                            value={office.passportPhoto}
+                            onChange={(e) => handleUpdateOffices(e, idx)}
+                          />
                         </div>
                       </div>
                       <div className="createelection__form-details-fl">

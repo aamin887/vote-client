@@ -41,14 +41,12 @@ function ElectionCard({ data, handleDelete }) {
 
         <div className={`electioncard__options ${options ? "show" : ""}`}>
           <ul>
-            <Link to={`/elections/${data?._id}`}>
-              <li>
-                <span>
-                  <FaCircleInfo />
-                </span>
-                <p>View </p>
-              </li>
-            </Link>
+            <li>
+              <span>
+                <FaCircleInfo />
+              </span>
+              <p>View </p>
+            </li>
 
             <button
               onClick={(e) => {
@@ -83,12 +81,8 @@ function ElectionCard({ data, handleDelete }) {
             {/* <div className="electioncard__footer-profile_img"> */}
             {<ProfileImage images={images} />}
             {/* </div> */}
-            <Link
-              title="Add a candidate"
-              to={`/elections/positions/${data?._id}/candidates/add`}
-            >
-              {<IoMdAddCircle size={20} />}
-            </Link>
+
+            {<IoMdAddCircle size={20} />}
           </div>
           <div className="electioncard__footer-remaining">
             <p>20 days remaining</p>

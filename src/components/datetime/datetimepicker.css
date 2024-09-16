@@ -1,0 +1,33 @@
+/* styles.css or styles.module.css */
+.date-time-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.picker-label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.date-time-picker .custom-input {
+  height: 45px;
+  width: 100%;
+  outline: none;
+  border-radius: 5px;
+  border: 1px solid var(--main-grey);
+  padding-left: 15px;
+  font-size: 16px;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+
+.date-time-picker .custom-input:valid,
+.date-time-picker .custom-input:focus {
+  border-color: var(--light-green);
+}
+
+.date-time-picker .custom-input.null {
+  border: 1px solid var(--main-grey);
+}
