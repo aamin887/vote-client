@@ -2,17 +2,19 @@ import "./addcandidate.css";
 
 import { useEffect, useRef, useState } from "react";
 import { RiDeleteBin4Fill } from "react-icons/ri";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
 import { toast } from "react-toastify";
-import Candidates from "../candidates/Candidates";
+import useAuth from "../../hooks/useAuth";
 
 function AddCandidate() {
-  const location = useLocation();
+  const [electionDetails, setElectionDetails] = useState({});
   const [positions, setPositions] = useState([]);
   const { electionId } = useParams();
 
-  const { state } = location;
+  const { auth } = useAuth();
+  const organisationId = auth.id;
+
   const descRef = useRef();
 
   const navigate = useNavigate();
@@ -95,11 +97,18 @@ function AddCandidate() {
 
   useEffect(() => {
     const ge = async () => {
-      const res = await axiosPrivate.get(`/api/v1/positions/${state._id}`);
-      console.log(res);
-      if (res.status === 200) {
-        setPositions(res.data);
+      const electionResponse = await axiosPrivate.get(
+        `/api/v1/elections/${electionId}?org=${organisationId}`
+      );
+      if (electionResponse.status === 200) {
+        const res = await axiosPrivate.get(`/api/v1/positions/${electionId}`);
+
+        if (res.status === 200) {
+          setPositions(res.data);
+        }
       }
+
+      setElectionDetails(electionResponse?.data?.election);
     };
 
     ge();
@@ -111,59 +120,69 @@ function AddCandidate() {
     </option>
   ));
 
+  const {
+    electionName,
+    organisation,
+    startDate,
+    endDate,
+    isActive,
+    description,
+  } = electionDetails;
+
   return (
     <div>
       <div className="addcandidate">
         <div className="addcandidate__content">
-          <button className="back-btn" onClick={() => navigate(-1)}>
-            Go back
-          </button>
           <div className="addcandidate__modal-title">
             <h2 className="section__heading">
-              You are about add a candidate to {state.electionName}
+              You are about add a candidate to {electionName}
             </h2>
             <p className="section__text lead__text">
               Fill in all required field to create election
             </p>
           </div>
+          <button className="back-btn" onClick={() => navigate(-1)}>
+            Go back
+          </button>
 
           <form onSubmit={handleSubmit} className="addcandidate__form">
             <div className="addcandidate__top">
               <div className="addcandidate__form-details">
                 <div className="addcandidate__form-details_control">
                   <span className="details">Name of election</span>
-                  <p>{state.electionName}</p>
+                  <p>{electionName}</p>
                 </div>
                 <div className="addcandidate__form-details_control">
                   <span className="details">Organisation</span>
-                  <p>{state.organisation}</p>
+                  <p>{organisation}</p>
                 </div>
               </div>
               <div className="addcandidate__form-details">
                 <div className="addcandidate__form-details_control">
                   <span className="details">Start date</span>
-                  <p>{state.startDate}</p>
+                  <p>{startDate}</p>
                 </div>
                 <div className="addcandidate__form-details_control">
                   <span className="details">Close date</span>
-                  <p>{state.endDate}</p>
+                  <p>{endDate}</p>
                 </div>
               </div>
               <div className="addcandidate__form-details">
                 <div className="addcandidate__form-details_control">
                   <span className="details">Organiser</span>
-                  <p>{state.organisation}</p>
+                  <p>{organisation}</p>
                 </div>
                 <div className="addcandidate__form-details_control">
                   <span className="details">Is active</span>
-                  <p>{state.isActive.toString(true)}</p>
+
+                  <p>{isActive?.toString(true)}</p>
                 </div>
               </div>
               <div className="createelection__form-details-fl">
                 {/* candidate message */}
                 <div className="createelection__form-details_control">
                   <span className="details">What is the election about?</span>
-                  <p>{state.description}</p>
+                  <p>{description}</p>
                 </div>
               </div>
             </div>

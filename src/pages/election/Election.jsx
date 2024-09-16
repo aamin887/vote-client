@@ -15,20 +15,18 @@ function Election() {
   const params = useParams();
   const [loading, setLoading] = useState(true);
   const [electionDetails, setElectionDetails] = useState({});
+  const [allPosition, setAllPosition] = useState([]);
+  const [toogleEdit, setToogleEdit] = useState(false);
+  const [tooglePosition, setTooglePosition] = useState(false);
   const [newPosition, setNewPosition] = useState({
     positionName: "",
     positionDescription: "",
   });
 
   const { auth } = useAuth();
-
   const { handleGridView, handleListView, toogleGridView } = useNav();
 
   const organisationId = auth.id;
-  const [allPosition, setAllPosition] = useState([]);
-  const [toogleEdit, setToogleEdit] = useState(false);
-
-  const [tooglePosition, setTooglePosition] = useState(false);
 
   const handleDeleteProfile = async function (id) {
     try {
@@ -287,10 +285,7 @@ function Election() {
                   className={`btn election__page-content_btn add`}
                   onClick={() =>
                     navigate(
-                      `/elections/${electionDetails?._id}/positions/candidates/add`,
-                      {
-                        state: electionDetails,
-                      }
+                      `/elections/${electionDetails?._id}/positions/candidates/add`
                     )
                   }
                 >
@@ -375,11 +370,7 @@ function Election() {
             }`}
           >
             {allPosition?.map((position, idx) => (
-              <CustomElectionCard
-                data={position}
-                election={electionDetails}
-                key={idx}
-              />
+              <CustomElectionCard data={position} setAllPosition={setAllPosition} key={idx} />
             ))}
           </div>
         </div>

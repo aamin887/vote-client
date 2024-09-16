@@ -158,6 +158,8 @@
 }
 
 .election__page-form {
+  margin-bottom: 0.8em;
+  border-radius: 0.3em;
   background-color: #4caf4f46;
   padding: 0.5em;
 }
@@ -182,6 +184,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.8em;
+  padding-top: 0.9em;
 }
 
 .election__page-content_container.grid__view {

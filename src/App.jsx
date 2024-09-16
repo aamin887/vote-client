@@ -57,6 +57,7 @@ function App() {
                     <Route element={<Elections />} index />
                     {/* election by id */}
                     <Route element={<Election />} path="/elections/:id" />
+                    {/* adding a candidate */}
                     <Route
                       element={<AddCandidate />}
                       path="/elections/:electionId/positions/candidates/add"

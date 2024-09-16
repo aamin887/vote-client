@@ -30,7 +30,6 @@ function Position() {
       if (res.status === 204) {
         await axiosPrivate.delete(`/api/v1/candidates/positions/${id}`);
         return navigate(`/elections`);
-        // /elections/positions/${electionDetails?._id}/candidates/add
       }
       return;
     } catch (error) {
@@ -153,7 +152,7 @@ function Position() {
             {/* elections description */}
             <div className="election__page-profile_right-details_fl">
               <div className="election__page-profile-details_control">
-                <span className="details">Description</span>
+                <span className="details">Role of this position?</span>
                 {!toogleEdit && <p>{positionDescription}</p>}
                 {toogleEdit && (
                   <textarea
