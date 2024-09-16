@@ -21,7 +21,7 @@ function Position() {
   const { handleGridView, handleListView, toogleGridView } = useNav();
 
   const organisationId = auth.id;
-  const [allPosition, setAllPosition] = useState([]);
+  const [candidates, setCandidates] = useState([]);
   const [toogleEdit, setToogleEdit] = useState(false);
 
   const handleDeleteProfile = async function (id) {
@@ -35,6 +35,8 @@ function Position() {
       return;
     } catch (error) {
       const statusCode = error.response.data.status;
+
+      console.log(error, ">>>");
 
       if (statusCode === 404) {
         return toast.error("profile not found!");
@@ -99,11 +101,11 @@ function Position() {
         console.log(res.data);
         // get all position associated with election
         if (res.status == 200) {
-          const resPosition = await axiosPrivate.get(
+          const resCandidates = await axiosPrivate.get(
             `/api/v1/candidates/${params.id}`
           );
-          console.log(resPosition);
-          setAllPosition([...resPosition.data]);
+
+          setCandidates([...resCandidates.data]);
         }
         setPositionDetails(res?.data);
       } catch (error) {
@@ -121,8 +123,7 @@ function Position() {
     getPosition();
   }, []);
 
-  const { positionName, positionDescription, votes, candidates } =
-    positionDetails;
+  const { positionName, positionDescription, votes } = positionDetails;
 
   return (
     <div className="election__page section__padding-md">
@@ -231,7 +232,7 @@ function Position() {
               toogleGridView ? "grid__view" : ""
             }`}
           >
-            {allPosition?.map((position, idx) => (
+            {candidates?.map((position, idx) => (
               <CandidateCard data={position} key={idx} />
             ))}
           </div>
