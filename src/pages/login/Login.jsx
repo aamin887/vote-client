@@ -2,6 +2,7 @@ import "./login.css";
 import one from "../../assets/Group13.png";
 import useAuth from "../../hooks/useAuth";
 import axios from "../../api/axios";
+import { handleLogin } from "../../api/actions";
 
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -48,16 +49,7 @@ function Login() {
     }
 
     try {
-      const response = await axios.post(
-        "/auth/login",
-        {
-          email,
-          password,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await handleLogin({ email, password });
 
       const { id, email: userEmail, accessToken, verified } = response.data;
 

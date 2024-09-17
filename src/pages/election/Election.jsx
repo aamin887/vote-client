@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
 import { IoGrid, IoList } from "react-icons/io5";
-import { CustomElectionCard } from "../../components";
+import { PositionCard } from "../../components";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import useNav from "../../hooks/useNav";
@@ -370,7 +370,11 @@ function Election() {
             }`}
           >
             {allPosition?.map((position, idx) => (
-              <CustomElectionCard data={position} setAllPosition={setAllPosition} key={idx} />
+              <PositionCard
+                data={position}
+                setAllPosition={setAllPosition}
+                key={idx}
+              />
             ))}
           </div>
         </div>

@@ -1,5 +1,5 @@
 import "./positionCard.css";
-import { Link, useNavigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import { FaFolderOpen } from "react-icons/fa6";

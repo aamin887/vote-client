@@ -70,7 +70,7 @@ function Elections() {
   return (
     <div
       className={`elections section__padding-md ${
-        toogleGridView ? "grid __view" : ""
+        toogleGridView ? "grid__view" : ""
       }`}
     >
       <div className="elections__header">
@@ -83,16 +83,20 @@ function Elections() {
         </p>
       </div>
 
-      <div className="elections__filter">
-        <div className="elections__filter-btns">
+      <div className="elections__view">
+        <div className="elections__view-btns">
           <button
-            className={`elections__view-btn ${!toogleGridView ? "active" : ""}`}
+            className={`elections__view-icons ${
+              !toogleGridView ? "active" : ""
+            }`}
             onClick={handleListView}
           >
             <IoList />
           </button>
           <button
-            className={`elections__view-btn ${toogleGridView ? "active" : ""}`}
+            className={`elections__view-icons ${
+              toogleGridView ? "active" : ""
+            }`}
             onClick={handleGridView}
           >
             <IoGrid />

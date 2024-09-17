@@ -2,11 +2,7 @@ import "./candidatedetails.css";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
-import { IoGrid, IoList } from "react-icons/io5";
-import { CustomElectionCard } from "../../components";
 import { toast } from "react-toastify";
-import useAuth from "../../hooks/useAuth";
-import useNav from "../../hooks/useNav";
 import { Loader } from "../../components";
 
 function CandidateDetails() {
@@ -14,12 +10,7 @@ function CandidateDetails() {
   const descRef = useRef();
   const { candidateId } = useParams();
   const [loading, setLoading] = useState(true);
-  const [positions, setPositions] = useState([]);
   const [candidateInfo, setCandidateInfo] = useState({});
-
-  const { auth } = useAuth();
-
-  const organisationId = auth.id;
 
   const [toogleEdit, setToogleEdit] = useState(false);
 
@@ -129,24 +120,24 @@ function CandidateDetails() {
   const { fullName, manifesto, position } = candidateInfo;
 
   return (
-    <div className="election__page section__padding-md">
+    <div className="candidatedetails__page section__padding-md">
       {loading && <Loader />}
 
-      <div className="election__page-profile">
-        <div className="election__page-profile_left">
+      <div className="candidatedetails__page-profile">
+        <div className="candidatedetails__page-profile_left">
           <button className="back-btn" onClick={handleBack}>
             Go back
           </button>
           {/* Profile Image */}
-          <div className="election__page-profile_photo">
+          <div className="candidatedetails__page-profile_photo">
             <img src="https://via.placeholder.com/150" alt="Profile" />
           </div>
 
           {/* Profile Details */}
-          <div className="election__page-profile_right">
+          <div className="candidatedetails__page-profile_right">
             {/*  name */}
-            <div className="election__page-profile_right-details_fl">
-              <div className="election__page-profile-details_control">
+            <div className="candidatedetails__page-profile_right-details_fl">
+              <div className="candidatedetails__page-profile-details_control">
                 <span className="details">Name</span>
                 {!toogleEdit && <p>{fullName}</p>}
                 {toogleEdit && (
@@ -162,8 +153,8 @@ function CandidateDetails() {
               </div>
             </div>
             {/* manifesto description */}
-            <div className="election__page-profile_right-details_fl">
-              <div className="election__page-profile-details_control">
+            <div className="candidatedetails__page-profile_right-details_fl">
+              <div className="candidatedetails__page-profile-details_control">
                 <span className="details">Description</span>
                 {!toogleEdit && <p>{manifesto}</p>}
                 {toogleEdit && (
@@ -179,14 +170,14 @@ function CandidateDetails() {
                 )}
               </div>
             </div>
-            <div className="election__page-profile_right-details">
+            <div className="candidatedetails__page-profile_right-details">
               {/* total votes received*/}
-              <div className="election__page-profile-details_control">
+              <div className="candidatedetails__page-profile-details_control">
                 <span className="details">Total votes</span>
                 <p>{0}</p>
               </div>
               {/* position */}
-              <div className="election__page-profile-details_control">
+              <div className="candidatedetails__page-profile-details_control">
                 <span className="details">Position</span>
                 {!toogleEdit && <p>{position}</p>}
                 {toogleEdit && (
@@ -203,15 +194,15 @@ function CandidateDetails() {
             </div>
 
             {/* Edit and Delete Buttons */}
-            <div className="election__page-profile_right-btns">
+            <div className="candidatedetails__page-profile_right-btns">
               <button
-                className="election__page-profile_btn-edit btn"
+                className="candidatedetails__page-profile_btn-edit btn"
                 onClick={handleEditProfile}
               >
                 {toogleEdit ? "Save" : "Edit"}
               </button>
               <button
-                className=" btn election__page-profile_btn cancel"
+                className="candidatedetails__page-profile_btn btn"
                 onClick={() => handleDeleteProfile(candidateId._id)}
                 disabled={toogleEdit}
               >

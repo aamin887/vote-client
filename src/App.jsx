@@ -37,7 +37,6 @@ function App() {
             <Route element={<Register />} path="/register" />
             <Route element={<PasswordReset />} path="/password-reset" />
             <Route element={<ChangePassword />} path="/password-change" />
-
             <Route element={<PasswordRequest />} path="/password-success" />
 
             {/* protected routes */}
@@ -48,13 +47,13 @@ function App() {
 
                   {/* elections */}
                   <Route path="elections">
+                    {/* index */}
+                    <Route element={<Elections />} index />
                     {/* create new election */}
                     <Route
                       element={<CreateElection />}
                       path="/elections/create"
                     />
-                    {/* index */}
-                    <Route element={<Elections />} index />
                     {/* election by id */}
                     <Route element={<Election />} path="/elections/:id" />
                     {/* adding a candidate */}
