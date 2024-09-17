@@ -6,13 +6,14 @@ import { IoGrid, IoList } from "react-icons/io5";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import useNav from "../../hooks/useNav";
-import { CandidateCard } from "../../components";
+import { CandidateCard, Loader } from "../../components";
 
 function Position() {
   const navigate = useNavigate();
   const descRef = useRef();
   const params = useParams();
   const [positionDetails, setPositionDetails] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const { auth } = useAuth();
 
@@ -116,13 +117,16 @@ function Position() {
         } else {
           return toast.error("network error");
         }
+      } finally {
+        setLoading(false);
       }
     };
 
     getPosition();
   }, []);
 
-  const { positionName, positionDescription, votes } = positionDetails;
+  const { positionName, positionDescription, votes, electionId } =
+    positionDetails;
 
   return (
     <div className="election__page section__padding-md">
@@ -132,6 +136,7 @@ function Position() {
         </button>
         <div className="election__page-profile_left">
           {/* Profile Details */}
+          {loading && <Loader />}
           <div className="election__page-profile_right">
             {/* elections name */}
             <div className="election__page-profile_right-details_fl">
@@ -193,6 +198,14 @@ function Position() {
                 onClick={() => handleDeleteProfile(positionDetails._id)}
               >
                 Delete
+              </button>
+              <button
+                className=" btn election__page-profile_btn cancel"
+                onClick={() =>
+                  navigate(`/elections/${electionId}/positions/candidates/add`)
+                }
+              >
+                Add candidates
               </button>
             </div>
           </div>

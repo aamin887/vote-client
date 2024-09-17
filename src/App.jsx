@@ -68,13 +68,13 @@ function App() {
                       path="/elections/positions/:id"
                     />
                   </Route>
-
+                  {/* candidates details */}
                   <Route
                     element={<CandidateDetails />}
                     path="/candidates/:candidateId"
                   />
 
-                  {/* positions */}
+                  {/* all candidates */}
                   <Route element={<Candidates />} path="/candidates" />
 
                   {/*  */}

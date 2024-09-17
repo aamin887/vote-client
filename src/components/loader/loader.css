@@ -1,6 +1,6 @@
 .spinner {
-  position: absolute;
-
+  position: fixed;
+  border: 1px solid rebeccapurple;
   width: 100vw;
   height: 100dvh;
   top: 0;
@@ -8,8 +8,9 @@
   display: grid;
   width: 100%;
   height: 100%;
+  z-index: 10;
   place-items: center;
-  background-color: #1f1b1b78;
+  background-color: #1f1b1be6;
 }
 
 .loader {

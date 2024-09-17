@@ -14,7 +14,8 @@ function CandidateDetails() {
   const descRef = useRef();
   const { candidateId } = useParams();
   const [loading, setLoading] = useState(true);
-  const [electionDetails, setElectionDetails] = useState({});
+  const [positions, setPositions] = useState([]);
+  const [candidateInfo, setCandidateInfo] = useState({});
 
   const { auth } = useAuth();
 
@@ -47,10 +48,7 @@ function CandidateDetails() {
   const handleUpdateProfile = async function (id, formData) {
     setLoading(true);
     try {
-      const res = await axiosPrivate.put(
-        `/api/v1/elections/${id}?org=${organisationId}`,
-        formData
-      );
+      const res = await axiosPrivate.put(`/api/v1/candidates/${id}`, formData);
       if (res.status === 204) {
         return toast.success("updated!");
       }
@@ -74,7 +72,7 @@ function CandidateDetails() {
   };
 
   const handleChange = (e) => {
-    setElectionDetails({ ...electionDetails, [e.target.name]: e.target.value });
+    setCandidateInfo({ ...candidateInfo, [e.target.name]: e.target.value });
   };
 
   const handleFocus = function () {
@@ -93,7 +91,7 @@ function CandidateDetails() {
       return setToogleEdit(true);
     }
     if (toogleEdit === true) {
-      handleUpdateProfile(candidateId, electionDetails);
+      handleUpdateProfile(candidateId, candidateInfo);
       return setToogleEdit(false);
     }
   };
@@ -106,10 +104,9 @@ function CandidateDetails() {
           `/api/v1/candidates/one/${candidateId}`
         );
         // get all position associated with election
-
         console.log(res.data, candidateId);
         if (res.status == 200) {
-          setElectionDetails({ ...res?.data.candidate });
+          setCandidateInfo({ ...res?.data.candidate });
         }
         setLoading(false);
       } catch (error) {
@@ -129,7 +126,7 @@ function CandidateDetails() {
     getCandidateInfo();
   }, []);
 
-  const { fullName, manifesto, position } = electionDetails;
+  const { fullName, manifesto, position } = candidateInfo;
 
   return (
     <div className="election__page section__padding-md">
@@ -147,7 +144,7 @@ function CandidateDetails() {
 
           {/* Profile Details */}
           <div className="election__page-profile_right">
-            {/* elections name */}
+            {/*  name */}
             <div className="election__page-profile_right-details_fl">
               <div className="election__page-profile-details_control">
                 <span className="details">Name</span>
@@ -155,7 +152,7 @@ function CandidateDetails() {
                 {toogleEdit && (
                   <input
                     type="text"
-                    name="electionName"
+                    name="fullName"
                     placeholder="E.g 2022 Leadership"
                     value={fullName}
                     onChange={handleChange}
@@ -164,19 +161,11 @@ function CandidateDetails() {
                 )}
               </div>
             </div>
-            {/* elections description */}
+            {/* manifesto description */}
             <div className="election__page-profile_right-details_fl">
               <div className="election__page-profile-details_control">
                 <span className="details">Description</span>
-                {!toogleEdit && (
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Veritatis, exercitationem. Doloremque, impedit cupiditate
-                    aliquam laudantium nulla, porro ex sunt fugiat tenetur unde
-                    sed quo, quos soluta deserunt? Dignissimos, numquam dolore.
-                  </p>
-                )}
-                {/* {!toogleEdit && <p>{manifesto}</p>} */}
+                {!toogleEdit && <p>{manifesto}</p>}
                 {toogleEdit && (
                   <textarea
                     name="manifesto"
@@ -191,12 +180,12 @@ function CandidateDetails() {
               </div>
             </div>
             <div className="election__page-profile_right-details">
-              {/* elections start date*/}
+              {/* total votes received*/}
               <div className="election__page-profile-details_control">
                 <span className="details">Total votes</span>
                 <p>{0}</p>
               </div>
-              {/* elections end date*/}
+              {/* position */}
               <div className="election__page-profile-details_control">
                 <span className="details">Position</span>
                 {!toogleEdit && <p>{position}</p>}
@@ -223,7 +212,7 @@ function CandidateDetails() {
               </button>
               <button
                 className=" btn election__page-profile_btn cancel"
-                onClick={() => handleDeleteProfile(electionDetails._id)}
+                onClick={() => handleDeleteProfile(candidateId._id)}
                 disabled={toogleEdit}
               >
                 Delete

@@ -62,6 +62,7 @@ function Login() {
       const { id, email: userEmail, accessToken, verified } = response.data;
 
       setAuth({ id, userEmail, accessToken, verified });
+
       setFormData({
         email: "forkahamin@yahoo.co.uk",
         password: "amin991",

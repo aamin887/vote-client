@@ -30,7 +30,13 @@ function AddCandidate() {
   };
 
   const [offices, setOffices] = useState([
-    { fullName: "", position: "", manifesto: "", passportPhoto: "" },
+    {
+      fullName: "",
+      position: "",
+      manifesto: "",
+      passportPhoto: "",
+      organisation: organisationId,
+    },
   ]);
 
   const handleCreatePosition = async (data) => {
@@ -39,7 +45,13 @@ function AddCandidate() {
       if (res.status === 201) {
         toast.success("candidates added successfully");
         setOffices([
-          { fullName: "", position: "", manifesto: "", passportPhoto: "" },
+          {
+            fullName: "",
+            position: "",
+            manifesto: "",
+            passportPhoto: "",
+            organisation: organisationId,
+          },
         ]);
         return navigate(`/elections/${electionId}`);
       }
@@ -59,7 +71,13 @@ function AddCandidate() {
   const handleAddOffice = () => {
     setOffices([
       ...offices,
-      { fullName: "", position: "", manifesto: "", passportPhoto: "" },
+      {
+        fullName: "",
+        position: "",
+        manifesto: "",
+        passportPhoto: "",
+        organisation: organisationId,
+      },
     ]);
   };
 
@@ -91,7 +109,13 @@ function AddCandidate() {
     handleCreatePosition(offices);
 
     setOffices([
-      { fullName: "", position: "", manifesto: "", passportPhoto: "" },
+      {
+        fullName: "",
+        position: "",
+        manifesto: "",
+        passportPhoto: "",
+        organisation: organisationId,
+      },
     ]);
   };
 
