@@ -5,7 +5,7 @@ import {
   Register,
   AddCandidate,
   PasswordReset,
-  Admin,
+  ResultVote,
   Vote,
   Dashboard,
   Error,
@@ -17,6 +17,7 @@ import {
   CandidateDetails,
   CreateElection,
   Position,
+  HelpPage,
 } from "./pages";
 
 import { PrivateRoute } from "./components";
@@ -72,17 +73,15 @@ function App() {
                     element={<CandidateDetails />}
                     path="/candidates/:candidateId"
                   />
-
                   {/* all candidates */}
                   <Route element={<Candidates />} path="/candidates" />
 
-                  {/*  */}
+                  {/* result page */}
+                  <Route element={<ResultVote />} path="results" />
 
-                  <Route element={<Candidates />} path="candidates/test" />
-                  <Route element={<Vote />} path="results" />
                   <Route element={<Vote />} path="reset-passwords" />
                   <Route element={<Vote />} path="reset-passwords/:id" />
-                  <Route element={<Admin />} path="help" />
+                  <Route element={<HelpPage />} path="help" />
                 </Route>
               </Route>
             </Route>

@@ -190,3 +190,30 @@
 .election__page-content_container.grid__view {
   grid-template-columns: repeat(4, 1fr);
 }
+
+.election__page-content_container.empty,
+.election__page-content_container.empty.grid__view {
+  grid-template-columns: repeat(1, 1fr);
+  margin: auto;
+  font-weight: 200;
+
+  text-align: center;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  color: rgb(157, 152, 152);
+}
+
+.election__page-content_container-empty {
+  font-weight: 200;
+
+  text-align: center;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  color: rgb(157, 152, 152);
+}
+
+.election__page-content_container-empty svg {
+  font-size: 1.8rem;
+}

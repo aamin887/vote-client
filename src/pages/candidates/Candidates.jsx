@@ -2,6 +2,7 @@ import "./candidates.css";
 import { CandidateCard, Loader } from "../../components";
 import useAuth from "../../hooks/useAuth";
 import { axiosPrivate } from "../../api/axios";
+import { BsInbox } from "react-icons/bs";
 import { useEffect, useState } from "react";
 
 function Candidates() {
@@ -33,6 +34,17 @@ function Candidates() {
 
   return (
     <div className="candidates section__padding-md">
+      {candidates.length === 0 && (
+        <div className="candidates__content-empty">
+          <p>
+            <BsInbox />
+          </p>
+          <p>
+            No candidates added yet. Go ahead create an election and add some
+            candidates.
+          </p>
+        </div>
+      )}
       <div className="candidates__content">
         {loading && <Loader />}
         {candidates?.map((candidate, idx) => (

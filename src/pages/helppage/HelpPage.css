@@ -1,0 +1,44 @@
+/* src/components/HelpPage.css */
+
+.help-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1,
+h2 {
+  color: #2c3e50;
+}
+
+.help-section {
+  margin-bottom: 30px;
+}
+
+.faq {
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .help-container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+}

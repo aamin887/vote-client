@@ -3,6 +3,7 @@
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.3s ease;
+  border: 1px solid var(--light-green);
 }
 
 .candidatecard:hover img {

@@ -4,3 +4,18 @@
   gap: 2.5em;
   position: relative;
 }
+
+.candidates__content-empty {
+  margin: auto;
+  font-weight: 200;
+  width: 100%;
+  text-align: center;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  color: rgb(157, 152, 152);
+}
+
+.candidates__content-empty svg {
+  font-size: 1.5rem;
+}

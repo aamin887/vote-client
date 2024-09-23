@@ -24,22 +24,23 @@ function Elections() {
   const handleDeleteElection = async function (id) {
     try {
       const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
+      setElectionData(electionData.filter((data) => data._id !== id));
+      toast.success("deleted");
       if (res.status === 204) {
-        await axiosPrivate.delete(`/api/v1/positions/elections/${id}`);
-        setElectionData(electionData.filter((data) => data._id !== id));
         setLoading(true);
-        return toast.success("deleted");
+        await axiosPrivate.delete(`/api/v1/positions/elections/${id}}`);
       }
       return;
     } catch (error) {
       const statusCode = error.response.data.status;
 
+      console.log(error);
+
       if (statusCode === 404) {
         return toast.error("election does not exit");
-      } else if (statusCode === 400) {
-        return toast.error("network error");
-      } else {
-        return toast.error("network error");
+      }
+      if (statusCode === 401) {
+        return toast.error("not allowed");
       }
     } finally {
       setLoading(false);

@@ -95,9 +95,7 @@ function Position() {
     const getPosition = async function () {
       try {
         // all election details
-        const res = await axiosPrivate.get(
-          `/api/v1/positions/one/${params.id}`
-        );
+        const res = await axiosPrivate.get(`/api/v1/positions/${params.id}`);
         console.log(res.data);
         // get all position associated with election
         if (res.status == 200) {

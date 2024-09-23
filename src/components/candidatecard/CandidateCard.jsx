@@ -15,7 +15,7 @@ function CandidateCard({ data }) {
           <div className="candidatecard__top-name">
             <h4>{data?.fullName}</h4>
           </div>
-          <img src={photo} alt="" />
+          <img src={data?.profilePhoto} alt="" />
         </div>
         <div className="candidatecard__bottom">
           <p>President</p>

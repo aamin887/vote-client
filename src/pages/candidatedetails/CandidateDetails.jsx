@@ -11,17 +11,18 @@ function CandidateDetails() {
   const { candidateId } = useParams();
   const [loading, setLoading] = useState(true);
   const [candidateInfo, setCandidateInfo] = useState({});
+  const [positionId, setPositionId] = useState("");
 
   const [toogleEdit, setToogleEdit] = useState(false);
 
-  const handleDeleteProfile = async function (id) {
+  const handleDelete = async function (id) {
     try {
       setLoading(true);
 
-      const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
+      const res = await axiosPrivate.delete(`/api/v1/candidates/${id}`);
       if (res.status === 204) {
-        await axiosPrivate.delete(`/api/v1/positions/elections/${id}`);
-        return navigate("/elections");
+        console.log(res);
+        return navigate(`/elections/positions/${positionId}`);
       }
       return;
     } catch (error) {
@@ -98,6 +99,7 @@ function CandidateDetails() {
         console.log(res.data, candidateId);
         if (res.status == 200) {
           setCandidateInfo({ ...res?.data.candidate });
+          setPositionId(res.data.candidate.position);
         }
         setLoading(false);
       } catch (error) {
@@ -117,7 +119,7 @@ function CandidateDetails() {
     getCandidateInfo();
   }, []);
 
-  const { fullName, manifesto, position } = candidateInfo;
+  const { fullName, manifesto, position, profilePhoto } = candidateInfo;
 
   return (
     <div className="candidatedetails__page section__padding-md">
@@ -130,7 +132,8 @@ function CandidateDetails() {
           </button>
           {/* Profile Image */}
           <div className="candidatedetails__page-profile_photo">
-            <img src="https://via.placeholder.com/150" alt="Profile" />
+            {/* <img src="https://via.placeholder.com/150" alt="Profile" /> */}
+            <img src={`${profilePhoto}`} alt="Profile" />
           </div>
 
           {/* Profile Details */}
@@ -203,7 +206,7 @@ function CandidateDetails() {
               </button>
               <button
                 className="candidatedetails__page-profile_btn btn"
-                onClick={() => handleDeleteProfile(candidateId._id)}
+                onClick={() => handleDelete(candidateId)}
                 disabled={toogleEdit}
               >
                 Delete

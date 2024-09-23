@@ -10,10 +10,8 @@ import Loader from "../../loader/Loader";
 
 function PositionCard({ data, setAllPosition }) {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
 
   const handleDeleteProfile = async function (id) {
-    setLoading(true);
     try {
       const res = await axiosPrivate.delete(`/api/v1/positions/${id}`);
       if (res.status === 204) {
@@ -30,14 +28,11 @@ function PositionCard({ data, setAllPosition }) {
       } else {
         return toast.error("network error");
       }
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <div className="positioncard">
-      {loading && <Loader />}
       <div className="positioncard__header">
         <h3>{data?.positionName}</h3>
         <p>{data?.positionDescription}</p>

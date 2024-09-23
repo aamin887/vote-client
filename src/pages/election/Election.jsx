@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import useNav from "../../hooks/useNav";
 import { Loader } from "../../components";
+import { BsInbox } from "react-icons/bs";
 
 function Election() {
   const navigate = useNavigate();
@@ -28,13 +29,12 @@ function Election() {
 
   const organisationId = auth.id;
 
-  const handleDeleteProfile = async function (id) {
+  const deleteElection = async function (id) {
     try {
       setLoading(true);
 
       const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
       if (res.status === 204) {
-        await axiosPrivate.delete(`/api/v1/positions/elections/${id}`);
         return navigate("/elections");
       }
       return;
@@ -42,6 +42,8 @@ function Election() {
       const statusCode = error?.response?.data?.status;
       if (statusCode === 404) {
         return toast.error("election not found");
+      } else if (statusCode == 400) {
+        return toast.error("make sure all ");
       } else {
         return toast.error("network error");
       }
@@ -60,7 +62,6 @@ function Election() {
       if (res.status === 204) {
         return toast.success("updated!");
       }
-      return;
     } catch (error) {
       const statusCode = error.response.data.status;
       if (statusCode === 404) {
@@ -106,19 +107,22 @@ function Election() {
     if (toogleEdit === false) {
       return setToogleEdit(true);
     }
+
     if (toogleEdit === true) {
       handleUpdateProfile(params.id, electionDetails);
       return setToogleEdit(false);
     }
   };
 
-  const handleAddPosition = async () => {
+  // add new position to election
+  const handleAddPosition = async (e) => {
+    e.preventDefault();
     try {
       setLoading(true);
       const res = await axiosPrivate.post("/api/v1/positions", {
         position: positionName,
         description: positionDescription,
-        electionId: electionDetails?._id,
+        electionId: electionDetails._id,
       });
 
       if (res.status === 201) {
@@ -128,9 +132,15 @@ function Election() {
         setNewPosition("");
       }
     } catch (error) {
-      const statusCode = error.response.data.status;
-      if (statusCode === 400) {
-        return toast.error("network error");
+      const statusCode = error.response.status;
+      if (statusCode === 401) {
+        return toast.error("not allowed!");
+      } else if (statusCode === 400) {
+        return toast.error("form input not valid");
+      } else if (statusCode === 403) {
+        return toast.error("Position already exist.");
+      } else {
+        return toast.error("network error!");
       }
     } finally {
       setLoading(false);
@@ -147,11 +157,11 @@ function Election() {
         // get all position associated with election
         if (res.status == 200) {
           const resPosition = await axiosPrivate.get(
-            `/api/v1/positions/${params.id}?org=${organisationId}`
+            `/api/v1/positions/?election=${params.id}`
           );
           setAllPosition([...resPosition.data]);
         }
-        setElectionDetails({ ...res?.data.election });
+        setElectionDetails({ ...res?.data?.election });
         setLoading(false);
       } catch (error) {
         const statusCode = error.response.data.status;
@@ -268,7 +278,7 @@ function Election() {
               </button>
               <button
                 className=" btn election__page-profile_btn cancel"
-                onClick={() => handleDeleteProfile(electionDetails._id)}
+                onClick={() => deleteElection(electionDetails._id)}
               >
                 Delete
               </button>
@@ -297,7 +307,7 @@ function Election() {
         </div>
 
         {tooglePosition && (
-          <div className="election__page-form">
+          <form onSubmit={handleAddPosition} className="election__page-form">
             <div className="election__page-profile_right-details">
               {/* new position*/}
               <div className="election__page-profile-details_control fl">
@@ -325,7 +335,7 @@ function Election() {
               </div>
               {/* elections end date*/}
               <div className="election__page-profile-details_control">
-                <button className="btn add" onClick={handleAddPosition}>
+                <button className="btn add" type="submit">
                   Add position
                 </button>
                 <button className="btn cancel" onClick={handlePosition}>
@@ -333,7 +343,7 @@ function Election() {
                 </button>
               </div>
             </div>
-          </div>
+          </form>
         )}
 
         {/* positions Section */}
@@ -366,9 +376,20 @@ function Election() {
           {/*  */}
           <div
             className={`election__page-content_container ${
-              toogleGridView ? "grid__view" : ""
-            }`}
+              allPosition.length === 0 ? "empty" : ""
+            } ${toogleGridView ? "grid__view" : ""}`}
           >
+            {allPosition.length === 0 && (
+              <div className="election__page-content_container-empty">
+                <p>
+                  <BsInbox />
+                </p>
+                <p>
+                  No position added yet. Go ahead create a position to add some
+                  candidates.
+                </p>
+              </div>
+            )}
             {allPosition?.map((position, idx) => (
               <PositionCard
                 data={position}
