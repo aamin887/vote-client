@@ -14,3 +14,12 @@ export { default as CandidateCard } from "./candidatecard/CandidateCard";
 export { default as AddCandidateForm } from "./addCandidate/AddCandidate";
 export { default as ElectionCard } from "./cards/ElectionCard/ElectionCard";
 export { default as DateTimePicker } from "./datetime/Datetimepicker";
+
+// home comp
+export { default as Header } from "./header/Header";
+export { default as Footer } from "./footer/Footer";
+export { default as Features } from "./features/Features";
+export { default as HowItWorks } from "./howItWorks/HowItWorks";
+export { default as FAQ } from "./faq/FAQ";
+export { default as Contact } from "./contact/Contact";
+export { default as RadiantButton } from "./button/RadiantButton";

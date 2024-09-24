@@ -1,0 +1,38 @@
+/* src/components/RadiantButton.css */
+.radiant-button {
+  position: relative;
+  overflow: hidden;
+  padding: 15px 30px;
+  font-size: 1rem;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.radiant-button:hover {
+  background-color: #0056b3;
+}
+
+.radiant-button:focus {
+  background-color: #0056b3;
+}
+
+.radiant-button .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(0);
+  animation: ripple-animation 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple-animation {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}

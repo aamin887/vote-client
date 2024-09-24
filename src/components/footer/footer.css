@@ -1,0 +1,32 @@
+.footer {
+  background-color: #e1f297;
+  color: #333;
+  padding: 40px 20px;
+  text-align: center;
+  border: none;
+  border-radius: 0.5em;
+}
+
+.footer__container {
+  display: flex;
+}
+
+.footer__container-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer__content-section.logo img {
+  width: 2em;
+}
+
+.footer__content-section.logo small {
+  font-size: 1rem;
+}
+
+.footer__content-section .btns {
+  display: flex;
+  align-items: center;
+}

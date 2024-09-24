@@ -1,0 +1,47 @@
+.features {
+  padding: 4em;
+  text-align: center;
+}
+
+.features h2 {
+  color: #ffff;
+  font-size: clamp(1rem, 1.5rem + 0.825vw, 2rem);
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+}
+
+.feature-list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.feature-item {
+  flex-basis: 30%;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #03a898;
+  text-align: center;
+}
+
+.feature-item svg {
+  color: #ffff;
+}
+
+.feature-item h3 {
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+@media (max-width: 768px) {
+  .features {
+    padding: 0em;
+    margin-top: 2em;
+  }
+
+  .feature-item {
+    flex-basis: 100%;
+  }
+}

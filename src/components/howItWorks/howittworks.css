@@ -1,0 +1,32 @@
+.how-it-works {
+  padding: 50px 20px;
+  background-color: #e0f266;
+  text-align: center;
+  color: #333;
+  border: none;
+  border-radius: 0.5em;
+}
+
+.how-it-works h2 {
+  font-size: clamp(1rem, 1.5rem + 0.825vw, 2rem);
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-bottom: 1em;
+}
+
+.steps {
+  list-style: none;
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.steps li {
+  margin: 15px 0;
+}
+
+@media (max-width: 768px) {
+  .steps {
+    font-size: 18px;
+  }
+}
