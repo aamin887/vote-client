@@ -1,8 +1,27 @@
 import "./header.css";
 import hero from "../../assets/hero-banner.jpeg";
 import logo from "../../assets/logo.png";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleSignUp = () => {
+    return navigate("/register");
+  };
+
+  useEffect(() => {
+    const setCookies = async function () {
+      const res = await axios.get("");
+
+      console.log(await res);
+    };
+
+    setCookies();
+  }, []);
+
   return (
     <header className="header">
       <nav className="navbar">
@@ -23,14 +42,18 @@ const Header = () => {
             <a href="#contact">Contact Us</a>
           </li>
         </ul>
-        <button className="cta-btn">Get Started</button>
+        <button className="cta-btn" onClick={handleSignUp}>
+          Get Started
+        </button>
       </nav>
 
       <div className="hero">
         <div className="hero-text">
           <h1>Your Voting Solution</h1>
           <p>Fast, secure, and easy voting platform.</p>
-          <button className="hero-btn">Try Now</button>
+          <button className="hero-btn" onClick={handleSignUp}>
+            Try Now
+          </button>
         </div>
         <div className="hero-image">
           <img src={hero} alt="Voting" />
