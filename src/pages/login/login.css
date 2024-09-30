@@ -119,3 +119,29 @@
   opacity: 0.8;
   border-bottom: 1px solid var(--secondary-color);
 }
+
+@media (max-width: 767px) {
+  .login__right {
+    display: none;
+  }
+
+  .login__left {
+    margin: auto;
+    width: 100%;
+  }
+
+  .login__site {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .login__right {
+    display: none;
+  }
+
+  .login__left {
+    width: 50%;
+    margin: auto;
+  }
+}

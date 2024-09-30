@@ -73,3 +73,34 @@ button:disabled:hover {
   font-weight: 900;
   right: 15px;
 }
+
+body.modal__open {
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .section__padding {
+    padding: 1em 1em;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .section__padding {
+    padding: 1em 3em;
+  }
+}
+
+/* large desktops */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .section__padding {
+    padding: 2em 5em;
+  }
+
+  .section__padding-md {
+    padding: 1em 2em;
+  }
+
+  .section__margin {
+    margin: 2em 1em;
+  }
+}

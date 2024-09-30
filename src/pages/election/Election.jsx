@@ -3,7 +3,11 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
 import { IoGrid, IoList } from "react-icons/io5";
-import { PositionCard, ConfirmationDialog } from "../../components";
+import {
+  PositionCard,
+  ConfirmationDialog,
+  DateTimePicker,
+} from "../../components";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import useNav from "../../hooks/useNav";
@@ -305,20 +309,20 @@ function Election() {
                 <span className="details">Close Date</span>
                 {!toogleEdit && <p>{formattedEndDate}</p>}
                 {toogleEdit && (
-                  <input
-                    type="text"
-                    name="endDate"
-                    placeholder="E.g 2022 Leadership"
-                    value={endDate}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  // <DateTimePicker
-                  //   // label={"Start Date"}
-                  //   name={"endDate"}
-                  //   setDate={setElectionDetails}
+                  // <input
+                  //   type="text"
+                  //   name="endDate"
+                  //   placeholder="E.g 2022 Leadership"
+                  //   value={endDate}
+                  //   onChange={handleChange}
+                  //   required
                   // />
+
+                  <DateTimePicker
+                    // label={"Start Date"}
+                    name={"endDate"}
+                    setDate={setElectionDetails}
+                  />
                 )}
               </div>
             </div>

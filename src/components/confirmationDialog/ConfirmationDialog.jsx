@@ -26,10 +26,10 @@ function ConfirmationDialog({
   useEffect(() => {
     if (isOpened) {
       ref.current?.showModal();
-      document.body.classList.add("modal-open"); // prevent bg scroll
+      document.body.classList.add("modal__open"); // prevent bg scroll
     } else {
       ref.current?.close();
-      document.body.classList.remove("modal-open");
+      document.body.classList.remove("modal__open");
     }
   }, [isOpened]);
 

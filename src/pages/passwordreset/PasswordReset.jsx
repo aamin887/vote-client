@@ -81,13 +81,13 @@ function PasswordReset() {
 
   return (
     <div className=" section__padding">
-      <div className="register__site">
+      <div className="reset__site">
         {/* right */}
-        <div className="register__left">
+        <div className="reset__left">
           <div className="register__right-img">
             <img src={one} style={{}} alt="illustration" className="noselect" />
           </div>
-          <div className="register__right-heading">
+          <div className="reset__right-heading">
             <h2 className="">Votes</h2>
             <p className="section__text">
               Vote today and shape a brighter future
@@ -95,8 +95,8 @@ function PasswordReset() {
           </div>
         </div>
 
-        <div className="register__right">
-          <div className="register__left-header">
+        <div className="reset__right">
+          <div className="reset__left-header">
             <h1 className="section__heading title__text">Forgot password?</h1>
             <p className="section__text lead__text">
               Don&apos;t worry we can help you out! if you still remember your
@@ -117,7 +117,7 @@ function PasswordReset() {
             </div>
           )}
 
-          <div className="register__left-form">
+          <div className="reset__left-form">
             <form onSubmit={handleSubmit}>
               {/* email */}
               <div className="form__control form__control-margin">

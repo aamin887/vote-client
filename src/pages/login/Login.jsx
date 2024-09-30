@@ -1,7 +1,6 @@
 import "./login.css";
 import one from "../../assets/Group13.png";
 import useAuth from "../../hooks/useAuth";
-import axios from "../../api/axios";
 import { handleLogin } from "../../api/actions";
 
 import { useEffect, useRef, useState } from "react";

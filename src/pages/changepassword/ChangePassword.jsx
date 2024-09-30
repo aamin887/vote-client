@@ -132,9 +132,9 @@ function ChangePassword() {
 
   return (
     <div className=" section__padding">
-      <div className="login__site">
-        <div className="login__left">
-          <div className="login__left-header">
+      <div className="changepassword__site">
+        <div className="changepassword__left">
+          <div className="changepassword__left-header">
             <h1 className="section__heading title__text">Change password</h1>
             <p className="section__text lead__text">
               Input your new desired password in the input fields below to
@@ -142,7 +142,7 @@ function ChangePassword() {
             </p>
           </div>
 
-          <div className="login__left-form">
+          <div className="changepassword__left-form">
             <form onSubmit={handleSubmit}>
               {/* email */}
               <div className="form__control form__control-margin underline">
@@ -268,7 +268,7 @@ function ChangePassword() {
           <div className="login__right-img">
             <img src={one} style={{}} alt="illustration" className="noselect" />
           </div>
-          <div className="login__right-heading">
+          <div className="changepassword__right-heading">
             <h2 className="">Votes</h2>
             <p className="section__text">
               Vote today and shape a brighter future
