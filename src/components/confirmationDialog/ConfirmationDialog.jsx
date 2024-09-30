@@ -5,6 +5,7 @@ import "./confirmationDialog.css";
 function ConfirmationDialog({
   title,
   icon,
+  id,
   isOpened,
   onProceed,
   onClose,
@@ -37,7 +38,7 @@ function ConfirmationDialog({
   };
 
   const handleDelete = () => {
-    onProceed();
+    onProceed(id);
     onClose();
   };
 

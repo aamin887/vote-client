@@ -3,11 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
 import { IoGrid, IoList } from "react-icons/io5";
-import {
-  PositionCard,
-  ConfirmationDialog,
-  DateTimePicker,
-} from "../../components";
+import { PositionCard, ConfirmationDialog } from "../../components";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import useNav from "../../hooks/useNav";
@@ -208,7 +204,8 @@ function Election() {
         title={`Are you sure?`}
         icon={<FaTimes />}
         isOpened={isOpened}
-        onProceed={() => deleteElection(electionDetails._id)}
+        id={electionDetails._id}
+        onProceed={deleteElection}
         onClose={() => setIsOpened(false)}
       >
         <p>
