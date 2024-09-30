@@ -162,10 +162,6 @@ function Election() {
         }
         setElectionDetails({
           ...res?.data?.election,
-          // ["endDate"]: format(
-          //   new Date(electionDetails?.endDate),
-          //   "MMMM do, yyyy h:mm a"
-          // ),
         });
         setLoading(false);
       } catch (error) {
@@ -190,10 +186,10 @@ function Election() {
   const { positionName, positionDescription } = newPosition;
 
   const formattedStartDate = startDate
-    ? format(new Date(electionDetails?.startDate), "MMMM do, yyyy h:mm a")
+    ? format(new Date(startDate), "MMMM do, yyyy h:mm a")
     : endDate;
   const formattedEndDate = endDate
-    ? format(new Date(electionDetails?.endDate), "MMMM do, yyyy h:mm a")
+    ? format(new Date(endDate), "MMMM do, yyyy h:mm a")
     : endDate;
 
   return (

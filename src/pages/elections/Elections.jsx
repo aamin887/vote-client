@@ -34,8 +34,6 @@ function Elections() {
     } catch (error) {
       const statusCode = error.response.data.status;
 
-      console.log(error);
-
       if (statusCode === 404) {
         return toast.error("election does not exit");
       }
