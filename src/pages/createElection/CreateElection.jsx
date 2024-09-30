@@ -61,6 +61,7 @@ const CreateElection = () => {
         return navigate("/elections");
       }
     } catch (error) {
+      console.log(error);
       const statusCode = error.response.data.status;
       if (statusCode === 409) {
         return toast.error(`Election already exists.`);

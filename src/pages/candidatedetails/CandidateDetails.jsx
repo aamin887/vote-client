@@ -134,6 +134,19 @@ function CandidateDetails() {
           <div className="candidatedetails__page-profile_photo">
             {/* <img src="https://via.placeholder.com/150" alt="Profile" /> */}
             <img src={`${profilePhoto}`} alt="Profile" />
+
+            {toogleEdit && (
+              <div className="candidatedetails__page-profile_photo-selector">
+                <input
+                  type="file"
+                  placeholder="Choose a photo"
+                  required
+                  name="imgfile"
+                  accept="image/*"
+                  onChange={handleChange}
+                />
+              </div>
+            )}
           </div>
 
           {/* Profile Details */}

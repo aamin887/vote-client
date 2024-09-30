@@ -14,6 +14,7 @@ export { default as CandidateCard } from "./candidatecard/CandidateCard";
 export { default as AddCandidateForm } from "./addCandidate/AddCandidate";
 export { default as ElectionCard } from "./cards/ElectionCard/ElectionCard";
 export { default as DateTimePicker } from "./datetime/Datetimepicker";
+export { default as ConfirmationDialog } from "./confirmationDialog/ConfirmationDialog";
 
 // home comp
 export { default as Header } from "./header/Header";

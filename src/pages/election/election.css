@@ -16,6 +16,11 @@
   margin-right: 20px;
 }
 
+.election__page-profile_photo-selector {
+  border: 0.2em solid var(--light-green);
+  border-radius: 0.2em;
+}
+
 .election__page-profile_right {
   flex: 1;
 }

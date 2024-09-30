@@ -1,0 +1,116 @@
+.dialog {
+  position: relative;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+
+  border-radius: 0.5em;
+  border: none;
+
+  font-family: "Varela Round", sans-serif;
+  text-align: center;
+  font-size: 14px;
+}
+
+::backdrop {
+  background-color: rgba(0, 0, 0, 0.748);
+}
+
+.dialog__modal-content {
+  padding: 0.5em;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+}
+
+.dialog__modal-header {
+  border-bottom: none;
+  position: relative;
+}
+
+.dialog__modal-header_icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 50%;
+  z-index: 9;
+  text-align: center;
+  border: 3px solid #f15e5e;
+}
+
+.dialog__modal-header_icon svg {
+  color: #f15e5e;
+  font-size: 46px;
+  display: inline-block;
+  margin-top: 13px;
+}
+
+.dialog__modal-header .close-btn {
+  position: absolute;
+  cursor: pointer;
+  top: -5px;
+  right: -2px;
+  padding: 0.4em;
+  border: none;
+  background: transparent;
+  color: var(--secondary-bg-color);
+  border-radius: 0.3em;
+}
+
+.dialog__modal-header .close-btn svg {
+  font-size: 1.2rem;
+}
+
+.dialog__modal-header h4 {
+  text-align: center;
+  font-size: 26px;
+  margin: 30px 0 -10px;
+}
+
+.dialog__modal-content_body {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+}
+
+.dialog__modal-content_body p {
+  color: #625c5c;
+  font-weight: 400;
+}
+
+.dialog__modal-content_footer {
+  display: flex;
+  gap: 1em;
+}
+
+.dialog__modal-content_footer .btn {
+  background: #c1c1c1;
+  color: #fff;
+  font-weight: 300;
+}
+
+.dialog__modal-content_footer .btn-danger {
+  background: #f15e5e;
+}
+
+.dialog__modal-header .btn,
+.dialog__modal-header .btn:active {
+  color: #fff;
+  border-radius: 4px;
+  background: #60c7c1;
+  text-decoration: none;
+  transition: all 0.4s;
+  line-height: normal;
+  min-width: 120px;
+  border: none;
+  min-height: 40px;
+  border-radius: 3px;
+  margin: 0 5px;
+}

@@ -1,11 +1,11 @@
 import "./datetimepicker.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { format } from "date-fns";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-const DateTimePicker = ({ label, setDate, name }) => {
+const DateTimePicker = ({ label, setDate, name, value }) => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [startDate, setStartDate] = useState(null);
 

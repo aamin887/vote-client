@@ -16,6 +16,10 @@
   margin-right: 20px;
 }
 
+.candidatedetails__page-profile_photo-selector {
+  border: 1px solid var(--light-green);
+}
+
 .candidatedetails__page-profile_right {
   flex: 1;
 }
@@ -50,17 +54,17 @@
   margin-bottom: 0.8em;
 }
 /* inside the form user details */
-.election__page-profile-details_control {
+.candidatedetails__page-profile-details_control {
   width: calc(100% / 2 - 10px);
 }
 
-.election__page-profile-details_control p {
+.candidatedetails_page-profile-details_control p {
   font-weight: 100;
 }
 
-.election__page-profile_right-details_fl
-  .election__page-profile-details_control {
-  width: calc(100%);
+.candidatedetails__page-profile_right-details_fl
+  .candidatedetails__page-profile-details_control {
+  width: 100%;
   margin-top: 0;
 }
 
@@ -90,7 +94,7 @@
   transition: all 0.3s ease;
 }
 
-.election__page-profile-details_control textarea {
+.candidatedetails__page-profile-details_control textarea {
   height: 5em;
 }
 
@@ -111,7 +115,7 @@
 }
 
 .candidatedetails__page-form
-  .candidatedetails__page-profile-details_control.fl {
+  .candidatedetails__page-profile-details_control_fl {
   width: calc(100% / 1.8 - 10px);
 }
 .candidatedetails__page-form

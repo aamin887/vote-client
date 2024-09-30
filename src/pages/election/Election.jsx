@@ -3,12 +3,18 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
 import { IoGrid, IoList } from "react-icons/io5";
-import { PositionCard } from "../../components";
+import {
+  PositionCard,
+  ConfirmationDialog,
+  DateTimePicker,
+} from "../../components";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import useNav from "../../hooks/useNav";
 import { Loader } from "../../components";
 import { BsInbox } from "react-icons/bs";
+import { FaTimes } from "react-icons/fa";
+import { format } from "date-fns";
 
 function Election() {
   const navigate = useNavigate();
@@ -23,16 +29,16 @@ function Election() {
     positionName: "",
     positionDescription: "",
   });
-
   const { auth } = useAuth();
+  const organisationId = auth.id;
   const { handleGridView, handleListView, toogleGridView } = useNav();
 
-  const organisationId = auth.id;
+  // confirmation modal
+  const [isOpened, setIsOpened] = useState(false);
 
   const deleteElection = async function (id) {
     try {
       setLoading(true);
-
       const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
       if (res.status === 204) {
         return navigate("/elections");
@@ -52,6 +58,7 @@ function Election() {
     }
   };
 
+  // update profile
   const handleUpdateProfile = async function (id, formData) {
     setLoading(true);
     try {
@@ -76,10 +83,6 @@ function Election() {
     }
   };
 
-  const handleBack = () => {
-    navigate(-1);
-  };
-
   const handlePosition = () => {
     setTooglePosition(!tooglePosition);
   };
@@ -102,12 +105,11 @@ function Election() {
     }
   };
 
+  // Add logic for editing the profile
   const handleEditProfile = () => {
-    // Add logic for editing the profile
     if (toogleEdit === false) {
       return setToogleEdit(true);
     }
-
     if (toogleEdit === true) {
       handleUpdateProfile(params.id, electionDetails);
       return setToogleEdit(false);
@@ -155,13 +157,20 @@ function Election() {
           `/api/v1/elections/${params.id}?org=${organisationId}`
         );
         // get all position associated with election
+        console.log(res.data);
         if (res.status == 200) {
           const resPosition = await axiosPrivate.get(
             `/api/v1/positions/?election=${params.id}`
           );
           setAllPosition([...resPosition.data]);
         }
-        setElectionDetails({ ...res?.data?.election });
+        setElectionDetails({
+          ...res?.data?.election,
+          // ["endDate"]: format(
+          //   new Date(electionDetails?.endDate),
+          //   "MMMM do, yyyy h:mm a"
+          // ),
+        });
         setLoading(false);
       } catch (error) {
         const statusCode = error.response.data.status;
@@ -180,21 +189,62 @@ function Election() {
     getElection();
   }, []);
 
-  const { electionName, description, startDate, endDate } = electionDetails;
+  const { electionName, description, startDate, endDate, poster } =
+    electionDetails;
   const { positionName, positionDescription } = newPosition;
+
+  const formattedStartDate = startDate
+    ? format(new Date(electionDetails?.startDate), "MMMM do, yyyy h:mm a")
+    : endDate;
+  const formattedEndDate = endDate
+    ? format(new Date(electionDetails?.endDate), "MMMM do, yyyy h:mm a")
+    : endDate;
 
   return (
     <div className="election__page section__padding-md">
       {loading && <Loader />}
 
+      <ConfirmationDialog
+        title={`Are you sure?`}
+        icon={<FaTimes />}
+        isOpened={isOpened}
+        onProceed={() => deleteElection(electionDetails._id)}
+        onClose={() => setIsOpened(false)}
+      >
+        <p>
+          Do you really want to delete these records? This process cannot be
+          undone.
+        </p>
+      </ConfirmationDialog>
+
       <div className="election__page-profile">
         <div className="election__page-profile_left">
-          <button className="back-btn" onClick={handleBack}>
+          <button
+            className="back-btn"
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
             Go back
           </button>
           {/* Profile Image */}
           <div className="election__page-profile_photo">
-            <img src="https://via.placeholder.com/150" alt="Profile" />
+            <img
+              src={poster || "https://via.placeholder.com/150"}
+              alt="Profile"
+            />
+            {toogleEdit && (
+              <div className="election__page-profile_photo-selector">
+                <input
+                  type="file"
+                  placeholder="Choose a photo"
+                  required
+                  name="imgfile"
+                  accept="image/*"
+                  onChange={handleChange}
+                />
+              </div>
+            )}
           </div>
 
           {/* Profile Details */}
@@ -238,30 +288,43 @@ function Election() {
               {/* elections start date*/}
               <div className="election__page-profile-details_control">
                 <span className="details">Start Date</span>
-                {!toogleEdit && <p>{startDate}</p>}
+                {!toogleEdit && <p>{formattedStartDate}</p>}
                 {toogleEdit && (
-                  <input
-                    type="text"
-                    name="startDate"
-                    placeholder="E.g 2022 Leadership"
+                  // <input
+                  //   type="text"
+                  //   name="startDate"
+                  //   placeholder="E.g 2022 Leadership"
+                  //   value={startDate}
+                  //   onChange={handleChange}
+                  //   required
+                  // />
+
+                  <DateTimePicker
+                    // label={"Start Date"}
+                    name={"startDate"}
                     value={startDate}
-                    onChange={handleChange}
-                    required
+                    setDate={setElectionDetails}
                   />
                 )}
               </div>
               {/* elections end date*/}
               <div className="election__page-profile-details_control">
                 <span className="details">Close Date</span>
-                {!toogleEdit && <p>{endDate}</p>}
+                {!toogleEdit && <p>{formattedEndDate}</p>}
                 {toogleEdit && (
-                  <input
-                    type="text"
-                    name="endDate"
-                    placeholder="E.g 2022 Leadership"
-                    value={endDate}
-                    onChange={handleChange}
-                    required
+                  // <input
+                  //   type="text"
+                  //   name="endDate"
+                  //   placeholder="E.g 2022 Leadership"
+                  //   value={endDate}
+                  //   onChange={handleChange}
+                  //   required
+                  // />
+
+                  <DateTimePicker
+                    // label={"Start Date"}
+                    name={"endDate"}
+                    setDate={setElectionDetails}
                   />
                 )}
               </div>
@@ -276,9 +339,21 @@ function Election() {
               >
                 {toogleEdit ? "Save" : "Edit"}
               </button>
+
+              {toogleEdit && (
+                <button
+                  className="election__page-profile_btn-edit btn"
+                  onClick={() => setToogleEdit(false)}
+                  style={{ backgroundColor: "red" }}
+                  disabled={tooglePosition}
+                >
+                  Cancel
+                </button>
+              )}
+
               <button
                 className=" btn election__page-profile_btn cancel"
-                onClick={() => deleteElection(electionDetails._id)}
+                onClick={() => setIsOpened(true)}
               >
                 Delete
               </button>
