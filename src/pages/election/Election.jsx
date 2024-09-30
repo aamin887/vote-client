@@ -290,21 +290,21 @@ function Election() {
                 <span className="details">Start Date</span>
                 {!toogleEdit && <p>{formattedStartDate}</p>}
                 {toogleEdit && (
-                  // <input
-                  //   type="text"
-                  //   name="startDate"
-                  //   placeholder="E.g 2022 Leadership"
-                  //   value={startDate}
-                  //   onChange={handleChange}
-                  //   required
-                  // />
-
-                  <DateTimePicker
-                    // label={"Start Date"}
-                    name={"startDate"}
+                  <input
+                    type="text"
+                    name="startDate"
+                    placeholder="E.g 2022 Leadership"
                     value={startDate}
-                    setDate={setElectionDetails}
+                    onChange={handleChange}
+                    required
                   />
+
+                  // <DateTimePicker
+                  //   // label={"Start Date"}
+                  //   name={"startDate"}
+                  //   value={startDate}
+                  //   setDate={setElectionDetails}
+                  // />
                 )}
               </div>
               {/* elections end date*/}
@@ -312,20 +312,20 @@ function Election() {
                 <span className="details">Close Date</span>
                 {!toogleEdit && <p>{formattedEndDate}</p>}
                 {toogleEdit && (
-                  // <input
-                  //   type="text"
-                  //   name="endDate"
-                  //   placeholder="E.g 2022 Leadership"
-                  //   value={endDate}
-                  //   onChange={handleChange}
-                  //   required
-                  // />
-
-                  <DateTimePicker
-                    // label={"Start Date"}
-                    name={"endDate"}
-                    setDate={setElectionDetails}
+                  <input
+                    type="text"
+                    name="endDate"
+                    placeholder="E.g 2022 Leadership"
+                    value={endDate}
+                    onChange={handleChange}
+                    required
                   />
+
+                  // <DateTimePicker
+                  //   // label={"Start Date"}
+                  //   name={"endDate"}
+                  //   setDate={setElectionDetails}
+                  // />
                 )}
               </div>
             </div>
