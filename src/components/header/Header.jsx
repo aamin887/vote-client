@@ -1,6 +1,7 @@
 import "./header.css";
 import hero from "../../assets/hero-banner.jpeg";
 import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -23,14 +24,18 @@ const Header = () => {
             <a href="#contact">Contact Us</a>
           </li>
         </ul>
-        <button className="cta-btn">Get Started</button>
+        <Link to="/register">
+          <button className="cta-btn">Get Started</button>
+        </Link>
       </nav>
 
       <div className="hero">
         <div className="hero-text">
           <h1>Your Voting Solution</h1>
           <p>Fast, secure, and easy voting platform.</p>
-          <button className="hero-btn">Try Now</button>
+          <Link to="/register">
+            <button className="cta-btn">Try now</button>
+          </Link>
         </div>
         <div className="hero-image">
           <img src={hero} alt="Voting" />

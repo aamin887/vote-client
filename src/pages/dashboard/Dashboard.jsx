@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { Loader } from "../../components";
+import { BsInbox } from "react-icons/bs";
 
 function Dashboard() {
   const { toogleGridView, handleGridView, handleListView } = useNav();
@@ -32,7 +33,6 @@ function Dashboard() {
         setElectionData(electionData.filter((data) => data._id !== id));
         await axiosPrivate.delete(`/api/v1/positions/elections/${id}`);
       }
-
       setLoading(true);
       toast.success("deleted");
       console.log(res);
@@ -139,6 +139,7 @@ function Dashboard() {
 
             {electionData.length === 0 && (
               <div className="dashboard__content-election_empty">
+                <p>{<BsInbox />}</p>
                 <p>
                   There are no elections available. Please create a new one to
                   get started.

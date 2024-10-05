@@ -1,11 +1,13 @@
 .electioncard {
   display: flex;
+  width: 95%;
   background-color: rgb(21, 31, 32);
   padding: 1em;
   justify-content: space-between;
   align-items: center;
   border-radius: 0.5em;
-  margin-bottom: 0.5em;
+  margin: auto;
+  /* margin-bottom: 0.5em; */
   cursor: pointer;
   position: relative;
 }
@@ -45,7 +47,7 @@
 }
 
 .electioncard__options ul li p {
-  font-size: 0.7rem;
+  font-size: 0.5rem;
 }
 .electioncard__options ul li:hover {
   background-color: rgb(188, 211, 71);
@@ -57,6 +59,11 @@
 
 .electioncard__options.show {
   display: block;
+}
+
+.electioncard__footer {
+  align-items: center;
+  width: 90%;
 }
 
 .electioncard:hover {

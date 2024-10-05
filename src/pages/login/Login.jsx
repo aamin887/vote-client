@@ -29,7 +29,7 @@ function Login() {
   const [togglePassword, setPTogglePassword] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
   const [formData, setFormData] = useState({
-    email: "forkahamin@yahoo.co.uk",
+    email: "amindev887@gmail.com",
     password: "amin@9165",
     remember_me: persist,
   });

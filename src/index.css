@@ -2,17 +2,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
+  /* auth pages */
+  --auth-background: #a8bcb8;
+  --auth-accent: #ffc42a;
+  --auth-text: #fff;
+
+  /* containers */
   --app-container: #00523f;
   --secondary-color: #ffc42a;
   --layout-bg-color: #0f0c0c;
+  --main-color: #fff;
 
   --main-dark: #0e0f108c;
-  --main-color: #fff;
   --main-blue: #3772ff;
   --main-red: #c1121f;
   --light-green: #1fcb4f;
   --warning-color: #b3790c;
-
   --projects-section: #1f2937;
   --link-color: rgba(255, 255, 255, 0.8);
   --link-color-hover: rgba(195, 207, 244, 0.1);
@@ -86,7 +91,8 @@
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 0.3em;
+  height: 0.3em;
   transition: all 0.3s ease;
 }
 ::-webkit-scrollbar-track {
