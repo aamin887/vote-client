@@ -1,8 +1,7 @@
 .candidates__content {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2.5em;
-  position: relative;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5em;
 }
 
 .candidates__content-empty {
@@ -18,4 +17,9 @@
 
 .candidates__content-empty svg {
   font-size: 1.5rem;
+}
+
+
+@media screen and (max-width:600px) {
+  
 }

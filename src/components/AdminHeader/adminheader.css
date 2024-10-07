@@ -107,7 +107,7 @@
 
 @media screen and (max-width: 620px) {
   .navigation__topnav-left_title .title__text {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
   .navigation__topnav-right_search {
     position: relative;

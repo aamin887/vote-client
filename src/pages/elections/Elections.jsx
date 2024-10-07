@@ -75,10 +75,7 @@ function Elections() {
       <div className="elections__header">
         <h3 className="section__heading title__text">Elections</h3>
         <p className="section__text">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro
-          veritatis deleniti optio asperiores velit eligendi! Aliquid repellat
-          ipsam officiis fugit est architecto! Facere repellendus repudiandae
-          magni maiores sapiente, omnis eius!
+          This page contains all the election created under this account.
         </p>
       </div>
 

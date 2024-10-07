@@ -1,16 +1,69 @@
 .electioncard {
   display: flex;
-  width: 95%;
   background-color: rgb(21, 31, 32);
   padding: 1em;
   justify-content: space-between;
   align-items: center;
   border-radius: 0.5em;
   margin: auto;
-  /* margin-bottom: 0.5em; */
+  margin-bottom: 0.5em;
   cursor: pointer;
+  width: 100%;
+  gap: 1em;
   position: relative;
 }
+
+/* start */
+
+.electioncard__header,
+.electioncard__content,
+.electioncard__footer {
+}
+
+.electioncard__header h3,
+.electioncard__content h4,
+.electioncard__footer-profile {
+  margin-bottom: 1em;
+  font-size: 0.7rem;
+}
+
+.electioncard__header p,
+.electioncard__content p,
+.electioncard__footer-remaining p {
+  font-size: 0.8rem;
+  font-weight: 100;
+}
+
+.electioncard__footer-profile {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.electioncard__footer-profile a {
+  margin-left: 3em;
+  color: var(--icon-color);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.electioncard__footer-profile a:hover {
+  transform: translateY(-0.2em);
+}
+
+.electioncard__footer-remaining {
+  background-color: var(--secondary-color);
+  padding: 0.3em;
+  border-radius: 0.5em;
+  color: var(--bg-color);
+  font-weight: bolder;
+}
+
+.electioncard__footer-remaining p {
+  font-weight: bolder;
+}
+
+/* end */
 
 .electioncard__options-btn {
   position: absolute;
@@ -25,14 +78,21 @@
   border: 1px solid whitesmoke;
   right: 25px;
   top: 15px;
+
   z-index: 2;
   display: none;
+  visibility: hidden;
   transform: display 0.3s ease;
   color: var(--secondary-color);
-  background-color: var(--bg-color);
+  background-color: brown;
   border-radius: 0.5em;
   overflow: hidden;
+
   box-shadow: 0 6px 40px rgba(0, 0, 0, 0.468);
+}
+
+.electioncard__options ul {
+  display: none;
 }
 
 .electioncard__options ul li {
@@ -59,11 +119,6 @@
 
 .electioncard__options.show {
   display: block;
-}
-
-.electioncard__footer {
-  align-items: center;
-  width: 90%;
 }
 
 .electioncard:hover {
@@ -123,45 +178,19 @@
 }
 /* grid view */
 
-.electioncard__header h3,
-.electioncard__content h4,
-.electioncard__footer-profile {
-  margin-bottom: 1em;
-  font-size: 0.9rem;
-}
+@media screen and (max-width: 680px) {
+  .electioncard {
+    padding: 0.5em;
+  }
 
-.electioncard__header p,
-.electioncard__content p,
-.electioncard__footer-remaining p {
-  font-size: 0.8rem;
-  font-weight: 100;
-}
+  .electioncard__header p,
+  .electioncard__content p,
+  .electioncard__footer-remaining p {
+    font-size: 0.6rem;
+    font-weight: 200;
+  }
 
-.electioncard__footer-profile {
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-
-.electioncard__footer-profile a {
-  margin-left: 3em;
-  color: var(--icon-color);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-.electioncard__footer-profile a:hover {
-  transform: translateY(-0.2em);
-}
-
-.electioncard__footer-remaining {
-  background-color: var(--secondary-color);
-  padding: 0.3em;
-  border-radius: 0.5em;
-  color: var(--bg-color);
-  font-weight: bolder;
-}
-
-.electioncard__footer-remaining p {
-  font-weight: bolder;
+  .electioncard__footer {
+    display: none;
+  }
 }

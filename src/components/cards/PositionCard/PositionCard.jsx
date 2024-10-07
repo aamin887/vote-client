@@ -5,8 +5,7 @@ import { RiDeleteBin2Fill } from "react-icons/ri";
 import { FaFolderOpen } from "react-icons/fa6";
 import { axiosPrivate } from "../../../api/axios";
 import { toast } from "react-toastify";
-import { useState } from "react";
-import Loader from "../../loader/Loader";
+
 
 function PositionCard({ data, setAllPosition }) {
   const navigate = useNavigate();

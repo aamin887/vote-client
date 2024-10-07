@@ -2,7 +2,6 @@ import "./election.css";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
-import { IoGrid, IoList } from "react-icons/io5";
 import {
   PositionCard,
   ConfirmationDialog,
@@ -10,7 +9,6 @@ import {
 } from "../../components";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
-import useNav from "../../hooks/useNav";
 import { Loader } from "../../components";
 import { BsInbox } from "react-icons/bs";
 import { FaTimes } from "react-icons/fa";
@@ -29,9 +27,11 @@ function Election() {
     positionName: "",
     positionDescription: "",
   });
+
+  const [electionPoster, setElectionPoster] = useState("");
+
   const { auth } = useAuth();
   const organisationId = auth.id;
-  const { handleGridView, handleListView, toogleGridView } = useNav();
 
   // confirmation modal
   const [isOpened, setIsOpened] = useState(false);
@@ -62,9 +62,22 @@ function Election() {
   const handleUpdateProfile = async function (id, formData) {
     setLoading(true);
     try {
+      const formattedData = new FormData();
+
+      formattedData.append("electionName", formData?.electionName);
+      formattedData.append("description", formData?.description);
+      formattedData.append("startDate", formData?.startDate);
+      formattedData.append("endDate", formData?.endDate);
+      formattedData.append("image", formData?.newPhoto);
+
       const res = await axiosPrivate.put(
         `/api/v1/elections/${id}?org=${organisationId}`,
-        formData
+        formattedData,
+        {
+          headers: {
+            "Content-type": "multipart/form-data",
+          },
+        }
       );
       if (res.status === 204) {
         return toast.success("updated!");
@@ -88,7 +101,15 @@ function Election() {
   };
 
   const handleChange = (e) => {
-    setElectionDetails({ ...electionDetails, [e.target.name]: e.target.value });
+    const { name, value, type } = e.target;
+
+    if (type === "file") {
+      setElectionDetails({ ...electionDetails, [name]: e.target.files[0] });
+
+      setElectionPoster(URL.createObjectURL(e.target.files[0]));
+    } else {
+      setElectionDetails({ ...electionDetails, [name]: value });
+    }
   };
 
   const handlePositionChanges = (e) => {
@@ -167,6 +188,11 @@ function Election() {
         setElectionDetails({
           ...res?.data?.election,
         });
+
+        // console.log();
+
+        setElectionPoster(res?.data?.election?.poster);
+
         setLoading(false);
       } catch (error) {
         const statusCode = error.response.data.status;
@@ -185,8 +211,7 @@ function Election() {
     getElection();
   }, []);
 
-  const { electionName, description, startDate, endDate, poster } =
-    electionDetails;
+  const { electionName, description, startDate, endDate } = electionDetails;
   const { positionName, positionDescription } = newPosition;
 
   const formattedStartDate = startDate
@@ -227,7 +252,7 @@ function Election() {
           {/* Profile Image */}
           <div className="election__page-profile_photo">
             <img
-              src={poster || "https://via.placeholder.com/150"}
+              src={electionPoster || "https://via.placeholder.com/150"}
               alt="Profile"
             />
             {toogleEdit && (
@@ -236,7 +261,7 @@ function Election() {
                   type="file"
                   placeholder="Choose a photo"
                   required
-                  name="imgfile"
+                  name="newPhoto"
                   accept="image/*"
                   onChange={handleChange}
                 />
@@ -406,7 +431,7 @@ function Election() {
                 ></textarea>
               </div>
               {/* elections end date*/}
-              <div className="election__page-profile-details_control">
+              <div className="election__page-profile-details_control-btns">
                 <button className="btn add" type="submit">
                   Add position
                 </button>
@@ -425,31 +450,12 @@ function Election() {
               <h5>Positions</h5>
               <p>These are all the position for this elections</p>
             </div>
-            <div className="dashboard__content-election_header-btns">
-              <button
-                className={`election__view-btn ${
-                  !toogleGridView ? "active" : ""
-                }`}
-                onClick={handleListView}
-              >
-                <IoList />
-              </button>
-              <button
-                className={`election__view-btn ${
-                  toogleGridView ? "active" : ""
-                }`}
-                onClick={handleGridView}
-              >
-                <IoGrid />
-              </button>
-            </div>
           </div>
-
           {/*  */}
           <div
-            className={`election__page-content_container ${
+            className={`election__page-content_container grid__view ${
               allPosition.length === 0 ? "empty" : ""
-            } ${toogleGridView ? "grid__view" : ""}`}
+            }`}
           >
             {allPosition.length === 0 && (
               <div className="election__page-content_container-empty">

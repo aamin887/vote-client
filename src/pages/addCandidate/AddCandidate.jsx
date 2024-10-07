@@ -43,6 +43,7 @@ function AddCandidate() {
       formattedData.append("position", formData.position);
       formattedData.append("manifesto", formData.manifesto);
       formattedData.append("organisation", formData.organisation);
+      formattedData.append("electionId", electionId);
       formattedData.append("image", formData.imgfile);
 
       const res = await axiosPrivate.post("/api/v1/candidates", formattedData, {

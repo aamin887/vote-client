@@ -24,6 +24,8 @@ function ElectionCard({ data, handleDelete }) {
     setOption(false);
   };
 
+  console.log(data);
+
   return (
     <Link to={`/elections/${data?._id}`}>
       <div
@@ -66,6 +68,7 @@ function ElectionCard({ data, handleDelete }) {
         </div>
 
         {/* end options */}
+
         <div className="electioncard__header">
           <h3>{data?.electionName}</h3>
           <p>{data?.organisation}</p>

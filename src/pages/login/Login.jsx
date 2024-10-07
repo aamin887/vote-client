@@ -15,6 +15,7 @@ import {
   IoEyeOffOutline,
   IoLockClosedOutline,
 } from "react-icons/io5";
+import { Loader } from "../../components";
 
 function Login() {
   const refEmail = useRef();
@@ -27,6 +28,7 @@ function Login() {
   const { setAuth, persist, setPersist } = useAuth();
 
   const [togglePassword, setPTogglePassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
   const [formData, setFormData] = useState({
     email: "amindev887@gmail.com",
@@ -48,6 +50,7 @@ function Login() {
     }
 
     try {
+      setLoading(true);
       const response = await handleLogin({ email, password });
 
       const { id, email: userEmail, accessToken, verified } = response.data;
@@ -84,6 +87,8 @@ function Login() {
           toastId: "networkError",
         });
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -120,6 +125,8 @@ function Login() {
           <div className="login__left-header">
             <h1 className="section__heading title__text">Log in</h1>
           </div>
+
+          {loading && <Loader />}
 
           <div className="login__left-form">
             <form onSubmit={handleSubmit}>

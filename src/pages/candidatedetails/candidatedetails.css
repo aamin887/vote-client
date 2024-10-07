@@ -80,6 +80,7 @@
 }
 
 .candidatedetails__page-profile-details_control input,
+.candidatedetails__page-profile-details_control select,
 .candidatedetails__page-profile-details_control textarea {
   height: 45px;
   width: 100%;
@@ -121,4 +122,11 @@
 .candidatedetails__page-form
   .candidatedetails__page-profile-details_control.sl {
   width: calc(100% / 4 - 10px);
+}
+
+@media screen and (max-width: 860px) {
+  .candidatedetails__page-profile_left {
+    display: flex;
+    flex-direction: column;
+  }
 }

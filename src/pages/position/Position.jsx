@@ -127,21 +127,21 @@ function Position() {
     positionDetails;
 
   return (
-    <div className="election__page section__padding-md">
-      <div className="election__page-profile">
+    <div className="position__page section__padding-md">
+      <div className="position__page-profile">
         <button className="back-btn" onClick={() => navigate(-1)}>
           Go back
         </button>
-        <div className="election__page-profile_left">
+        <div className="position__page-profile_left">
           {/* Profile Details */}
           {loading && <Loader />}
-          <div className="election__page-profile_right">
+          <div className="position__page-profile_right">
             {/* elections name */}
-            <div className="election__page-profile_right-details_fl">
-              <div className="election__page-profile-details_control">
+            <div className="position__page-profile_right-details_fl">
+              <div className="position__page-profile-details_control">
                 <span className="details">Title</span>
-                {!toogleEdit && <p>{positionDetails?.positionName}</p>}
-                {toogleEdit && (
+                <p>{positionDetails?.positionName}</p>
+                {/* {toogleEdit && (
                   <input
                     type="text"
                     name="positionName"
@@ -149,12 +149,12 @@ function Position() {
                     onChange={handleChange}
                     required
                   />
-                )}
+                )} */}
               </div>
             </div>
             {/* elections description */}
-            <div className="election__page-profile_right-details_fl">
-              <div className="election__page-profile-details_control">
+            <div className="position__page-profile_right-details_fl">
+              <div className="position__page-profile-details_control">
                 <span className="details">Role of this position?</span>
                 {!toogleEdit && <p>{positionDescription}</p>}
                 {toogleEdit && (
@@ -170,23 +170,23 @@ function Position() {
                 )}
               </div>
             </div>
-            <div className="election__page-profile_right-details">
+            <div className="position__page-profile_right-details">
               {/* elections start date*/}
-              <div className="election__page-profile-details_control">
+              <div className="position__page-profile-details_control">
                 <span className="details">Candidates</span>
                 <p>{candidates?.length}</p>
               </div>
               {/* elections end date*/}
-              <div className="election__page-profile-details_control">
+              <div className="position__page-profile-details_control">
                 <span className="details">Votes</span>
                 <p>{votes?.length}</p>
               </div>
             </div>
 
             {/* Edit and Delete Buttons */}
-            <div className="election__page-profile_right-btns">
+            <div className="position__page-profile_right-btns">
               <button
-                className="election__page-profile_btn-edit btn"
+                className="position__page-profile_btn-edit btn"
                 onClick={handleEditProfile}
               >
                 {toogleEdit ? "Save" : "Edit"}
@@ -210,15 +210,15 @@ function Position() {
         </div>
 
         {/* positions Section */}
-        <div className="election__page-content">
-          <div className="election__page-content_header">
+        <div className="position__page-content">
+          <div className="position__page-content_header">
             <div className="election__page-content_header-title">
               <h5>Positions</h5>
               <p>These are all the position for this elections</p>
             </div>
             <div className="dashboard__content-election_header-btns">
               <button
-                className={`election__view-btn ${
+                className={`position__view-btn ${
                   !toogleGridView ? "active" : ""
                 }`}
                 onClick={handleListView}
@@ -226,7 +226,7 @@ function Position() {
                 <IoList />
               </button>
               <button
-                className={`election__view-btn ${
+                className={`position__view-btn ${
                   toogleGridView ? "active" : ""
                 }`}
                 onClick={handleGridView}
@@ -238,7 +238,7 @@ function Position() {
 
           {/*  */}
           <div
-            className={`election__page-content_container ${
+            className={`position__page-content_container ${
               toogleGridView ? "grid__view" : ""
             }`}
           >

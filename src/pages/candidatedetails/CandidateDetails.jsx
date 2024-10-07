@@ -12,6 +12,8 @@ function CandidateDetails() {
   const [loading, setLoading] = useState(true);
   const [candidateInfo, setCandidateInfo] = useState({});
   const [positionId, setPositionId] = useState("");
+  const [positions, setPositions] = useState([]);
+  const [candidatePhoto, setCandidatePhoto] = useState("");
 
   const [toogleEdit, setToogleEdit] = useState(false);
 
@@ -40,7 +42,25 @@ function CandidateDetails() {
   const handleUpdateProfile = async function (id, formData) {
     setLoading(true);
     try {
-      const res = await axiosPrivate.put(`/api/v1/candidates/${id}`, formData);
+      const formattedData = new FormData();
+
+      console.log(formData);
+
+      formattedData.append("fullName", formData.fullName);
+      formattedData.append("position", formData.position);
+      formattedData.append("manifesto", formData.manifesto);
+      formattedData.append("organisation", formData.organisation);
+      formattedData.append("image", formData?.newPhoto);
+
+      const res = await axiosPrivate.put(
+        `/api/v1/candidates/${id}`,
+        formattedData,
+        {
+          headers: {
+            "Content-type": "multipart/form-data",
+          },
+        }
+      );
       if (res.status === 204) {
         return toast.success("updated!");
       }
@@ -64,7 +84,14 @@ function CandidateDetails() {
   };
 
   const handleChange = (e) => {
-    setCandidateInfo({ ...candidateInfo, [e.target.name]: e.target.value });
+    const { name, value, type } = e.target;
+
+    if (type === "file") {
+      setCandidateInfo({ ...candidateInfo, [name]: e.target.files[0] });
+      setCandidatePhoto(URL.createObjectURL(e.target.files[0]));
+    } else {
+      setCandidateInfo({ ...candidateInfo, [name]: value });
+    }
   };
 
   const handleFocus = function () {
@@ -99,7 +126,18 @@ function CandidateDetails() {
         console.log(res.data, candidateId);
         if (res.status == 200) {
           setCandidateInfo({ ...res?.data.candidate });
+          setCandidatePhoto(res?.data.candidate?.profilePhoto);
           setPositionId(res.data.candidate.position);
+
+          // select positon
+          const resPosition = await axiosPrivate.get(
+            `/api/v1/positions/?election=${res?.data?.candidate?.electionId}`
+          );
+
+          console.log(resPosition, "asas");
+          if (resPosition.status === 200) {
+            setPositions(resPosition.data);
+          }
         }
         setLoading(false);
       } catch (error) {
@@ -119,7 +157,15 @@ function CandidateDetails() {
     getCandidateInfo();
   }, []);
 
-  const { fullName, manifesto, position, profilePhoto } = candidateInfo;
+  const { fullName, manifesto, position } = candidateInfo;
+
+  console.log(positions, "ss");
+
+  const positionSelectionOptions = positions?.map((data, idx) => (
+    <option value={data._id} key={idx + "-options"}>
+      {data.positionName}
+    </option>
+  ));
 
   return (
     <div className="candidatedetails__page section__padding-md">
@@ -132,8 +178,10 @@ function CandidateDetails() {
           </button>
           {/* Profile Image */}
           <div className="candidatedetails__page-profile_photo">
-            {/* <img src="https://via.placeholder.com/150" alt="Profile" /> */}
-            <img src={`${profilePhoto}`} alt="Profile" />
+            <img
+              src={`${candidatePhoto || "https://via.placeholder.com/150"}`}
+              alt="Profile"
+            />
 
             {toogleEdit && (
               <div className="candidatedetails__page-profile_photo-selector">
@@ -141,7 +189,7 @@ function CandidateDetails() {
                   type="file"
                   placeholder="Choose a photo"
                   required
-                  name="imgfile"
+                  name="newPhoto"
                   accept="image/*"
                   onChange={handleChange}
                 />
@@ -197,14 +245,18 @@ function CandidateDetails() {
                 <span className="details">Position</span>
                 {!toogleEdit && <p>{position}</p>}
                 {toogleEdit && (
-                  <input
-                    type="text"
-                    name="endDate"
-                    placeholder="E.g 2022 Leadership"
+                  <select
+                    name="position"
                     value={position}
                     onChange={handleChange}
-                    required
-                  />
+                  >
+                    {[
+                      <option value={""} key={"empty_option"}>
+                        {"Select a position"}
+                      </option>,
+                      ...positionSelectionOptions,
+                    ]}
+                  </select>
                 )}
               </div>
             </div>
