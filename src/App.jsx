@@ -45,7 +45,6 @@ function App() {
               <Route element={<PrivateRoute />}>
                 <Route element={<Layout />}>
                   <Route element={<Dashboard />} path="/dashboard" />
-
                   {/* elections */}
                   <Route path="elections">
                     {/* index */}

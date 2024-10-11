@@ -50,7 +50,7 @@
 
 button:disabled {
   cursor: not-allowed;
-  background-color: gray;
+  background-color: rgb(81, 78, 78);
 }
 
 button:disabled:hover {
@@ -64,7 +64,7 @@ button:disabled:hover {
 .back-btn {
   position: absolute;
   top: 20px;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   padding: 0.5em 0.9em;
   color: whitesmoke;
   text-transform: capitalize;
@@ -72,6 +72,10 @@ button:disabled:hover {
   border-radius: 0.2em;
   font-weight: 900;
   right: 15px;
+}
+
+.back-btn:hover {
+  background-color: var(--hover-primary);
 }
 
 body.modal__open {

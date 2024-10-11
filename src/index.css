@@ -2,80 +2,45 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
-  /* auth pages */
-  --auth-background: #a8bcb8;
-  --auth-accent: #ffc42a;
-  --auth-text: #fff;
+  /* Light Mode */
+  --bg-color: #cacccf;
+  --text-color: #212529;
+  --primary-color: #506aebd8;
+  --hover-primary: #0056b3;
+  --secondary-color: #ffffff;
+  --marker-color: #eb7821;
+  --focus-outline: #80bdff;
 
-  /* containers */
-  --app-container: #00523f;
-  --secondary-color: #ffc42a;
-  --layout-bg-color: #0f0c0c;
-  --main-color: #fff;
-
-  --main-dark: #0e0f108c;
-  --main-blue: #3772ff;
-  --main-red: #c1121f;
-  --light-green: #1fcb4f;
-  --warning-color: #b3790c;
-  --projects-section: #1f2937;
-  --link-color: rgba(255, 255, 255, 0.8);
-  --link-color-hover: rgba(195, 207, 244, 0.1);
-  --link-color-active-bg: rgba(195, 207, 244, 0.2);
-  --button-bg: #1f2937;
-  --search-area-bg: #1f2937;
-  --message-box-hover: #243244;
-  --message-box-border: rgba(255, 255, 255, 0.1);
-  --star: #ffd92c;
-  --light-font: rgba(255, 255, 255, 0.8);
-  --more-list-bg: #2f3142;
-  --more-list-bg-hover: rgba(195, 207, 244, 0.1);
-  --more-list-shadow: rgba(195, 207, 244, 0.1);
-  --message-btn: rgba(195, 207, 244, 0.1);
-
-  --main-color-card: #dbf6fd;
-
-  /* dashboard */
-  --nav-bg-color: #1a1c22;
-  --text-color: #ffffff;
-  --nav-text-color: #a9a9a9;
-
-  /* authentication */
-  --secondary-color: #ffc42a;
-  --font-family: "Montserrat", sans-serif;
-
-  /* create election */
-  --main-blue: #71b7e6;
-  --main-purple: #9b59b6;
-  --main-grey: #ccc;
-  --sub-grey: #d9d9d9;
+  --card-bg: #ffffff;
+  --border-color: #ced4da;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --error-color: #dc3545;
+  --selection-bg: #b8daff;
+  --selection-text: #212529;
 }
 
-/* dark mode */
 .dark:root {
-  --app-container: #1f1d2b;
-  --app-container: #111827;
-  --main-color: #fff;
-  --secondary-color: rgba(255, 255, 255, 0.8);
-  --projects-section: #1f2937;
-  --link-color: rgba(255, 255, 255, 0.8);
-  --link-color-hover: rgba(195, 207, 244, 0.1);
-  --link-color-active-bg: rgba(195, 207, 244, 0.2);
-  --button-bg: #1f2937;
-  --search-area-bg: #1f2937;
-  --message-box-hover: #243244;
-  --message-box-border: rgba(255, 255, 255, 0.1);
-  --star: #ffd92c;
-  --light-font: rgba(255, 255, 255, 0.8);
-  --more-list-bg: #2f3142;
-  --more-list-bg-hover: rgba(195, 207, 244, 0.1);
-  --more-list-shadow: rgba(195, 207, 244, 0.1);
-  --message-btn: rgba(195, 207, 244, 0.1);
+  /* Dark Mode */
+  --primary-color: #1e90ff;
+  --secondary-color: #152021;
+  --bg-color: #0f0b0c;
+  --card-bg: #2e2e38;
+  --text-color: #e9ecef;
+  --border-color: #343a40;
+
+  --hover-primary: #1c73b8;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --error-color: #dc3545;
+  --focus-outline: #4b9cdb;
+  --selection-bg: #3a3a56;
+  --selection-text: #e9ecef;
 }
 
 ::selection {
-  background: var(--secondary-color);
-  color: var(--secondary-bg-color);
+  background: var(--selection-bg);
+  color: var(--selection-text);
 }
 
 .noselect {
@@ -98,10 +63,12 @@
 ::-webkit-scrollbar-track {
   border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--secondary-color);
   border-radius: 1px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #1760df;
   cursor: grabbing;
@@ -117,7 +84,6 @@
 html,
 body {
   font-family: "Montserrat", sans-serif;
-  background-color: var(--app-container);
   color: var(--text-color);
   font-size: 16px;
 }
@@ -159,7 +125,7 @@ input::-webkit-inner-spin-button {
 }
 
 .title__text {
-  font-family: "Acme", sans-serif;
+  font-family: "monstera", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -183,9 +149,9 @@ input::-webkit-inner-spin-button {
 
 .btn {
   padding: 0.9em 1em;
-  background-color: var(--secondary-color);
+  background-color: var(--primary-color);
   border-radius: 0.3em;
-  color: var(--secondary-bg-color);
+  color: var(--text-color);
   border: none;
   width: 100%;
   font-size: 1.1rem;
@@ -194,11 +160,23 @@ input::-webkit-inner-spin-button {
 }
 
 a.active {
-  background-color: var(--secondary-color);
-  color: var(--secondary-bg-color);
+  background-color: var(--primary-color);
+  color: var(--hover-primary);
   padding: 0.5em;
 }
 
 .btn:hover {
   opacity: 0.9;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: #00523f;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    background-color: #00523f;
+  }
 }

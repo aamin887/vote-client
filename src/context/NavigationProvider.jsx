@@ -10,13 +10,13 @@ function NavigationProvider({ children }) {
   );
 
   const handleListView = function () {
-    setToogleGridView(false);
-    return localStorage.setItem("election-card-view", JSON.stringify(false));
+    setToogleGridView(true);
+    return localStorage.setItem("election-card-view", JSON.stringify(true));
   };
 
   const handleGridView = function () {
-    setToogleGridView(true);
-    return localStorage.setItem("election-card-view", JSON.stringify(true));
+    setToogleGridView(false);
+    return localStorage.setItem("election-card-view", JSON.stringify(false));
   };
 
   return (

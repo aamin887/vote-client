@@ -1,0 +1,105 @@
+:root {
+  /* Light Mode */
+  --primary-color-light: #007bff;
+  --secondary-color-light: #6c757d;
+  --bg-color-light: #f8f9fa;
+  --card-bg-light: #ffffff;
+  --text-color-light: #212529;
+  --border-color-light: #ced4da;
+  --hover-primary-light: #0056b3;
+  --success-color-light: #28a745;
+  --warning-color-light: #ffc107;
+  --error-color-light: #dc3545;
+  --focus-outline-light: #80bdff;
+  --selection-bg-light: #b8daff;
+  --selection-text-light: #212529;
+}
+
+.dark:root {
+  /* Dark Mode */
+  --primary-color-dark: #1e90ff;
+  --secondary-color-dark: #adb5bd;
+  --bg-color-dark: #1f1f2e;
+  --card-bg-dark: #2e2e38;
+  --text-color-dark: #e9ecef;
+  --border-color-dark: #343a40;
+  --hover-primary-dark: #1c73b8;
+  --success-color-dark: #28a745;
+  --warning-color-dark: #ffc107;
+  --error-color-dark: #dc3545;
+  --focus-outline-dark: #4b9cdb;
+  --selection-bg-dark: #3a3a56;
+  --selection-text-dark: #e9ecef;
+}
+
+:root {
+  /* auth pages */
+  --auth-background: #a8bcb8;
+  --auth-accent: #ffc42a;
+  --auth-text: #fff;
+
+  /* containers */
+  --app-container: #00523f;
+  --secondary-color: #ffc42a;
+  --layout-bg-color: #0f0c0c;
+  --main-color: #fff;
+
+  --main-dark: #0e0f108c;
+  --main-blue: #3772ff;
+  --main-red: #c1121f;
+  --light-green: #1fcb4f;
+  --warning-color: #b3790c;
+  --projects-section: #1f2937;
+  --link-color: rgba(255, 255, 255, 0.8);
+  --link-color-hover: rgba(195, 207, 244, 0.1);
+  --link-color-active-bg: rgba(195, 207, 244, 0.2);
+  --button-bg: #1f2937;
+  --search-area-bg: #1f2937;
+  --message-box-hover: #243244;
+  --message-box-border: rgba(255, 255, 255, 0.1);
+  --star: #ffd92c;
+  --light-font: rgba(255, 255, 255, 0.8);
+  --more-list-bg: #2f3142;
+  --more-list-bg-hover: rgba(195, 207, 244, 0.1);
+  --more-list-shadow: rgba(195, 207, 244, 0.1);
+  --message-btn: rgba(195, 207, 244, 0.1);
+
+  --main-color-card: #dbf6fd;
+
+  /* dashboard */
+  --nav-bg-color: #1a1c22;
+  --text-color: #ffffff;
+  --nav-text-color: #a9a9a9;
+
+  /* authentication */
+  --secondary-color: #ffc42a;
+  --font-family: "Montserrat", sans-serif;
+
+  /* create election */
+  --main-blue: #71b7e6;
+  --main-purple: #9b59b6;
+  --main-grey: #ccc;
+  --sub-grey: #d9d9d9;
+}
+
+/* dark mode */
+.dark:root {
+  --app-container: #1f1d2b;
+  --app-container: #111827;
+  --main-color: #fff;
+  --secondary-color: rgba(255, 255, 255, 0.8);
+  --projects-section: #1f2937;
+  --link-color: rgba(255, 255, 255, 0.8);
+  --link-color-hover: rgba(195, 207, 244, 0.1);
+  --link-color-active-bg: rgba(195, 207, 244, 0.2);
+  --button-bg: #1f2937;
+  --search-area-bg: #1f2937;
+  --message-box-hover: #243244;
+  --message-box-border: rgba(255, 255, 255, 0.1);
+  --star: #ffd92c;
+  --light-font: rgba(255, 255, 255, 0.8);
+  --more-list-bg: #2f3142;
+  --more-list-bg-hover: rgba(195, 207, 244, 0.1);
+  --more-list-shadow: rgba(195, 207, 244, 0.1);
+  --message-btn: rgba(195, 207, 244, 0.1);
+}

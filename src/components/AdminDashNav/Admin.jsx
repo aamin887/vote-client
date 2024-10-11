@@ -2,7 +2,6 @@ import "./admin.css";
 import logo from "../../assets/logo.png";
 
 import useLogout from "../../hooks/useLogout.js";
-import useNav from "../../hooks/useNav.js";
 
 import { NavLink } from "react-router-dom";
 
@@ -51,13 +50,13 @@ function AdminNav() {
       className={`main__navigation ${hideMenu ? "active" : ""}`}
       ref={menuRef}
     >
+      <div className="main__navigation-logo">
+        <img className="logo" src={logo} alt="vote logo" />
+      </div>
       <div className="navigation__toggle">
         <span name="menu-outline" onClick={() => toggleMenu()}>
           {hideMenu ? <GiHamburgerMenu /> : <FaTimes />}
         </span>
-      </div>
-      <div className="main__navigation-logo">
-        <img className="logo" src={logo} alt="vote logo" />
       </div>
       <ul>
         <li>
@@ -65,7 +64,7 @@ function AdminNav() {
             <span className="icons">
               <FaHome />
             </span>
-            <span className="title">Dashboard</span>
+            <span className="title">Home</span>
           </NavLink>
         </li>
 

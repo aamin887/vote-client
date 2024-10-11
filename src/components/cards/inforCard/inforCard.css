@@ -1,13 +1,15 @@
 .inforcard {
-  background-color: var(--nav-bg-color);
+  background-color: var(--secondary-color);
   min-width: 200px;
   padding: 1em 0.8em;
   border-radius: 0.5em;
   transition: all 0.3s ease;
+  color: var(--text-color);
+  cursor: pointer;
 }
 
 .inforcard:hover {
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .inforcard__content {
@@ -25,7 +27,7 @@
 .inforcard__content-left span {
   display: inline-block;
   padding: 0.4em;
-  background-color: rgba(255, 255, 255, 0.153);
+  background-color: var(--primary-color);
   color: whitesmoke;
   border-radius: 0.3em;
 }

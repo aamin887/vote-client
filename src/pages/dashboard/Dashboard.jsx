@@ -93,7 +93,7 @@ function Dashboard() {
 
           <div
             className={`dashboard__content-election ${
-              toogleGridView ? "grid__view" : ""
+              !toogleGridView ? "grid__view" : ""
             }`}
           >
             {loading && <Loader />}

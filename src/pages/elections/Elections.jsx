@@ -91,7 +91,7 @@ function Elections() {
           </button>
           <button
             className={`elections__view-icons ${
-              toogleGridView ? "active" : ""
+              !toogleGridView ? "active" : ""
             }`}
             onClick={handleGridView}
           >

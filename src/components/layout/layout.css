@@ -1,5 +1,5 @@
 .app__layout {
-  background-color: var(--layout-bg-color);
+  background-color: var(--bg-color);
   min-height: 100dvh;
   position: relative;
 }
@@ -11,7 +11,7 @@
   z-index: 5;
   position: absolute;
   top: 0;
-  background-color: var(--layout-bg-color);
+  background-color: var(--secondary-color);
   position: fixed;
   transition: all 0.5s;
   font-weight: bold;

@@ -1,6 +1,6 @@
 .electioncard {
   display: flex;
-  background-color: rgb(21, 31, 32);
+  background-color: var(--secondary-color);
   padding: 1em;
   justify-content: space-between;
   align-items: center;
@@ -11,6 +11,11 @@
   width: 100%;
   gap: 1em;
   position: relative;
+}
+
+.electioncard:hover {
+  background-color: var(--primary-color);
+  color: var(--text-color);
 }
 
 /* start */
@@ -119,10 +124,6 @@
 
 .electioncard__options.show {
   display: block;
-}
-
-.electioncard:hover {
-  background-color: rgba(30, 44, 45, 0.764);
 }
 
 /* grid view */

@@ -5,7 +5,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 1.3em;
-  background-color: var(--nav-bg-color);
+  background-color: var(--secondary-color);
+  color: var(--text-color);
 
   position: fixed;
   /* display: grid; */
@@ -31,7 +32,8 @@
   width: 400px;
   margin: 0 10px;
   border-radius: 0.5em;
-  background-color: var(--layout-bg-color);
+  border: 1px solid var(--text-color);
+  background-color: var(--bg-color);
   margin-right: 2em;
 }
 
@@ -48,20 +50,15 @@
   padding-left: 35px;
   font-size: 18px;
   outline: none;
-  border: 1px solid var(--black2);
 }
 
 .navigation__topnav-right_search label ion-icon {
   position: absolute;
   top: 0;
-  color: var(--nav-text-color);
+  color: var(--text-color);
   left: 10px;
   font-size: 1.2rem;
 }
-
-/* .navigation__topnav-right_search label ion-icon i {
-
-} */
 
 .navigation__topnav-right_icons {
   align-self: center;
@@ -71,11 +68,11 @@
 }
 
 .navigation__topnav-right_icons-add {
-  color: var(--light-green);
+  color: var(--primary-color);
 }
 
 .navigation__topnav-right_icons-add:hover {
-  color: var(--light-green);
+  color: var(--hover-primary);
   transform: scale(0.9);
 }
 
@@ -86,7 +83,7 @@
   border-radius: 20%;
   overflow: hidden;
   cursor: pointer;
-  background-color: var(--layout-bg-color);
+  background-color: var(--bg-color);
 }
 
 .navigation__topnav-right_user img {

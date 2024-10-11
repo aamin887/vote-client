@@ -1,6 +1,11 @@
 .landing__page {
-  background-color: #0f4841;
+  background-color: #00523f;
   color: #f9fdfc;
+  background: radial-gradient(
+    circle at -1% 57.5%,
+    rgb(19, 170, 82) 0%,
+    rgb(0, 102, 43) 90%
+  );
 }
 
 .landing__padding {

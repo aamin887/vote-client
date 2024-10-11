@@ -1,5 +1,7 @@
 .dashboard {
   position: relative;
+  min-height: 100dvh;
+  background-color: transparent;
 }
 
 .dashboard__content {
@@ -19,10 +21,11 @@
 
 .dashboard__content-election_header {
   display: flex;
+  color: var(--text-color);
   align-items: center;
   justify-content: space-between;
-  padding: 1em 0.3em;
-  background-color: #4caf4f16;
+  padding: 1em;
+  background-color: var(--primary-color);
   border-radius: 0.4em;
   margin-bottom: 0.6em;
 }
@@ -41,42 +44,34 @@
 }
 
 .dashboard__content-election_header-title p {
-  font-weight: 100;
+  font-weight: 500;
 }
 
 .election__view-btn {
   display: inline-block;
   line-height: 100%;
   padding: 0.4em;
-  background-color: rgba(255, 255, 255, 0.153);
+  background-color: var(--focus-outline);
   border-radius: 0.3em;
   border: none;
   margin-left: 0.5em;
   cursor: pointer;
 }
 
-.election__view-btn:hover {
-  background-color: rgb(200, 206, 190);
-}
-
-.election__view-btn.active {
-  background-color: var(--icon-color);
-}
-
 .election__view-btn svg,
 .election__view-btn i {
   font-size: 1.3rem;
-  color: var(--icon-color);
+  color: var(--primary-color);
 }
 
 .election__view-btn.active svg,
 .election__view-btn.active i {
-  color: rgb(255, 255, 255);
+  color: var(--focus-outline);
 }
 
 .dashboard__content-right {
   height: 100%;
-  background-color: rgb(21, 31, 32);
+  background-color: var(--secondary-color);
   border: none;
   border-radius: 0.5em;
 }
@@ -103,7 +98,7 @@
   position: absolute;
   height: 0.1em;
   width: 100%;
-  background-color: rgba(159, 159, 159, 0.744);
+  background-color: rgba(192, 28, 28, 0.744);
 }
 
 .logs__card-content {
@@ -158,23 +153,22 @@
 .dashboard__content-election_empty-btn {
   padding: 0.5em 1em;
   text-transform: capitalize;
-
+  color: var(--text-color);
   margin-top: 0.5em;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid gray;
+  border: 1px solid var(--primary-color);
 }
 
 .dashboard__content-election_empty-btn:hover {
   opacity: 0.9;
-  color: rgba(21, 195, 21, 0.093);
-  color: rgb(194, 192, 192);
+  color: var(--secondary-color);
 }
 
 .dashboard__content-election_empty-btn svg {
   line-height: 100%;
-  color: rgb(21, 195, 21);
+  color: var(--primary-color);
   margin-right: 0.5em;
 }
 
