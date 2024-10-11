@@ -3,6 +3,7 @@ import "./elections.css";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { ElectionCard } from "../../components";
 import { IoGrid, IoList } from "react-icons/io5";
+import { BsInbox } from "react-icons/bs";
 import useNav from "../../hooks/useNav";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
@@ -78,32 +79,35 @@ function Elections() {
           This page contains all the election created under this account.
         </p>
       </div>
-
-      <div className="elections__view">
-        <div className="elections__view-btns">
-          <button
-            className={`elections__view-icons ${
-              !toogleGridView ? "active" : ""
-            }`}
-            onClick={handleListView}
-          >
-            <IoList />
-          </button>
-          <button
-            className={`elections__view-icons ${
-              !toogleGridView ? "active" : ""
-            }`}
-            onClick={handleGridView}
-          >
-            <IoGrid />
-          </button>
+      {electionData.length !== 0 && (
+        <div className="elections__view">
+          <div className="elections__view-btns">
+            <button
+              className={`elections__view-icons ${
+                !toogleGridView ? "active" : ""
+              }`}
+              onClick={handleListView}
+            >
+              <IoList />
+            </button>
+            <button
+              className={`elections__view-icons ${
+                !toogleGridView ? "active" : ""
+              }`}
+              onClick={handleGridView}
+            >
+              <IoGrid />
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {loading && <Loader />}
 
       {electionData.length === 0 && loading === false && (
         <div className="dashboard__content-election_empty">
+          <p>{<BsInbox />}</p>
+
           <p>
             There are no elections available. Please create a new one to get
             started.

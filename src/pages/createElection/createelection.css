@@ -10,7 +10,7 @@
 }
 
 .createelection__content {
-  background-color: #1a1c21;
+  background-color: var(--bg-color);
   max-width: 980px;
   padding: 3em;
   width: 100%;
@@ -20,6 +20,7 @@
 
 .createelection__content h2 {
   position: relative;
+  color: var(--text-color);
 }
 
 .createelection__content h2::before {
@@ -27,7 +28,7 @@
   position: absolute;
   height: 3.5px;
   width: 50px;
-  background: linear-gradient(135deg, var(--main-blue), var(--main-purple));
+  background: var(--marker-color);
   left: 0;
   bottom: 0;
 }
@@ -45,7 +46,13 @@
 }
 
 .createelection__form-details-fl .createelection__form-details_control {
-  width: calc(100%);
+  width: 100%;
+}
+
+.createelection__form-details-fl
+  .createelection__form-details_control
+  textarea {
+  width: 100%;
 }
 
 .createelection__form-details_control .details {
@@ -53,13 +60,12 @@
   margin-bottom: 5px;
   display: block;
 }
-.createelection__form-details_control input,
-.createelection__form-details_control textarea {
+.createelection__form-details_control input {
   height: 45px;
   width: 100%;
   outline: none;
   border-radius: 5px;
-  border: 1px solid var(--main-grey);
+  border: 1px solid var(--accent-color);
   padding-left: 15px;
   font-size: 16px;
   border-bottom-width: 2px;
@@ -68,13 +74,13 @@
 
 .createelection__form-details_control textarea {
   height: 5em;
+  border-radius: 0.3em;
+  border: 1px solid var(--accent-color);
 }
 
-.createelection__form-details_control input:focus,
 .createelection__form-details_control input:valid,
-.createelection__form-details_control textarea:focus,
 .createelection__form-details_control textarea.valid {
-  border-color: var(--light-green);
+  border-color: var(--success-color);
 }
 
 form .button {
@@ -93,10 +99,10 @@ form .button button {
   font-size: 18px;
   font-weight: 500;
   border-radius: 5px;
-  background: linear-gradient(135deg, var(--main-blue), var(--main-purple));
+  background-color: var(--primary-color);
   transition: all 0.3s ease;
 }
 
 form .button button:hover {
-  background: linear-gradient(-135deg, var(--main-blue), var(--main-purple));
+  background: var(--hover-primary);
 }

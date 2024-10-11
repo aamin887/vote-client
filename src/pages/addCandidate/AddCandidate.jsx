@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
+import { Loader } from "../../components";
 
 function AddCandidate() {
   const { auth } = useAuth();
@@ -12,6 +13,7 @@ function AddCandidate() {
 
   const [electionDetails, setElectionDetails] = useState({});
   const [positions, setPositions] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     position: "",
@@ -37,6 +39,7 @@ function AddCandidate() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const formattedData = new FormData();
 
       formattedData.append("fullName", formData.fullName);
@@ -65,6 +68,8 @@ function AddCandidate() {
       } else {
         return toast.error("network error ");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -116,6 +121,7 @@ function AddCandidate() {
 
   return (
     <div>
+      {loading && <Loader />}
       <div className="addcandidate">
         <div className="addcandidate__content">
           <div className="addcandidate__modal-title">

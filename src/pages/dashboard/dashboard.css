@@ -25,7 +25,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1em;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   border-radius: 0.4em;
   margin-bottom: 0.6em;
 }
@@ -142,7 +142,8 @@
   display: grid;
   place-items: center;
   font-size: 1.2rem;
-  color: rgb(157, 152, 152);
+  color: var(--primary-color);
+  font-weight: 500;
 }
 
 .dashboard__content-election_empty button {
@@ -153,7 +154,7 @@
 .dashboard__content-election_empty-btn {
   padding: 0.5em 1em;
   text-transform: capitalize;
-  color: var(--text-color);
+  color: var(--accent-color);
   margin-top: 0.5em;
   display: flex;
   align-items: center;

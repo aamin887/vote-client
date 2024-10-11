@@ -5,16 +5,19 @@ import useAuth from "../../hooks/useAuth";
 import { axiosPrivate } from "../../api/axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { DateTimePicker } from "../../components";
+import { DateTimePicker, Loader } from "../../components";
 
 const CreateElection = () => {
   // textarea reference
   const descRef = useRef();
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
 
   const { auth } = useAuth();
+  const organisationId = auth.id;
+
   const from = location.state?.from?.pathname || "/dashboard";
 
   // form data state
@@ -34,7 +37,7 @@ const CreateElection = () => {
   };
 
   // handle Focus form TextArea to add border to indicate input availability
-  const handleFocusTextArea = function (e) {
+  const handleFocusTextArea = function () {
     const desValue = descRef.current;
     if (desValue.value.length > 0) {
       desValue.classList.add("valid");
@@ -47,7 +50,7 @@ const CreateElection = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const organisationId = auth.id;
+      setLoading(true);
       const res = await axiosPrivate.post("/api/v1/elections", {
         electionName,
         description,
@@ -74,6 +77,8 @@ const CreateElection = () => {
       } else {
         return toast.error(`network error`);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -82,6 +87,7 @@ const CreateElection = () => {
 
   return (
     <div className="createelection">
+      {loading && <Loader />}
       <div className="createelection__content">
         <div className="createelection__content-title">
           <h2 className="section__heading">Create a new election</h2>
@@ -145,9 +151,9 @@ const CreateElection = () => {
             </div>
           </div>
 
-          <div className="addcandidate__form-details-fl">
+          <div className="createelection__form-details-fl">
             {/* elections name */}
-            <div className="addcandidate__form-details_control">
+            <div className="createelection__form-details_control">
               <span className="details">Description</span>
               <textarea
                 name="description"

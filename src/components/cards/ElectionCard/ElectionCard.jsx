@@ -2,6 +2,7 @@ import "./electionCard.css";
 import { Link } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
 import { useState } from "react";
+import { format } from "date-fns";
 
 function ElectionCard({ data }) {
   const [options, setOption] = useState(false);
@@ -32,7 +33,7 @@ function ElectionCard({ data }) {
         {/*  */}
         <div className="electioncard__content ">
           <h4>Election Date</h4>
-          <p>{data?.startDate}</p>
+          <p>{format(data?.startDate, "MMMM do, yyyy")}</p>
         </div>
         {/*  */}
         <div className=" electioncard__footer">

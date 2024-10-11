@@ -4,23 +4,34 @@ import { TfiShine } from "react-icons/tfi";
 import { IoMdAddCircle } from "react-icons/io";
 import LOGO from "../../assets/logo.png";
 import "./adminheader.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function AdminHeader() {
-  const [theme, setTheme] = useState(true);
+  const root = document.documentElement;
+  const [darkMode, setDarkMode] = useState(false);
 
   const toogleDark = function () {
-    const root = document.documentElement;
+    setDarkMode((prev) => !prev);
+  };
 
-    setTheme(!theme);
+  useEffect(() => {
+    const themed = localStorage.getItem("theme");
+    console.log("s");
+    if (themed) {
+      setDarkMode(true);
+    }
+  }, []);
 
-    if (theme) {
+  useEffect(() => {
+    if (darkMode) {
       root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
     } else {
       root.classList.remove("dark");
+      localStorage.removeItem("theme");
     }
-  };
+  }, [darkMode]);
 
   return (
     <div className="navigation__topnav">
@@ -51,7 +62,7 @@ function AdminHeader() {
         </Link>
 
         <div className="navigation__topnav-right_icons" onClick={toogleDark}>
-          {theme ? (
+          {darkMode ? (
             <FaMoon size={23} style={{ color: "#fffff" }} />
           ) : (
             <TfiShine size={23} style={{ color: "#fffff" }} />

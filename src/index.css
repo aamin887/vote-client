@@ -10,6 +10,7 @@
   --secondary-color: #ffffff;
   --marker-color: #eb7821;
   --focus-outline: #80bdff;
+  --accent-color: #212121;
 
   --card-bg: #ffffff;
   --border-color: #ced4da;
@@ -28,6 +29,7 @@
   --card-bg: #2e2e38;
   --text-color: #e9ecef;
   --border-color: #343a40;
+  --accent-color: #f2f2f2;
 
   --hover-primary: #1c73b8;
   --success-color: #28a745;

@@ -36,7 +36,7 @@
   position: absolute;
   height: 3.5px;
   width: 30px;
-  background: linear-gradient(135deg, var(--main-blue), var(--main-purple));
+  background: var(--marker-color);
   left: 0;
   bottom: 0;
 }
