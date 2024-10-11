@@ -13,32 +13,47 @@ import { FaPeopleGroup } from "react-icons/fa6";
 import { IoExitOutline } from "react-icons/io5";
 import { BsGraphUp } from "react-icons/bs";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function AdminNav() {
+  const [hideMenu, setHideMenu] = useState(true);
+
+  const logout = useLogout();
   const menuRef = useRef();
 
-  const { toogle, setToogle } = useNav();
-  const logout = useLogout();
-
   const toggleMenu = () => {
-    localStorage.setItem("toggle_nav", JSON.stringify(toogle));
-    setToogle(!toogle);
-  };
-
-  const closeMenuonClick = () => {
-    !toogle && setToogle(true);
+    setHideMenu((prev) => !prev);
   };
 
   const handleLogout = function () {
     return logout();
   };
 
+  useEffect(() => {
+    const handleMenuToggle = (e) => {
+      if (!hideMenu && menuRef.current && !menuRef.current.contains(e.target)) {
+        setHideMenu(true);
+      }
+    };
+
+    document.addEventListener("mousedown", handleMenuToggle);
+    document.addEventListener("touchstart", handleMenuToggle);
+
+    return () => {
+      // cleanup function
+      document.removeEventListener("mousedown", handleMenuToggle);
+      document.removeEventListener("touchstart", handleMenuToggle);
+    };
+  }, [hideMenu]);
+
   return (
-    <div className={`main__navigation ${toogle ? "active" : ""}`} ref={menuRef}>
+    <div
+      className={`main__navigation ${hideMenu ? "active" : ""}`}
+      ref={menuRef}
+    >
       <div className="navigation__toggle">
         <span name="menu-outline" onClick={() => toggleMenu()}>
-          {toogle ? <GiHamburgerMenu /> : <FaTimes />}
+          {hideMenu ? <GiHamburgerMenu /> : <FaTimes />}
         </span>
       </div>
       <div className="main__navigation-logo">
@@ -46,7 +61,7 @@ function AdminNav() {
       </div>
       <ul>
         <li>
-          <NavLink to={"/dashboard"} onClick={closeMenuonClick}>
+          <NavLink to={"/dashboard"}>
             <span className="icons">
               <FaHome />
             </span>
@@ -55,7 +70,7 @@ function AdminNav() {
         </li>
 
         <li>
-          <NavLink to={"/elections"} onClick={closeMenuonClick}>
+          <NavLink to={"/elections"}>
             <span className="icons">
               <GiVote />
             </span>
@@ -64,7 +79,7 @@ function AdminNav() {
         </li>
 
         <li>
-          <NavLink to={"/candidates"} onClick={closeMenuonClick}>
+          <NavLink to={"/candidates"}>
             <span className="icons">
               <FaPeopleGroup />
             </span>
@@ -73,7 +88,7 @@ function AdminNav() {
         </li>
 
         <li>
-          <NavLink to={"/results"} onClick={closeMenuonClick}>
+          <NavLink to={"/results"}>
             <span className="icons">
               <BsGraphUp />
             </span>
@@ -82,7 +97,7 @@ function AdminNav() {
         </li>
 
         <li>
-          <NavLink to={"/reset-passwords"} onClick={closeMenuonClick}>
+          <NavLink to={"/reset-passwords"}>
             <span className="icons">
               <FaLock />
             </span>
@@ -90,7 +105,7 @@ function AdminNav() {
           </NavLink>
         </li>
         <li>
-          <NavLink to={"/help"} onClick={closeMenuonClick}>
+          <NavLink to={"/help"}>
             <span className="icons">
               <IoMdHelp />
             </span>

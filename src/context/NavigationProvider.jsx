@@ -3,10 +3,6 @@ import { createContext, useState } from "react";
 export const NavContext = createContext();
 
 function NavigationProvider({ children }) {
-  const [toogle, setToogle] = useState(
-    JSON.parse(localStorage.getItem("toggle_nav")) || true
-  );
-
   const [toogleGridView, setToogleGridView] = useState(
     typeof JSON.parse(localStorage.getItem("election-card-view")) !== "boolean"
       ? true
@@ -26,8 +22,6 @@ function NavigationProvider({ children }) {
   return (
     <NavContext.Provider
       value={{
-        setToogle,
-        toogle,
         toogleGridView,
         setToogleGridView,
         handleGridView,

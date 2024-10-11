@@ -21,7 +21,6 @@ function Position() {
 
   const { handleGridView, handleListView, toogleGridView } = useNav();
 
-  const organisationId = auth.id;
   const [candidates, setCandidates] = useState([]);
   const [toogleEdit, setToogleEdit] = useState(false);
 
@@ -216,32 +215,10 @@ function Position() {
               <h5>Positions</h5>
               <p>These are all the position for this elections</p>
             </div>
-            <div className="dashboard__content-election_header-btns">
-              <button
-                className={`position__view-btn ${
-                  !toogleGridView ? "active" : ""
-                }`}
-                onClick={handleListView}
-              >
-                <IoList />
-              </button>
-              <button
-                className={`position__view-btn ${
-                  toogleGridView ? "active" : ""
-                }`}
-                onClick={handleGridView}
-              >
-                <IoGrid />
-              </button>
-            </div>
           </div>
 
           {/*  */}
-          <div
-            className={`position__page-content_container ${
-              toogleGridView ? "grid__view" : ""
-            }`}
-          >
+          <div className={`position__page-content_container`}>
             {candidates?.map((position, idx) => (
               <CandidateCard data={position} key={idx} />
             ))}

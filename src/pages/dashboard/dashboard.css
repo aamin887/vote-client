@@ -180,7 +180,7 @@
 
 @media screen and (max-width: 600px) {
   .dashboard__stats {
-    height: 10em;
+    height: 15em;
     margin-bottom: 1em;
   }
 

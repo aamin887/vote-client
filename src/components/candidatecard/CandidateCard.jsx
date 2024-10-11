@@ -15,6 +15,7 @@ function CandidateCard({ data }) {
             <Link to={`/candidates/${data?._id}`} className="iconBox">
               {" "}
               {<FaInfo />}
+              <p>See more</p>
             </Link>
           </div>
         </div>

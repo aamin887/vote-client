@@ -16,6 +16,22 @@ const images = [
 function ElectionCard({ data, handleDelete }) {
   const [options, setOption] = useState(false);
 
+  const date_diff_indays = function (date1, date2) {
+    const dt1 = new Date(data?.startDate);
+    const dt2 = new Date(data?.endDate);
+    let remains = Math.floor(
+      (Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) -
+        Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) /
+        (1000 * 60 * 60 * 24)
+    );
+
+    return remains > 1
+      ? `${remains} days remaining`
+      : `${remains} day remaining`;
+  };
+
+  console.log(date_diff_indays());
+
   const showOptions = function () {
     setOption(true);
   };
@@ -88,7 +104,7 @@ function ElectionCard({ data, handleDelete }) {
             {<IoMdAddCircle size={20} />}
           </div>
           <div className="electioncard__footer-remaining">
-            <p>20 days remaining</p>
+            <p>{date_diff_indays()}</p>
           </div>
         </div>
       </div>

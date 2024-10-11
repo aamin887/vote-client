@@ -25,6 +25,8 @@ const DateTimePicker = ({ label, setDate, name, value }) => {
     });
   };
 
+  useEffect(() => {}, []);
+
   return (
     <div className="date-time-picker">
       <label htmlFor="date-time-input" className="picker-label">
