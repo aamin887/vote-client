@@ -28,8 +28,6 @@ function Position() {
     } catch (error) {
       const statusCode = error.response.data.status;
 
-      console.log(error, ">>>");
-
       if (statusCode === 404) {
         return toast.error("profile not found!");
       } else if (statusCode === 401) {
@@ -133,7 +131,7 @@ function Position() {
               <div className="position__page-profile-details_control">
                 <span className="details">Title</span>
                 <p>{positionDetails?.positionName}</p>
-                {/* {toogleEdit && (
+                {toogleEdit && (
                   <input
                     type="text"
                     name="positionName"
@@ -141,7 +139,7 @@ function Position() {
                     onChange={handleChange}
                     required
                   />
-                )} */}
+                )}
               </div>
             </div>
             {/* elections description */}

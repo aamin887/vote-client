@@ -1,14 +1,35 @@
+import { LuVote } from "react-icons/lu";
 import "./UserCard.css"; // Import custom styles
-import { FiMoreHorizontal } from "react-icons/fi"; // More options icon from react-icons
+import { Link } from "react-router-dom";
+import photo from "../../assets/User.png";
 
-const UserCard = ({ user }) => {
+const UserCard = ({ data }) => {
+  const handleVoteCast = () => {
+    console.log("vote sent");
+  };
+
   return (
-    <div className="user-card">
-      <div className="user-card-header">
-        <h3>Amiin</h3>
-        <button className="more-options">
-          <FiMoreHorizontal size={24} />
-        </button>
+    <div className="candidate__card ">
+      <div className="card-inner">
+        <div className="box">
+          <div className="imgBox">
+            <img src={data?.profilePhoto || photo} alt="Shower Gel" />
+          </div>
+          <div className="icon">
+            <button onClick={handleVoteCast} className="iconBox">
+              {" "}
+              {<LuVote />}
+              <p>Vote</p>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="content">
+        <h3>{data?.fullName}</h3>
+        <p>
+          {data?.manifesto.split(" ").slice(0, 5).join(" ").toString()}
+          {data?.manifesto.split(" ").length > 5 ? "...." : ""}
+        </p>
       </div>
     </div>
   );

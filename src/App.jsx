@@ -43,6 +43,7 @@ function App() {
             {/* protected routes */}
             <Route element={<PersistLogin />}>
               <Route element={<PrivateRoute />}>
+                <Route element={<Vote />} path="/votes" />
                 <Route element={<Layout />}>
                   <Route element={<Dashboard />} path="/dashboard" />
                   {/* elections */}
@@ -74,10 +75,8 @@ function App() {
                   />
                   {/* all candidates */}
                   <Route element={<Candidates />} path="/candidates" />
-
                   {/* result page */}
                   <Route element={<ResultVote />} path="results" />
-
                   <Route element={<Vote />} path="reset-passwords" />
                   <Route element={<Vote />} path="reset-passwords/:id" />
                   <Route element={<HelpPage />} path="help" />

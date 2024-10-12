@@ -31,8 +31,8 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
   const [formData, setFormData] = useState({
-    email: "amindev887@gmail.com",
-    password: "amin@9165",
+    email: "demo.admin@gmail.com",
+    password: "Test@123",
     remember_me: persist,
   });
 
@@ -52,14 +52,11 @@ function Login() {
     try {
       setLoading(true);
       const response = await handleLogin({ email, password });
-
       const { id, email: userEmail, accessToken, verified } = response.data;
-
       setAuth({ id, userEmail, accessToken, verified });
-
       setFormData({
-        email: "forkahamin@yahoo.co.uk",
-        password: "amin991",
+        email: "",
+        password: "",
       });
 
       if (response.status === 200) {
@@ -96,7 +93,6 @@ function Login() {
     const { name, value, type } = e.target;
     if (type === "checkbox") {
       setPersist((prev) => !prev);
-      // setFormData((data) => ({ ...data, [name]: checked }));
     } else {
       setFormData((data) => ({ ...data, [name]: value }));
     }

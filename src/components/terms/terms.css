@@ -1,6 +1,6 @@
 .terms__modal {
   position: fixed;
-  background-color: var(--main-dark);
+  background-color: var(--bg-color);
   left: 0;
   right: 0;
   top: 0;

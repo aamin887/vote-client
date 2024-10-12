@@ -1,0 +1,9 @@
+.votes__page {
+  background-color: #00523f;
+  color: #f9fdfc;
+  background-color: transparent;
+}
+
+.votes__padding {
+  padding: 3em 2em;
+}

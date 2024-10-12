@@ -72,7 +72,7 @@
 }
 
 .position__page-profile-details_control .details {
-  font-weight: 500;
+  font-weight: bolder;
   color: var(--accent-color);
   margin-bottom: 5px;
   display: block;

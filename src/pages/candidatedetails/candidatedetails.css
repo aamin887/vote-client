@@ -58,10 +58,6 @@
   width: calc(100% / 2 - 10px);
 }
 
-.candidatedetails_page-profile-details_control p {
-  font-weight: 100;
-}
-
 .candidatedetails__page-profile_right-details_fl
   .candidatedetails__page-profile-details_control {
   width: 100%;
@@ -75,6 +71,9 @@
   display: block;
 }
 
+.candidatedetails_page-profile-details_control p {
+  font-weight: 100;
+}
 .candidatedetails__page-profile-details_control button {
   margin-right: 0.4em;
 }

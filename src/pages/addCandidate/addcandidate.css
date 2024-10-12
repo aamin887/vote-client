@@ -10,7 +10,7 @@
 }
 
 .addcandidate__top {
-  background-color: rgba(38, 129, 209, 0.117);
+  background-color: var(--secondary-color);
   padding: 0.9em;
   border-radius: 0.5em;
   margin-bottom: 0.8em;
@@ -21,7 +21,7 @@
   position: relative;
   width: 100%;
   margin-top: 40px;
-  background: var(--nav-bg-color);
+  background: var(--secondary-color);
   padding: 25px 30px;
   border-radius: 5px;
 }
@@ -70,7 +70,7 @@
   width: 100%;
   outline: none;
   border-radius: 5px;
-  border: 1px solid var(--main-grey);
+  border: 1px solid var(--accent-color);
   padding-left: 15px;
   font-size: 16px;
   border-bottom-width: 2px;
@@ -85,7 +85,7 @@
 .addcandidate__form-categories-control_details input:valid,
 .addcandidate__form-categories-control_details textarea:focus,
 .addcandidate__form-categories-control_details textarea.valid {
-  border-color: var(--main-purple);
+  border-color: var(--success-color);
 }
 /* submit button */
 form .button {
@@ -100,7 +100,7 @@ form .button {
   height: 100%;
   margin-top: 30px;
   color: var(--icon-color);
-  /* background-color: var(--secondary-color); */
+  background-color: var(--secondary-color);
   padding: 0.5em;
   border-radius: 0.3em;
   transform: background 0.3s ease;
@@ -114,6 +114,12 @@ form .button {
 @media only screen and (max-width: 584px) {
   .container {
     max-width: 100%;
+  }
+
+  .addcandidate__form-candidates {
+    border-radius: 0.2em;
+    padding: 0.7em;
+    border: 2px solid var(--marker-color);
   }
 
   .addcandidate__form-categories-control {
