@@ -4,6 +4,12 @@
   margin: auto;
 }
 
+.position__page-profile .back-btn {
+  position: absolute;
+  right: 6em;
+  top: 5em;
+}
+
 .position__page-profile_left {
   display: flex;
   max-width: 800px;
@@ -37,7 +43,7 @@
   padding: 8px 16px;
   border: none;
   border-radius: 5px;
-  color: #fff;
+  color: var(--text-color);
   cursor: pointer;
 }
 
@@ -67,7 +73,7 @@
 
 .position__page-profile-details_control .details {
   font-weight: 500;
-  color: var(--secondary-color);
+  color: var(--accent-color);
   margin-bottom: 5px;
   display: block;
 }
@@ -91,7 +97,7 @@
   resize: vertical;
   outline: none;
   border-radius: 5px;
-  border: 1px solid var(--main-grey);
+  border: 1px solid var(--accent-color);
   padding-left: 15px;
   font-size: 16px;
   border-bottom-width: 2px;
@@ -107,20 +113,18 @@
 .position__page-profile-details_control textarea:focus,
 .position__page-profile-details_control textarea:valid,
 .position__page-profile-details_control textarea.valid {
-  border-color: var(--icon-color);
+  border-color: var(--success-color);
 }
-
-/* content and forms */
-
-/* .election__page-content {
-} */
 
 .position__page-content_header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1em 1em;
-  background-color: #4caf4f16;
+  background-color: var(--secondary-color);
+  box-shadow: 0 1px 1px grey;
+  margin-bottom: 1em;
+  border-radius: 0.5em;
 }
 
 .position__page-content_header-title h5 {
@@ -133,42 +137,8 @@
   font-weight: 100;
 }
 
-.position__view-btn {
-  display: inline-block;
-  line-height: 100%;
-  padding: 0.4em;
-  background-color: rgba(255, 255, 255, 0.153);
-  border-radius: 0.3em;
-  border: none;
-  margin-left: 0.5em;
-  cursor: pointer;
-}
-
-.position__view-btn:hover {
-  background-color: rgb(200, 206, 190);
-}
-
-.position__view-btn.active {
-  background-color: var(--icon-color);
-}
-
-.position__view-btn svg,
-.position__view-btn i {
-  font-size: 1.3rem;
-  color: var(--icon-color);
-}
-
-.position__view-btn.active svg,
-.position__view-btn.active i {
-  color: rgb(255, 255, 255);
-}
-
 .position__page-content_container {
   display: grid;
   grid-template-columns: repeat(auto-fill minmax(200px, 1fr));
   gap: 0.8em;
-}
-
-.position__page-content_container.grid__view {
-  grid-template-columns: repeat(4, 1fr);
 }

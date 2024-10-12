@@ -4,6 +4,12 @@
   justify-content: center;
   width: 100vw;
   height: 100vh;
+  color: #fff;
+}
+
+.success h2,
+.success h1 {
+  color: #fff;
 }
 
 .success__content {

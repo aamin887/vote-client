@@ -6,28 +6,8 @@ import { FaFolderOpen } from "react-icons/fa6";
 import { axiosPrivate } from "../../../api/axios";
 import { toast } from "react-toastify";
 
-function PositionCard({ data, setAllPosition }) {
+function PositionCard({ data, setAllPosition, isOpened }) {
   const navigate = useNavigate();
-
-  const handleDeleteProfile = async function (id) {
-    try {
-      const res = await axiosPrivate.delete(`/api/v1/positions/${id}`);
-      if (res.status === 204) {
-        setAllPosition((pos) => {
-          const d = pos.filter((p) => p._id !== id);
-          return d;
-        });
-      }
-      return;
-    } catch (error) {
-      const statusCode = error?.response?.data?.status;
-      if (statusCode === 404) {
-        return toast.error("election not found");
-      } else {
-        return toast.error("network error");
-      }
-    }
-  };
 
   return (
     <div className="positioncard">
@@ -54,7 +34,7 @@ function PositionCard({ data, setAllPosition }) {
           <button
             className="positioncard__footer-remaining_btn"
             onClick={() => {
-              handleDeleteProfile(data?._id);
+              isOpened(true);
             }}
           >
             {<RiDeleteBin2Fill size={20} />}

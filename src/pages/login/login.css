@@ -3,8 +3,13 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+  color: #fff;
 }
 
+.login__site h1,
+.login__site h2 {
+  color: #fff;
+}
 .login__left {
   flex-basis: 1;
   width: 80%;
@@ -48,11 +53,13 @@
   display: block;
   font-size: 1.4rem;
   position: relative;
+  color: #fff;
 }
 
 .form__control-input input:focus,
 .form__control-input input:active {
   background-color: transparent;
+  color: #fff;
 }
 
 .form__control-input_icon {
@@ -81,7 +88,7 @@
 }
 
 .form__control-input input[type="checkbox"] {
-  border-color: var(--warning-color);
+  border-color: var(--marker-color);
   margin-right: 0.3em;
 }
 
@@ -90,7 +97,8 @@
 }
 
 .form__control-footnote-link a {
-  color: var(--secondary-color);
+  color: #fff;
+
   font-weight: bolder;
   cursor: pointer;
   padding-bottom: 0.2em;
@@ -102,7 +110,7 @@
 .form__control-input_instructions {
   display: block;
   line-height: 1.4;
-  color: var(--main-blue);
+  color: var(--primary-color);
 }
 
 .form__control-input_offscreen {
@@ -111,13 +119,13 @@
 }
 
 .error__icons {
-  color: var(--warning-color);
+  color: var(--marker-color);
   margin-right: 0.5em;
 }
 
 .form__control-footnote-link:hover {
   opacity: 0.8;
-  border-bottom: 1px solid var(--secondary-color);
+  border-bottom: 1px solid var(--primary-color);
 }
 
 @media (max-width: 767px) {

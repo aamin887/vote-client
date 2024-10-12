@@ -28,6 +28,7 @@
   background-color: var(--secondary-color);
   border-radius: 0.4em;
   margin-bottom: 0.6em;
+  box-shadow: 0 1px 1px grey;
 }
 
 .dashboard__content-election.grid__view .dashboard__content-election_cards {

@@ -96,7 +96,7 @@
   padding-left: 15px;
   font-size: 16px;
   border-bottom-width: 2px;
-  color: var(--text-color);
+  color: var(--accent-color);
   transition: all 0.3s ease;
 }
 
@@ -110,7 +110,7 @@
 .election__page-profile-details_control textarea:valid,
 .election__page-profile-details_control textarea.valid {
   border-color: var(--success-color);
-  color: var(--secondary-color);
+  color: var(--accent-color);
 }
 
 .election__page-content_header {

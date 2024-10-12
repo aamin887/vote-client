@@ -2,10 +2,7 @@ import "./position.css";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { axiosPrivate } from "../../api/axios";
-import { IoGrid, IoList } from "react-icons/io5";
 import { toast } from "react-toastify";
-import useAuth from "../../hooks/useAuth";
-import useNav from "../../hooks/useNav";
 import { CandidateCard, Loader } from "../../components";
 
 function Position() {
@@ -15,11 +12,7 @@ function Position() {
   const [positionDetails, setPositionDetails] = useState({});
   const [loading, setLoading] = useState(true);
 
-  const { auth } = useAuth();
-
   console.log(params.id);
-
-  const { handleGridView, handleListView, toogleGridView } = useNav();
 
   const [candidates, setCandidates] = useState([]);
   const [toogleEdit, setToogleEdit] = useState(false);

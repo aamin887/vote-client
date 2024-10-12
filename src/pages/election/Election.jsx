@@ -35,6 +35,7 @@ function Election() {
 
   // confirmation modal
   const [isOpened, setIsOpened] = useState(false);
+  const [openPosition, setOpenPosition] = useState(false);
 
   const deleteElection = async function (id) {
     try {
@@ -164,6 +165,30 @@ function Election() {
         return toast.error("Position already exist.");
       } else {
         return toast.error("network error!");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // delete position
+  const deletePosition = async function (id) {
+    setLoading(true);
+    try {
+      const res = await axiosPrivate.delete(`/api/v1/positions/${id}`);
+      if (res.status === 204) {
+        setAllPosition((pos) => {
+          const d = pos.filter((p) => p._id !== id);
+          return d;
+        });
+      }
+      return;
+    } catch (error) {
+      const statusCode = error?.response?.data?.status;
+      if (statusCode === 404) {
+        return toast.error("election not found");
+      } else {
+        return toast.error("network error");
       }
     } finally {
       setLoading(false);
@@ -363,7 +388,9 @@ function Election() {
               {toogleEdit && (
                 <button
                   className="election__page-profile_btn-edit btn"
-                  onClick={() => setToogleEdit(false)}
+                  onClick={() => {
+                    setToogleEdit(false);
+                  }}
                   style={{ backgroundColor: "red" }}
                   disabled={tooglePosition}
                 >
@@ -466,12 +493,30 @@ function Election() {
                 </p>
               </div>
             )}
+
             {allPosition?.map((position, idx) => (
-              <PositionCard
-                data={position}
-                setAllPosition={setAllPosition}
-                key={idx}
-              />
+              <>
+                <ConfirmationDialog
+                  title={`Are you sure?`}
+                  icon={<FaTimes />}
+                  isOpened={openPosition}
+                  id={position._id}
+                  onProceed={deletePosition}
+                  onClose={() => setOpenPosition(false)}
+                >
+                  <p>
+                    Do you really want to delete these records? This process
+                    cannot be undone.
+                  </p>
+                </ConfirmationDialog>
+
+                <PositionCard
+                  data={position}
+                  setAllPosition={setAllPosition}
+                  key={idx}
+                  isOpened={setOpenPosition}
+                />
+              </>
             ))}
           </div>
         </div>
