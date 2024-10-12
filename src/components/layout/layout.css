@@ -1,6 +1,5 @@
 .app__layout {
   background-color: var(--bg-color);
-  min-height: 100dvh;
   position: relative;
 }
 
@@ -26,5 +25,6 @@
   padding-top: 80px;
   margin-left: 80px;
   padding-right: 1em;
+  min-height: 100dvh;
   position: relative;
 }

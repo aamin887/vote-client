@@ -56,10 +56,12 @@
 .elections__content {
   display: grid;
   gap: 0.6em;
+  align-items: stretch;
 }
 
 .elections__content.grid__view {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 0.6em;
+  grid-auto-rows: minmax(100px, auto);
 }

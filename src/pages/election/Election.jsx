@@ -189,8 +189,6 @@ function Election() {
           ...res?.data?.election,
         });
 
-        // console.log();
-
         setElectionPoster(res?.data?.election?.poster);
 
         setLoading(false);
@@ -312,21 +310,21 @@ function Election() {
                 <span className="details">Start Date</span>
                 {!toogleEdit && <p>{formattedStartDate}</p>}
                 {toogleEdit && (
-                  <input
-                    type="text"
-                    name="startDate"
-                    placeholder="E.g 2022 Leadership"
-                    value={startDate}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  // <DateTimePicker
-                  //   // label={"Start Date"}
-                  //   name={"startDate"}
+                  // <input
+                  //   type="text"
+                  //   name="startDate"
+                  //   placeholder="E.g 2022 Leadership"
                   //   value={startDate}
-                  //   setDate={setElectionDetails}
+                  //   onChange={handleChange}
+                  //   required
                   // />
+
+                  <DateTimePicker
+                    // label={"Start Date"}
+                    name={"startDate"}
+                    value={startDate}
+                    setDate={setElectionDetails}
+                  />
                 )}
               </div>
               {/* elections end date*/}
@@ -453,7 +451,7 @@ function Election() {
           </div>
           {/*  */}
           <div
-            className={`election__page-content_container grid__view ${
+            className={`election__page-content_container  ${
               allPosition.length === 0 ? "empty" : ""
             }`}
           >

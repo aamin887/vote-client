@@ -1,66 +1,44 @@
 .positioncard {
   display: flex;
-  background-color: rgb(21, 31, 32);
   padding: 1em;
+  background-color: var(--secondary-color);
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   border-radius: 0.5em;
   margin-bottom: 0.5em;
   cursor: pointer;
   position: relative;
-}
-
-.positioncard__content-inline {
-  display: flex;
-  position: relative;
-  align-items: center;
-}
-
-.positioncard__content-inline p {
-  margin-right: 1em;
-}
-
-.positioncard__footer-remaining {
-  padding: 0.3em;
-  display: flex;
   flex-direction: column;
-  border-radius: 0.5em;
-}
-
-/* grid view */
-.grid__view .positioncard {
   max-width: 300px;
-  align-items: flex-start;
-  flex-direction: column;
 }
 
-.grid__view .positioncard__header,
-.grid__view .positioncard__content,
-.grid__view .positioncard__footer {
+.positioncard__header,
+.positioncard__content,
+.positioncard__footer {
   display: flex;
   /* justify-content: space-between; */
   flex-direction: column;
   margin-bottom: 0.5em;
 }
 
-.grid__view .positioncard__footer {
+.positioncard__footer {
   margin-bottom: 0;
   width: 100%;
 }
 
-.grid__view .positioncard__footer-profile {
+.positioncard__footer-profile {
   margin-top: 0.8em;
   right: 0;
 }
 
-.grid__view .positioncard__header h3,
-.grid__view .positioncard__content h4,
-.grid__view .positioncard__footer-profile {
+.positioncard__header h3,
+.positioncard__content h4,
+.positioncard__footer-profile {
   margin-bottom: 0.5em;
   font-size: 0.9rem;
 }
 
-.grid__view .positioncard__footer-remaining {
+.positioncard__footer-remaining {
   padding: 0.3em;
   display: flex;
   border-radius: 0.5em;
@@ -70,8 +48,7 @@
   color: var(--bg-color);
   font-weight: bolder;
 }
-
-.grid__view .positioncard__footer-remaining p {
+.positioncard__footer-remaining p {
   font-weight: bolder;
 }
 /* grid view */
@@ -81,13 +58,6 @@
 .positioncard__footer-profile {
   margin-bottom: 1em;
   font-size: 0.9rem;
-}
-
-.positioncard__header p,
-.positioncard p,
-.positioncard__footer-remaining p {
-  font-size: 0.8rem;
-  font-weight: 100;
 }
 
 .electioncard__footer-profile {

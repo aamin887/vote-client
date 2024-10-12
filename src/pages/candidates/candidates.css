@@ -12,7 +12,7 @@
   display: grid;
   place-items: center;
   font-size: 1.2rem;
-  color: rgb(157, 152, 152);
+  color: var(--primary-color);
 }
 
 .candidates__content-empty svg {

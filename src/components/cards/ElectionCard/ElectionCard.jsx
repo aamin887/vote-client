@@ -1,12 +1,9 @@
 import "./electionCard.css";
 import { Link } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
-import { useState } from "react";
 import { format } from "date-fns";
 
 function ElectionCard({ data }) {
-  const [options, setOption] = useState(false);
-
   const date_diff_indays = function (date1, date2) {
     const dt1 = new Date(data?.startDate);
     const dt2 = new Date(data?.endDate);
@@ -37,9 +34,6 @@ function ElectionCard({ data }) {
         </div>
         {/*  */}
         <div className=" electioncard__footer">
-          <div className="electioncard__footer-profile">
-            {<IoMdAddCircle size={20} />}
-          </div>
           <div className="electioncard__footer-remaining">
             <p>{date_diff_indays()}</p>
           </div>

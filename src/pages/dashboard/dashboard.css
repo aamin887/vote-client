@@ -47,26 +47,32 @@
   font-weight: 500;
 }
 
-.election__view-btn {
+.dashboard__content-election_header-btns {
+  border-radius: 0.3em;
+  padding: 0.2em;
+  background-color: var(--primary-color);
+}
+
+dashboard__content-election_header-btns .election__view-btn {
   display: inline-block;
   line-height: 100%;
   padding: 0.4em;
-  background-color: var(--focus-outline);
+  color: var(--primary-color);
   border-radius: 0.3em;
   border: none;
   margin-left: 0.5em;
   cursor: pointer;
 }
 
-.election__view-btn svg,
-.election__view-btn i {
+dashboard__content-election_header-btns .election__view-btn svg,
+dashboard__content-election_header-btns .election__view-btn i {
   font-size: 1.3rem;
-  color: var(--primary-color);
 }
 
-.election__view-btn.active svg,
-.election__view-btn.active i {
-  color: var(--focus-outline);
+dashboard__content-election_header-btns .election__view-btn.active svg,
+dashboard__content-election_header-btns .election__view-btn.active i {
+  color: var(--primary-color);
+  background-color: var(--accent-color);
 }
 
 .dashboard__content-right {

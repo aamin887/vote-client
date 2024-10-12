@@ -21,7 +21,7 @@
 .section__text {
   font-size: clamp(1.2rem, 1.2rem + 0vw, 1.25rem);
   line-height: 1.5em;
-  font-weight: 300;
+  font-weight: 500;
   margin-bottom: 0.9em;
   text-align: left;
 }

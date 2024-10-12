@@ -6,7 +6,6 @@ import { FaFolderOpen } from "react-icons/fa6";
 import { axiosPrivate } from "../../../api/axios";
 import { toast } from "react-toastify";
 
-
 function PositionCard({ data, setAllPosition }) {
   const navigate = useNavigate();
 
