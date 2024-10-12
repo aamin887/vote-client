@@ -17,7 +17,7 @@
 }
 
 .candidatedetails__page-profile_photo-selector {
-  border: 1px solid var(--light-green);
+  border: 1px solid var(--success-color);
 }
 
 .candidatedetails__page-profile_right {
@@ -70,7 +70,7 @@
 
 .candidatedetails__page-profile-details_control .details {
   font-weight: 500;
-  color: var(--secondary-color);
+  color: var(--accent-color);
   margin-bottom: 5px;
   display: block;
 }
@@ -88,7 +88,7 @@
   resize: vertical;
   outline: none;
   border-radius: 5px;
-  border: 1px solid var(--main-grey);
+  border: 1px solid var(--accent-color);
   padding-left: 15px;
   font-size: 16px;
   border-bottom-width: 2px;
@@ -99,12 +99,14 @@
   height: 5em;
 }
 
+.candidatedetails__page-profile-details_control select:focus,
+.candidatedetails__page-profile-details_control select:valid,
 .candidatedetails__page-profile-details_control input:focus,
 .candidatedetails__page-profile-details_control input:valid,
 .candidatedetails__page-profile-details_control textarea:focus,
 .candidatedetails__page-profile-details_control textarea:valid,
 .candidatedetails__page-profile-details_control textarea.valid {
-  border-color: var(--light-green);
+  border-color: var(--success-color);
 }
 
 .candidatedetails__page-content_header {

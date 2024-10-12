@@ -1,4 +1,3 @@
-import { FaWallet } from "react-icons/fa6";
 import "./inforCard.css";
 
 function InforCard({ icon, title, stats }) {

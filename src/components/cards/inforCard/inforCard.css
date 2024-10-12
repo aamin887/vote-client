@@ -9,7 +9,7 @@
 }
 
 .inforcard:hover {
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 .inforcard__content {
@@ -44,7 +44,7 @@
 }
 
 .inforcard__content-right p {
-  font-weight: 100;
+  font-weight: 500;
   font-size: 0.9rem;
   margin-bottom: 1em;
 }

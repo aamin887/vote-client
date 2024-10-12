@@ -80,13 +80,13 @@ function Dashboard() {
             {/* all voters */}
             <InforCard
               icon={<GiVote size={26} />}
-              title="Elections"
+              title="Candidates"
               stats={electionData.length}
             />
             {/* all candidates */}
             <InforCard
               icon={<GiVote size={26} />}
-              title="Elections"
+              title="Voters"
               stats={electionData.length}
             />
           </div>

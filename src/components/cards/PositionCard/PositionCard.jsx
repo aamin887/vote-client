@@ -3,17 +3,23 @@ import { useNavigate } from "react-router-dom";
 
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import { FaFolderOpen } from "react-icons/fa6";
-import { axiosPrivate } from "../../../api/axios";
-import { toast } from "react-toastify";
 
-function PositionCard({ data, setAllPosition, isOpened }) {
+function PositionCard({ data, isOpened }) {
   const navigate = useNavigate();
 
   return (
     <div className="positioncard">
       <div className="positioncard__header">
         <h3>{data?.positionName}</h3>
-        <p>{data?.positionDescription}</p>
+
+        <p>
+          {data?.positionDescription
+            .split(" ")
+            .slice(0, 5)
+            .join(" ")
+            .toString()}
+          {data?.positionDescription.split(" ").length > 5 ? "...." : ""}
+        </p>
       </div>
       {/*  */}
       <div className="positioncard__content">

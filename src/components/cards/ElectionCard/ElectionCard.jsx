@@ -1,6 +1,5 @@
 import "./electionCard.css";
 import { Link } from "react-router-dom";
-import { IoMdAddCircle } from "react-icons/io";
 import { format } from "date-fns";
 
 function ElectionCard({ data }) {

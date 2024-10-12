@@ -21,6 +21,10 @@
   margin-bottom: 0.5em;
 }
 
+.positioncard__header p {
+  font-weight: 200;
+}
+
 .positioncard__footer {
   margin-bottom: 0;
   width: 100%;

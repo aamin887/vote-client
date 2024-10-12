@@ -31,7 +31,7 @@
 .electioncard__content p,
 .electioncard__footer-remaining p {
   font-size: 0.8rem;
-  font-weight: 100;
+  font-weight: 500;
 }
 
 .electioncard__footer-profile {
@@ -70,7 +70,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  margin-bottom: 01em;
+  margin-bottom: 1em;
 }
 
 .grid__view .electioncard__footer {
@@ -103,7 +103,6 @@
   font-weight: bolder;
 }
 /* grid view */
-
 @media screen and (max-width: 680px) {
   .electioncard {
     padding: 0.5em;
