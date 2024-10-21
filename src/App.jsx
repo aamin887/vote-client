@@ -24,7 +24,13 @@ import { PrivateRoute } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AuthProvider from "./context/AuthProvider";
 import NavigationProvider from "./context/NavigationProvider";
-import { PersistLogin, Layout } from "./components";
+import {
+  PersistLogin,
+  Layout,
+  ResultHome,
+  ResultElection,
+  Result,
+} from "./components";
 
 function App() {
   return (
@@ -75,8 +81,18 @@ function App() {
                   />
                   {/* all candidates */}
                   <Route element={<Candidates />} path="/candidates" />
+
                   {/* result page */}
-                  <Route element={<ResultVote />} path="results" />
+                  <Route element={<ResultVote />} path="results">
+                    <Route element={<ResultHome />} index />
+                    <Route element={<ResultElection />} path="elections/:id" />
+                    <Route
+                      element={<Result />}
+                      path="elections/:position/:id"
+                    />
+                  </Route>
+
+                  {/* others */}
                   <Route element={<Vote />} path="reset-passwords" />
                   <Route element={<Vote />} path="reset-passwords/:id" />
                   <Route element={<HelpPage />} path="help" />

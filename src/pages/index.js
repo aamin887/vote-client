@@ -15,7 +15,7 @@ export { default as Position } from "./position/Position.jsx";
 export { default as Home } from "./home/Home";
 export { default as Admin } from "./admin/Admin";
 export { default as HelpPage } from "./helppage/HelpPage.jsx";
-export { default as ResultVote } from "./resultvote/ResultVote.jsx";
+export { default as ResultVote } from "./voteresults/VoteResults.jsx";
 export { default as Vote } from "./vote/Votes";
 export { default as Error } from "./error/Error";
 export { default as Candidates } from "./candidates/Candidates";

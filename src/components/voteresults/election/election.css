@@ -1,0 +1,7 @@
+.positionCard {
+  border: 1px solid green;
+  width: 250px;
+  box-shadow: 0 0 2px rebeccapurple;
+  padding: 0.5em;
+  border-radius: 0.5em;
+}

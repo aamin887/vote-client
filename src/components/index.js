@@ -24,3 +24,8 @@ export { default as HowItWorks } from "./howItWorks/HowItWorks";
 export { default as FAQ } from "./faq/FAQ";
 export { default as Contact } from "./contact/Contact";
 export { default as RadiantButton } from "./button/RadiantButton";
+
+// result
+export { default as ResultHome } from "../components/voteresults/home/Home";
+export { default as ResultElection } from "../components/voteresults/election/Election";
+export { default as Result } from "../components/voteresults/result/Result";

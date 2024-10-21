@@ -62,6 +62,7 @@
   height: 0.3em;
   transition: all 0.3s ease;
 }
+
 ::-webkit-scrollbar-track {
   border-radius: 10px;
 }
@@ -73,7 +74,6 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #1760df;
-  cursor: grabbing;
 }
 
 * {

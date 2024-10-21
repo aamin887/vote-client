@@ -24,8 +24,8 @@ const Header = () => {
             <a href="#contact">Contact Us</a>
           </li>
         </ul>
-        <Link to="/register">
-          <button className="cta-btn">Get Started</button>
+        <Link to="/login">
+          <button className="cta-btn">Signin</button>
         </Link>
       </nav>
 
@@ -34,7 +34,7 @@ const Header = () => {
           <h1>Your Voting Solution</h1>
           <p>Fast, secure, and easy voting platform.</p>
           <Link to="/register">
-            <button className="cta-btn">Try now</button>
+            <button className="cta-btn">Signup</button>
           </Link>
         </div>
         <div className="hero-image">

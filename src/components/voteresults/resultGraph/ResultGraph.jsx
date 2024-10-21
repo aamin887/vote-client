@@ -10,7 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import "./VoteResults.css";
+import "./resultgraph.css";
 
 // Sample vote data
 const allVoteData = [
@@ -28,7 +28,7 @@ const allVoteData = [
 const ageGroups = ["All", "18-25", "26-40", "41-60", "60+"];
 const regions = ["All", "North", "South", "East", "West"];
 
-const VoteResults = () => {
+const ResultGraph = () => {
   // State for filters
   const [selectedAgeGroup, setSelectedAgeGroup] = useState("All");
   const [selectedRegion, setSelectedRegion] = useState("All");
@@ -102,4 +102,4 @@ const VoteResults = () => {
   );
 };
 
-export default VoteResults;
+export default ResultGraph;

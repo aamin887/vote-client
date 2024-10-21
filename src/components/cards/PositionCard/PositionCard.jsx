@@ -35,7 +35,7 @@ function PositionCard({ data, isOpened }) {
             className="positioncard__footer-remaining_btn"
             onClick={() => navigate(`/elections/positions/${data?._id}`)}
           >
-            {<FaFolderOpen size={20} />}View
+            {<FaFolderOpen size={20} />}Open
           </button>
           <button
             className="positioncard__footer-remaining_btn"
