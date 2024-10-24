@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Loader from "../../loader/Loader";
 import useAuth from "../../../hooks/useAuth";
 import "./election.css";
+import PositionCard from "../components/positioncard/PositionCard";
 
 function Election() {
   const { id } = useParams();
@@ -48,19 +49,12 @@ function Election() {
   return (
     <div>
       {load && <Loader />}
-      {positions?.map((position, idx) => {
-        return (
-          <Link
-            key={idx}
-            to={`/results/elections/${position.positionName}/${position._id}`}
-          >
-            <article className="positionCard">
-              <h4>{position?.positionName}</h4>
-              <p>{position?.positionDescription}</p>
-            </article>
-          </Link>
-        );
-      })}
+
+      <div className="election__content">
+        {positions?.map((position, idx) => {
+          return <PositionCard data={position} key={idx} />;
+        })}
+      </div>
     </div>
   );
 }

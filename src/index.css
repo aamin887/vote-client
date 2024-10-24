@@ -5,8 +5,8 @@
   /* Light Mode */
   --bg-color: #fafafa;
   --text-color: #212529;
-  --primary-color: #506aebd8;
-  --hover-primary: #0056b3;
+  --primary-color: #526bebd8;
+  --hover-primary: #6ba0dad0;
   --secondary-color: #ffffff;
   --marker-color: #eb7821;
   --focus-outline: #80bdff;
@@ -23,9 +23,9 @@
 
 .dark:root {
   /* Dark Mode */
+  --bg-color: #282c36;
   --primary-color: #1e90ff;
   --secondary-color: #152021;
-  --bg-color: #0f0b0c;
   --card-bg: #2e2e38;
   --text-color: #e9ecef;
   --border-color: #343a40;

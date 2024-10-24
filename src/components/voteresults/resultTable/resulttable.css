@@ -1,0 +1,68 @@
+/* CandidateTable.css */
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 20px 0;
+  padding: 0 15px;
+}
+
+.candidate-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  text-align: left;
+}
+
+.candidate-table th,
+.candidate-table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+.candidate-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.candidate-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Responsive font scaling */
+@media screen and (max-width: 768px) {
+  .candidate-table {
+    font-size: 0.9rem;
+  }
+
+  .candidate-table th,
+  .candidate-table td {
+    padding: 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .candidate-table {
+    font-size: 0.8rem;
+  }
+
+  .candidate-table th,
+  .candidate-table td {
+    padding: 8px;
+  }
+
+  /* Stacking rows for mobile */
+  .candidate-table th,
+  .candidate-table td {
+    display: block;
+    width: 100%;
+    text-align: right;
+    position: relative;
+  }
+
+  .candidate-table th::before,
+  .candidate-table td::before {
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+  }
+}

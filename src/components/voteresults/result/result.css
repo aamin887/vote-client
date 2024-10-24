@@ -1,0 +1,29 @@
+.vote__result {
+}
+
+.vote__result-header_tabs {
+  background-color: var(--accent-color);
+  display: inline-block;
+  border-radius: 0.5em;
+  border: 1px solid var(--);
+  padding: 0.2em;
+}
+
+.vote__result-header_tabs button {
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.2em;
+  margin-right: 0.5em;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.vote__result-header_tabs button:hover {
+  background-color: var(--hover-primary);
+}
+
+.vote__result-header_tabs button.active {
+  background-color: var(--primary-color);
+}

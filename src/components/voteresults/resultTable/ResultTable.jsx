@@ -1,29 +1,26 @@
-import React from "react";
-
+import "./resulttable.css";
 const ResultTable = ({ positionId }) => {
   const candidates = [
-    { name: "John Doe", party: "Party A", votes: 1000 },
-    { name: "Jane Smith", party: "Party B", votes: 850 },
-    // Add more candidates as needed
+    { candidate: "John Doe", votes: 1, voteShare: 1000 },
+    { candidate: "Jane Smith", votes: 1, voteShare: 850 },
   ];
 
   return (
-    <div className="candidates-table">
-      <h2>Candidates for Position {positionId}</h2>
-      <table>
+    <div className="table-container">
+      <table className="candidate-table">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Party</th>
+            <th>Candidate</th>
             <th>Votes</th>
+            <th>Vote Share(%)</th>
           </tr>
         </thead>
         <tbody>
-          {candidates.map((candidate, index) => (
+          {candidates.map((row, index) => (
             <tr key={index}>
-              <td>{candidate.name}</td>
-              <td>{candidate.party}</td>
-              <td>{candidate.votes}</td>
+              <td>{row.candidate}</td>
+              <td>{row.votes}</td>
+              <td>{row.voteShare}</td>
             </tr>
           ))}
         </tbody>

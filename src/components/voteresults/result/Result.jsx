@@ -5,16 +5,16 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 
 function Result() {
-  const { id: positionId } = useParams();
+  const { id: positionId, position } = useParams();
 
   const [activeTab, setActiveTab] = useState("table");
   return (
-    <div>
-      <div className="table-header">
-        <h1>Position Detail - {positionId}</h1>
-        <div className="tabs">
+    <div className="vote__result">
+      <div className="vote__result-header">
+        <h1>Vote result for {position}</h1>
+        <div className="vote__result-header_tabs">
           <button
-            className={activeTab === "candidates" ? "active" : ""}
+            className={activeTab === "table" ? "active" : ""}
             onClick={() => setActiveTab("table")}
           >
             Candidates
@@ -28,7 +28,7 @@ function Result() {
         </div>
       </div>
 
-      <div className="content">
+      <div className="vote__result-content">
         {activeTab === "table" && <ResultTable positionId={1} />}
         {activeTab === "graph" && <ResultGraph />}
       </div>

@@ -1,33 +1,16 @@
 import "./home.css";
-import { Link } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
-
-const Card = function ({ card }) {
-  console.log(card);
-  return (
-    <Link to={`elections/${card._id}`}>
-      <article className="card">
-        <div className="card__header">
-          <h4>{card?.title}</h4>
-        </div>
-        <div className="card__content">
-          <p>test description</p>
-        </div>
-        <div className="card__footer">
-          <small>{card?.endDate}</small>
-        </div>
-      </article>
-    </Link>
-  );
-};
+import Loader from "../../loader/Loader";
+import ElectionCard from "../components/electioncard/ElectionCard";
 
 function Home() {
   const { auth } = useAuth();
   const [electionData, setElectionData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const organisationId = auth.id;
 
   const axiosPrivate = useAxiosPrivate();
@@ -54,9 +37,10 @@ function Home() {
   }, []);
   return (
     <div className="voteresult__home">
+      {loading && <Loader />}
       <div className="voteresult__content">
         {electionData?.map((card, idx) => {
-          return <Card card={card} key={idx} />;
+          return <ElectionCard key={idx} data={card} />;
         })}
       </div>
     </div>

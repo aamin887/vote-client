@@ -1,5 +1,5 @@
 // src/components/VoteResults.js
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   BarChart,
   Bar,
@@ -10,6 +10,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+
 import "./resultgraph.css";
 
 // Sample vote data
