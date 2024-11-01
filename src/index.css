@@ -1,6 +1,27 @@
 @import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
+/* p {
+  --main-color-card: #dbf6fd;
+
+  --nav-bg-color: #1a1c22;
+  --layout-bg-color: #282c35;
+  --icon-color: #1fcb4f;
+  --text-color: #ffffff;
+  --nav-text-color: #a9a9a9;
+
+
+  --bg-color: #00523f;
+  --secondary-color: #ffc42a;
+  --font-family: "Montserrat", sans-serif;
+
+
+  --main-blue: #71b7e6;
+  --main-purple: #9b59b6;
+  --main-grey: #ccc;
+  --sub-grey: #d9d9d9;
+} */
+
 :root {
   /* Light Mode */
   --bg-color: #fafafa;
@@ -11,7 +32,7 @@
   --marker-color: #eb7821;
   --focus-outline: #80bdff;
   --accent-color: #212121;
-
+ 
   --card-bg: #ffffff;
   --border-color: #ced4da;
   --success-color: #28a745;

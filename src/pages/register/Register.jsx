@@ -157,7 +157,7 @@ function Register() {
                 >
                   <CgDanger
                     size={20}
-                    // color={"#b3790c"}
+                    color={"#b3790c"}
                     className="error__icons"
                   />
                   <br />

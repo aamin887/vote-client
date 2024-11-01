@@ -83,12 +83,16 @@
 }
 
 .form__control-reset a {
-  color: var(--secondary-color);
+  color: #ffffff;
   font-weight: bolder;
 }
 
+.form__control-reset a:hover {
+  color: #ffc107;
+}
+
 .form__control-input input[type="checkbox"] {
-  border-color: var(--marker-color);
+  border-color: #ffc107;
   margin-right: 0.3em;
 }
 
@@ -110,7 +114,7 @@
 .form__control-input_instructions {
   display: block;
   line-height: 1.4;
-  color: var(--primary-color);
+  color: #ffc107;
 }
 
 .form__control-input_offscreen {
@@ -119,13 +123,12 @@
 }
 
 .error__icons {
-  color: var(--marker-color);
   margin-right: 0.5em;
 }
 
 .form__control-footnote-link:hover {
   opacity: 0.8;
-  border-bottom: 1px solid var(--primary-color);
+  border-bottom: 1px solid #ffc107;
 }
 
 @media (max-width: 767px) {

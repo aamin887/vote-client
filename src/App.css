@@ -57,6 +57,10 @@ button:disabled:hover {
   opacity: 1;
 }
 
+.form__control .btn {
+  color: #ffc107;
+}
+
 .form__control-margin {
   margin-bottom: 2.5em;
 }

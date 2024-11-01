@@ -1,5 +1,5 @@
 import "./style.css";
-import error from "../../assets/404.png";
+import logo from "../../assets/logo.png";
 import { useLocation } from "react-router-dom";
 
 function PasswordRequest() {
@@ -15,7 +15,7 @@ function PasswordRequest() {
     <div className="success section__padding">
       <div className="success__content">
         <div className="success__content-img section__margin">
-          <img src={error} alt="" />
+          <img src={logo} alt="" />
           <h2 className="section__heading">Success</h2>
           <p className="section__text lead__text">
             We have succsefuly created your new password. Head back to the login
