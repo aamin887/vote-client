@@ -27,7 +27,7 @@ function PasswordRequest() {
             We have succsefuly created your new password. Head back to the login
             page to get access your account
           </p>
-          <button onClick={() => handleNavigate()} className="btn">
+          <button onClick={() => handleNavigate()} className="btn auth__btns">
             Login
           </button>
         </div>

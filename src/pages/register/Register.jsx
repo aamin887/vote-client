@@ -321,7 +321,7 @@ function Register() {
               </div> */}
 
               <div className="form__control">
-                <button type="submit" className="btn">
+                <button type="submit" className="btn auth__btns">
                   Register
                 </button>
                 <p className="form__control-footnote">

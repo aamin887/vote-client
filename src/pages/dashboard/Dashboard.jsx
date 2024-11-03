@@ -26,7 +26,8 @@ function Dashboard() {
 
   const organisationId = auth.id;
 
-  const handleDelete = async function (id) {
+  const handleDelete = async function (e, id) {
+    e.stopPropagation();
     try {
       const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
       if (res.status === 204) {
@@ -64,6 +65,20 @@ function Dashboard() {
     };
 
     getAllElections();
+
+    const handleResize = function () {
+      if (window.innerWidth <= 620) {
+        handleGridView();
+      }
+    };
+
+    // Add event listener for window resize
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   return (
@@ -128,6 +143,7 @@ function Dashboard() {
                 {electionData?.map((election, idx) => {
                   return (
                     <ElectionCard
+                      setLoading={setLoading}
                       data={election}
                       handleDelete={handleDelete}
                       key={idx}

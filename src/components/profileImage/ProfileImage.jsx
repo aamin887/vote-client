@@ -1,6 +1,8 @@
 import "./profileimage.css";
+import img from "../../assets/img.avif";
 
-const ProfileImages = ({ images = [] }) => {
+const images = [img, img];
+const ProfileImages = () => {
   return (
     <div className="profile-images-container">
       {images?.map((image, index) => (

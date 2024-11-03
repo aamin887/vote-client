@@ -161,7 +161,7 @@ function PasswordReset() {
               </div>
 
               <div className="form__control">
-                <button type="submit" className="btn">
+                <button type="submit" className="btn auth__btns">
                   Reset password
                 </button>
                 <p className="form__control-footnote">

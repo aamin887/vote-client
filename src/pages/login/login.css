@@ -100,9 +100,9 @@
   margin-top: 0.9em;
 }
 
-.form__control-footnote-link a {
-  color: #fff;
-
+.form__control-footnote-link a,
+.form__control-reset a {
+  color: #ffc107;
   font-weight: bolder;
   cursor: pointer;
   padding-bottom: 0.2em;

@@ -96,13 +96,14 @@ form .button button {
   outline: none;
   color: #fff;
   border: none;
+  cursor: pointer;
   font-size: 18px;
   font-weight: 500;
   border-radius: 5px;
-  background-color: var(--primary-color);
+  background-color: var(--btn-color);
   transition: all 0.3s ease;
 }
 
 form .button button:hover {
-  background: var(--hover-primary);
+  background: var(--btn-hover);
 }

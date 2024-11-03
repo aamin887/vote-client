@@ -1,51 +1,35 @@
 @import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
-/* p {
-  --main-color-card: #dbf6fd;
-
-  --nav-bg-color: #1a1c22;
-  --layout-bg-color: #282c35;
-  --icon-color: #1fcb4f;
-  --text-color: #ffffff;
-  --nav-text-color: #a9a9a9;
-
-
-  --bg-color: #00523f;
-  --secondary-color: #ffc42a;
-  --font-family: "Montserrat", sans-serif;
-
-
-  --main-blue: #71b7e6;
-  --main-purple: #9b59b6;
-  --main-grey: #ccc;
-  --sub-grey: #d9d9d9;
-} */
-
-:root {
+.dark:root {
   /* Light Mode */
-  --bg-color: #fafafa;
-  --text-color: #212529;
-  --primary-color: #526bebd8;
-  --hover-primary: #6ba0dad0;
-  --secondary-color: #ffffff;
-  --marker-color: #eb7821;
+  --bg-color: #282c36;
+  --text-color: #e8e9eb;
+
+  --primary-color: #162021;
+  --secondary-color: #1a1c21;
+  --hover-primary: #212b2e;
+
+  --marker-color: #ffc229;
+  --accent-color: #808080;
+  --icon-color: #28a745;
+
+  --btn-color: #ffc229;
+  --btn-hover: #dda518ed;
+
   --focus-outline: #80bdff;
-  --accent-color: #212121;
- 
-  --card-bg: #ffffff;
-  --border-color: #ced4da;
-  --success-color: #28a745;
+  --success-color: #3fe365;
   --warning-color: #ffc107;
   --error-color: #dc3545;
-  --selection-bg: #b8daff;
-  --selection-text: #212529;
+
+  --selection-bg: #978140;
+  --selection-text: #fff;
 }
 
-.dark:root {
-  /* Dark Mode */
+/* .dark:root {
+
   --bg-color: #282c36;
-  --primary-color: #1e90ff;
+  --primary-color: #1fcc50;
   --secondary-color: #152021;
   --card-bg: #2e2e38;
   --text-color: #e9ecef;
@@ -59,7 +43,7 @@
   --focus-outline: #4b9cdb;
   --selection-bg: #3a3a56;
   --selection-text: #e9ecef;
-}
+} */
 
 ::selection {
   background: var(--selection-bg);
@@ -89,8 +73,8 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--secondary-color);
-  border-radius: 1px;
+  background: var(--selection-bg);
+  border-radius: 1.6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -164,7 +148,7 @@ input::-webkit-inner-spin-button {
 
 .underline {
   border-radius: 1px;
-  border-bottom: 2px solid var(--primary-color);
+  border-bottom: 2px solid #fff;
 }
 
 .inline {
@@ -174,7 +158,7 @@ input::-webkit-inner-spin-button {
 
 .btn {
   padding: 0.9em 1em;
-  background-color: var(--primary-color);
+  background-color: var(--marker-color);
   border-radius: 0.3em;
   color: var(--text-color);
   border: none;
@@ -182,6 +166,10 @@ input::-webkit-inner-spin-button {
   font-size: 1.1rem;
   font-weight: bolder;
   cursor: pointer;
+}
+
+.auth__btns {
+  background-color: #ffc107;
 }
 
 a.active {

@@ -250,7 +250,7 @@ function ChangePassword() {
                       : true
                   }
                   type="submit"
-                  className="btn"
+                  className="btn auth__btns"
                 >
                   Change password
                 </button>

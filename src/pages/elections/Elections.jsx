@@ -68,11 +68,7 @@ function Elections() {
   }, []);
 
   return (
-    <div
-      className={`elections section__padding-md ${
-        toogleGridView ? "grid__view" : ""
-      }`}
-    >
+    <div className={`elections section__padding-md ${""}`}>
       <div className="elections__header">
         <h3 className="section__heading title__text">Elections</h3>
         <p className="section__text">
@@ -84,7 +80,7 @@ function Elections() {
           <div className="elections__view-btns">
             <button
               className={`elections__view-icons ${
-                !toogleGridView ? "active" : ""
+                toogleGridView ? "active" : ""
               }`}
               onClick={handleListView}
             >
@@ -124,7 +120,9 @@ function Elections() {
 
       {electionData.length > 0 && loading === false && (
         <div
-          className={`elections__content ${toogleGridView ? "grid__view" : ""}`}
+          className={`elections__content ${
+            !toogleGridView ? "grid__view" : ""
+          }`}
         >
           {electionData?.map((election, idx) => {
             return (

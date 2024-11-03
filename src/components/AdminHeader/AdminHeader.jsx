@@ -7,7 +7,7 @@ import "./adminheader.css";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function AdminHeader() {
+function AdminHeader({ setSearchQuery }) {
   const root = document.documentElement;
   const [darkMode, setDarkMode] = useState(false);
 
@@ -44,7 +44,12 @@ function AdminHeader() {
       <div className="navigation__topnav-right">
         <div className="navigation__topnav-right_search">
           <label>
-            <input type="text" placeholder="Search here" autoComplete="off" />
+            <input
+              type="text"
+              placeholder="Search here"
+              autoComplete="off"
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
             <ion-icon name="search-outline">
               <CiSearch style={{ color: "#a9a9a9" }} />
             </ion-icon>

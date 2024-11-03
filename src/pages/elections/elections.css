@@ -20,7 +20,7 @@
   display: inline-block;
   line-height: 100%;
   padding: 0.4em;
-  background-color: var(--secondary-color);
+  background-color: var(--marker-color);
 
   border-radius: 0.3em;
   border: none;
@@ -57,11 +57,11 @@
   display: grid;
   gap: 0.6em;
   align-items: stretch;
+  padding-bottom: 2em;
 }
 
 .elections__content.grid__view {
-  display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 0.6em;
-  grid-auto-rows: minmax(100px, auto);
+  grid-auto-rows: minmax(200px, auto);
 }

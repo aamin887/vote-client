@@ -71,7 +71,7 @@
 
 .election__page-profile-details_control .details {
   font-weight: 500;
-  color: var(--accent-color);
+  color: var(--text-color);
   margin-bottom: 5px;
   display: block;
 }
@@ -96,7 +96,7 @@
   padding-left: 15px;
   font-size: 16px;
   border-bottom-width: 2px;
-  color: var(--accent-color);
+  color: var(--text-color);
   transition: all 0.3s ease;
 }
 
@@ -110,7 +110,7 @@
 .election__page-profile-details_control textarea:valid,
 .election__page-profile-details_control textarea.valid {
   border-color: var(--success-color);
-  color: var(--accent-color);
+  color: var(--text-color);
 }
 
 .election__page-content_header {
@@ -131,36 +131,6 @@
 
 .election__page-content_header-title p {
   font-weight: 100;
-}
-
-.election__view-btn {
-  display: inline-block;
-  line-height: 100%;
-  padding: 0.4em;
-  background-color: var(--secondary-color);
-  border-radius: 0.3em;
-  border: none;
-  margin-left: 0.5em;
-  cursor: pointer;
-}
-
-.election__view-btn:hover {
-  background-color: var(--accent-color);
-}
-
-.election__view-btn.active {
-  background-color: var(--icon-color);
-}
-
-.election__view-btn svg,
-.election__view-btn i {
-  font-size: 1.3rem;
-}
-
-.election__view-btn.active svg,
-.election__view-btn.active i {
-  color: var(--primary-color);
-  background-color: var(--accent-color);
 }
 
 .election__page-content_container {
@@ -187,7 +157,7 @@
   display: grid;
   place-items: center;
   font-size: 1.2rem;
-  color: var(--primary-color);
+  color: var(--text-color);
 }
 
 .election__page-content_container-empty {
@@ -222,7 +192,7 @@
 .election__page-form textarea:valid,
 .election__page-form textarea.valid {
   border-color: var(--success-color);
-  color: var(--accent-color);
+  color: var(--text-color);
 }
 
 .election__page-form .btn {

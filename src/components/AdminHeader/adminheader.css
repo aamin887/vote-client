@@ -68,11 +68,11 @@
 }
 
 .navigation__topnav-right_icons-add {
-  color: var(--primary-color);
+  color: var(--success-color);
 }
 
 .navigation__topnav-right_icons-add:hover {
-  color: var(--hover-primary);
+  opacity: 0.9;
   transform: scale(0.9);
 }
 

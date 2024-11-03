@@ -7,8 +7,8 @@ export { default as ChangePassword } from "./changepassword/ChangePassword";
 
 // dashboard
 export { default as Dashboard } from "./dashboard/Dashboard";
+export { default as AddCandidate } from "./addcandidate/AddCandidate.jsx";
 export { default as Elections } from "./elections/Elections";
-export { default as AddCandidate } from "./addCandidate/AddCandidate";
 export { default as Election } from "./election/Election";
 export { default as Position } from "./position/Position.jsx";
 
@@ -20,5 +20,5 @@ export { default as Vote } from "./vote/Votes";
 export { default as Error } from "./error/Error";
 export { default as Candidates } from "./candidates/Candidates";
 export { default as CreateElection } from "./createElection/CreateElection";
-export { default as CreatePosition } from "./addCandidate/AddCandidate";
+// export { default as CreatePosition } from "./addcandidate/AddCandidate.jsx";
 export { default as CandidateDetails } from "./candidatedetails/CandidateDetails.jsx";

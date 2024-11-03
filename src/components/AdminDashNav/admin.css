@@ -1,7 +1,7 @@
 .main__navigation {
   width: 295px;
   min-height: 100%;
-  background: var(--nav-bg-color);
+  background: var(--secondary-color);
   border-left: 4px solid var(--bg-color);
   transition: 0.5s;
   position: sticky;
@@ -57,8 +57,7 @@
 }
 
 .main__navigation ul li:hover {
-  background-color: var(--white);
-  color: var(--bg-color);
+  color: var(--icon-color);
 }
 
 .main__navigation ul li a {
@@ -104,17 +103,16 @@
 
 .main__navigation ul li a .icons {
   font-size: 1.75rem;
-  border-radius: 50%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
+  color: var(--icon-color);
 }
 
 .main__navigation ul li a.active .icons {
   font-size: 1.7rem;
-  color: var(--secondary-color);
-  background-color: var(--primary-color);
+  color: var(--icon-color);
 }
 
 .main__navigation ul li a .title {
@@ -141,5 +139,6 @@
   justify-content: flex-start;
   text-align: left;
   padding: 0 !important;
+  background-color: var(--marker-color);
   border-radius: 0px !important;
 }

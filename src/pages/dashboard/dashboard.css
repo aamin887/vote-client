@@ -7,7 +7,7 @@
 .dashboard__content {
   display: grid;
   gap: 1.5em;
-  grid-template-columns: 4fr 2fr;
+  grid-template-columns: 6fr 2fr;
 }
 
 .dashboard__stats {
@@ -51,29 +51,32 @@
 .dashboard__content-election_header-btns {
   border-radius: 0.3em;
   padding: 0.2em;
-  background-color: var(--primary-color);
+  min-width: 4em;
+  display: inline;
+  background-color: var(--marker-color);
 }
 
-dashboard__content-election_header-btns .election__view-btn {
+.dashboard__content-election_header-btns .election__view-btn {
   display: inline-block;
   line-height: 100%;
-  padding: 0.4em;
-  color: var(--primary-color);
+  padding: 0.1em;
+  color: var(--icon-color);
   border-radius: 0.3em;
   border: none;
   margin-left: 0.5em;
   cursor: pointer;
 }
 
-dashboard__content-election_header-btns .election__view-btn svg,
-dashboard__content-election_header-btns .election__view-btn i {
+.dashboard__content-election_header-btns .election__view-btn svg,
+.dashboard__content-election_header-btns .election__view-btn i {
   font-size: 1.3rem;
 }
 
-dashboard__content-election_header-btns .election__view-btn.active svg,
-dashboard__content-election_header-btns .election__view-btn.active i {
-  color: var(--primary-color);
-  background-color: var(--accent-color);
+.dashboard__content-election_header-btns .election__view-btn.active svg,
+.dashboard__content-election_header-btns .election__view-btn.active i {
+  /* color: var(--primary-color); */
+  /* background-color: ; */
+  color: whitesmoke;
 }
 
 .dashboard__content-right {
@@ -81,6 +84,7 @@ dashboard__content-election_header-btns .election__view-btn.active i {
   background-color: var(--secondary-color);
   border: none;
   border-radius: 0.5em;
+  padding: 0.5em;
 }
 
 .logs__card {
@@ -139,6 +143,7 @@ dashboard__content-election_header-btns .election__view-btn.active i {
 .dashboard__content-election_cards {
   overflow-x: scroll;
   max-height: 450px;
+  padding: 0.5em;
 }
 
 .dashboard__content-election_empty {
@@ -149,7 +154,7 @@ dashboard__content-election_header-btns .election__view-btn.active i {
   display: grid;
   place-items: center;
   font-size: 1.2rem;
-  color: var(--primary-color);
+  color: var(--text-color);
   font-weight: 500;
 }
 
@@ -161,22 +166,23 @@ dashboard__content-election_header-btns .election__view-btn.active i {
 .dashboard__content-election_empty-btn {
   padding: 0.5em 1em;
   text-transform: capitalize;
-  color: var(--accent-color);
+  color: var(--marker-color);
   margin-top: 0.5em;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--primary-color);
+  border: 1px solid var(--marker-color);
 }
 
 .dashboard__content-election_empty-btn:hover {
   opacity: 0.9;
-  color: var(--secondary-color);
+  border: 1px solid var(--focus-outline);
+  color: var(--focus-outline);
 }
 
 .dashboard__content-election_empty-btn svg {
   line-height: 100%;
-  color: var(--primary-color);
+  color: var(--success-color);
   margin-right: 0.5em;
 }
 
@@ -212,5 +218,9 @@ dashboard__content-election_header-btns .election__view-btn.active i {
 
   .dashboard__content-election_header-btns button {
     font-size: 0.4rem;
+  }
+
+  .dashboard__content-election_header-btns {
+    visibility: hidden;
   }
 }

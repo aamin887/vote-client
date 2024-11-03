@@ -4,11 +4,13 @@ import useAuth from "../../hooks/useAuth";
 import { axiosPrivate } from "../../api/axios";
 import { BsInbox } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 function Candidates() {
   const { auth } = useAuth();
   const [candidates, setCandidates] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { searchQuery, currentPage } = useOutletContext();
 
   const organisationId = auth.id;
   const getAllCandidates = async function () {
