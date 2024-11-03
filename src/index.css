@@ -1,6 +1,31 @@
 @import url("https://fonts.googleapis.com/css2?family=Acme&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
+:root {
+  /* Light Mode */
+  --bg-color: #e8e9eb;
+  --text-color: #282c36;
+
+  --primary-color: #79a4a8;
+  --secondary-color: #f5f6f7;
+  --hover-primary: #212b2e;
+
+  --marker-color: #ffc229;
+  --accent-color: #808080;
+  --icon-color: #28a745;
+
+  --btn-color: #ffc229;
+  --btn-hover: #dda518ed;
+
+  --focus-outline: #80bdff;
+  --success-color: #3fe365;
+  --warning-color: #ffc107;
+  --error-color: #dc3545;
+
+  --selection-bg: #978140;
+  --selection-text: #fff;
+}
+
 .dark:root {
   /* Light Mode */
   --bg-color: #282c36;
