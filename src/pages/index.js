@@ -7,7 +7,7 @@ export { default as ChangePassword } from "./changepassword/ChangePassword";
 
 // dashboard
 export { default as Dashboard } from "./dashboard/Dashboard";
-export { default as AddCandidate } from "./addcandidate/AddCandidate";
+// export { default as AddCandidate } from "./addcandidate/AddCandidate";
 export { default as Elections } from "./elections/Elections";
 export { default as Election } from "./election/Election";
 export { default as Position } from "./position/Position.jsx";
