@@ -122,6 +122,7 @@
   line-height: 60px;
   white-space: nowrap;
   font-weight: 500;
+  color: var(--text-color);
 }
 
 .main__navigation ul li:hover {

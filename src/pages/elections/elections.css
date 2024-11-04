@@ -19,11 +19,11 @@
 .elections__view-btns {
   display: inline-block;
   line-height: 100%;
-  padding: 0.4em;
-  background-color: var(--marker-color);
-
+  padding: 0.2em;
+  background-color: transparent;
+  border: 1px solid var(--marker-color);
   border-radius: 0.3em;
-  border: none;
+  /* border: none; */
   margin-left: 0.5em;
   cursor: pointer;
 }
@@ -31,26 +31,21 @@
 .elections__view-icons {
   line-height: 100%;
   padding: 0.4em;
-  background-color: var(--primary-color);
+  background-color: transparent;
   border-radius: 0.3em;
   border: none;
   margin-left: 0.5em;
   cursor: pointer;
 }
-
-.elections__view-icons.active {
-  background-color: var(--primary-color);
+.elections__view-icons svg,
+.elections__view-icons i {
+  color: var(--icon-color);
+  font-size: 1.3rem;
 }
 
 .elections__view-icons.active svg,
 .elections__view-btns.active i {
-  color: whitesmoke;
-}
-
-.elections__filter-view svg,
-.elections__filter-view i {
-  font-size: 1.3rem;
-  color: var(--primary-color);
+  color: var(--marker-color);
 }
 
 .elections__content {

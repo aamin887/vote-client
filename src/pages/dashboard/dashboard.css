@@ -53,7 +53,7 @@
   padding: 0.2em;
   min-width: 4em;
   display: inline;
-  background-color: var(--marker-color);
+  border: var(--marker-color) 1px solid;
 }
 
 .dashboard__content-election_header-btns .election__view-btn {
@@ -61,8 +61,10 @@
   line-height: 100%;
   padding: 0.1em;
   color: var(--icon-color);
+  background-color: transparent;
+  border: 1px solid var(--secondary-color);
   border-radius: 0.3em;
-  border: none;
+  /* border: none; */
   margin-left: 0.5em;
   cursor: pointer;
 }
@@ -76,7 +78,7 @@
 .dashboard__content-election_header-btns .election__view-btn.active i {
   /* color: var(--primary-color); */
   /* background-color: ; */
-  color: whitesmoke;
+  color: var(--marker-color);
 }
 
 .dashboard__content-right {

@@ -121,7 +121,7 @@ function Dashboard() {
                 <div className="dashboard__content-election_header-btns">
                   <button
                     className={`election__view-btn ${
-                      !toogleGridView ? "active" : ""
+                      toogleGridView ? "active" : ""
                     }`}
                     onClick={handleListView}
                   >
@@ -129,7 +129,7 @@ function Dashboard() {
                   </button>
                   <button
                     className={`election__view-btn ${
-                      toogleGridView ? "active" : ""
+                      !toogleGridView ? "active" : ""
                     }`}
                     onClick={handleGridView}
                   >

@@ -7,3 +7,11 @@
 .votes__padding {
   padding: 3em 2em;
 }
+
+.txx {
+  background-color: rgb(122, 97, 97);
+  display: grid;
+  gap: 0.4em;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-auto-rows: minmax(200px, auto);
+}
