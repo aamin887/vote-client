@@ -19,7 +19,7 @@ import {
   HelpPage,
 } from "./pages";
 
-import AddCandidate from "./pages/addcandidate/AddCandidate";
+// import AddCandidate from "./pages/addcandidate/AddCandidate";
 
 import { PrivateRoute } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -65,10 +65,10 @@ function App() {
                     {/* election by id */}
                     <Route element={<Election />} path="/elections/:id" />
                     {/* adding a candidate */}
-                    <Route
+                    {/* <Route
                       element={<AddCandidate />}
                       path="/elections/:electionId/positions/candidates/add"
-                    />
+                    /> */}
                     {/* view a position */}
                     <Route
                       element={<Position />}
