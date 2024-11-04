@@ -1,0 +1,79 @@
+/* Navbar.css */
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base Navbar Styles */
+.votersnav {
+  width: 100%;
+  background-color: #333;
+  color: white;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.votersnav__container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+}
+
+.votersnav__logo {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Links Styles */
+.votersnav__links {
+  list-style: none;
+  display: flex;
+}
+
+.votersnav__link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+}
+
+.votersnav__link:hover {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .votersnav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 60px; /* Set a height for the navbar */
+  }
+
+  .votersnav__container {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .votersnav__link {
+    padding: 0.5rem;
+    font-size: 1rem;
+  }
+
+  /* Add padding to the body content to avoid overlap */
+  body {
+    padding-bottom: 60px; /* Matches the navbar height */
+  }
+}

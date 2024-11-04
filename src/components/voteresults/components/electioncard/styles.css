@@ -1,6 +1,5 @@
 .election__card {
-  border: 2px solid var(--primary-color);
-  background-color: var(--bg-color);
+  background-color: var(--secondary-color);
   padding: 0.5em;
   border-radius: 0.5em;
   transition: all 0.3s ease;

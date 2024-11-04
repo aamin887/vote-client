@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./votes.css";
 import UserCard from "../../components/usercard/Usercard";
-
+import VotersNav from "../../components/votersnav/VotersNav";
 // Sample data for categories and candidates
 const data = [
   {
@@ -42,7 +42,9 @@ function Votes() {
 
   return (
     <div className="votes__page">
+      <VotersNav />
       <h1>Voting Panel</h1>
+
       {data.map(({ category, candidates }) => (
         <div
           key={category}

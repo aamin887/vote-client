@@ -91,12 +91,17 @@
   justify-content: center;
   align-items: center;
   transition: 0.3s;
+
   flex-direction: column;
+}
+
+.usercard__left-icon_btn svg {
+  font-size: 0.9rem;
 }
 
 /* content */
 .usercard__right {
-  padding: 0.938em 0.625em;
+  padding-left: 0.5em;
 }
 
 .usercard__right h4 {
@@ -108,8 +113,8 @@
   margin: 0.625rem 0 1.25rem;
   color: var(--text-color);
   font-size: 0.9rem;
-  font-weight: 200;
-  line-height: 1.2;
+  font-weight: 300;
+  line-height: 1.4;
 }
 
 @media screen and (max-width: 600px) {

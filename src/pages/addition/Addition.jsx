@@ -19,7 +19,7 @@ function Addition() {
     position: "",
     manifesto: "",
     imgfile: "",
-    organisation: organisationId,
+    organisation: "",
   });
 
   const { electionId } = useParams();
@@ -117,6 +117,7 @@ function Addition() {
       setElectionDetails(electionResponse?.data?.election);
     };
     getPositionList();
+    formData.organisation = organisationId;
   }, []);
 
   return (

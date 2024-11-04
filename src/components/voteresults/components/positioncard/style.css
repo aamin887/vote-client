@@ -1,6 +1,5 @@
 .position__card {
-  border: 2px solid var(--primary-color);
-  background-color: var(--bg-color);
+  background-color: var(--secondary-color);
   padding: 0.5em;
   border-radius: 0.5em;
   transition: all 0.3s ease;
@@ -24,6 +23,10 @@
 .position__card-header,
 .position__card-content {
   margin-bottom: 0.5em;
+}
+
+.position__card-content {
+  margin-left: 3.5em;
 }
 
 .position__card-header p,
