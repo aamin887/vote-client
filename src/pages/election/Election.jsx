@@ -501,6 +501,7 @@ function Election() {
                   icon={<FaTimes />}
                   isOpened={openPosition}
                   id={position._id}
+                  key={idx + position._id}
                   onProceed={deletePosition}
                   onClose={() => setOpenPosition(false)}
                 >

@@ -168,7 +168,7 @@ function AddCandidate() {
                   <p>{organisation}</p>
                 </div>
                 <div className="addcandidate__form-details_control">
-                  <span className="details">Is active</span>
+                  <span className="details">Active</span>
 
                   <p>{isActive?.toString(true)}</p>
                 </div>
