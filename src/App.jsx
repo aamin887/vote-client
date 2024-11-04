@@ -17,6 +17,7 @@ import {
   CreateElection,
   Position,
   HelpPage,
+  AddCandidate,
 } from "./pages";
 
 // import AddCandidate from "./pages/addcandidate/AddCandidate";
@@ -65,10 +66,10 @@ function App() {
                     {/* election by id */}
                     <Route element={<Election />} path="/elections/:id" />
                     {/* adding a candidate */}
-                    {/* <Route
+                    <Route
                       element={<AddCandidate />}
                       path="/elections/:electionId/positions/candidates/add"
-                    /> */}
+                    />
                     {/* view a position */}
                     <Route
                       element={<Position />}
