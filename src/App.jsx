@@ -17,10 +17,8 @@ import {
   CreateElection,
   Position,
   HelpPage,
-  AddCandidate,
+  Addition,
 } from "./pages";
-
-// import AddCandidate from "./pages/addcandidate/AddCandidate";
 
 import { PrivateRoute } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -67,7 +65,7 @@ function App() {
                     <Route element={<Election />} path="/elections/:id" />
                     {/* adding a candidate */}
                     <Route
-                      element={<AddCandidate />}
+                      element={<Addition />}
                       path="/elections/:electionId/positions/candidates/add"
                     />
                     {/* view a position */}
