@@ -1,4 +1,4 @@
-import "./addcandidate.css";
+import "./addition.css";
 
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { Loader } from "../../components";
 
-function AddCandidate() {
+function Addition() {
   const { auth } = useAuth();
   const organisationId = auth.id;
 
@@ -271,4 +271,4 @@ function AddCandidate() {
   );
 }
 
-export default AddCandidate;
+export default Addition;
