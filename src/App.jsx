@@ -3,7 +3,6 @@ import {
   Home,
   Login,
   Register,
-  AddCandidate,
   PasswordReset,
   ResultVote,
   Vote,
@@ -19,6 +18,8 @@ import {
   Position,
   HelpPage,
 } from "./pages";
+
+import AddCandidate from "./pages/addcandidate/AddCandidate";
 
 import { PrivateRoute } from "./components";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
