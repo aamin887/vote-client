@@ -6,12 +6,14 @@ import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import Loader from "../../loader/Loader";
 import ElectionCard from "../components/electioncard/ElectionCard";
+import { useOutletContext } from "react-router-dom";
 
 function Home() {
   const { auth } = useAuth();
   const [electionData, setElectionData] = useState([]);
   const [loading, setLoading] = useState(true);
   const organisationId = auth.id;
+  // const { searchQuery, currentPage } = useOutletContext();
 
   const axiosPrivate = useAxiosPrivate();
 

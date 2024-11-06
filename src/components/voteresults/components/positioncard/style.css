@@ -1,55 +1,47 @@
-.position__card {
+.positioncard__result {
   background-color: var(--secondary-color);
-  padding: 0.5em;
+  padding: 0.683em 0.83em;
   border-radius: 0.5em;
   transition: all 0.3s ease;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  box-shadow: 0 0 0.6em rgba(133, 133, 133, 0.103);
 }
 
-.position__card:hover {
-  transform: scale(1.01);
+.positioncard__result:hover {
+  transform: scale(0.98);
 }
 
-.position__card-header {
+.positioncard__result-content {
   display: flex;
-  justify-content: flex-start;
   align-items: flex-start;
-  gap: 0.8em;
 }
 
-.position__card-header,
-.position__card-content {
-  margin-bottom: 0.5em;
-}
-
-.position__card-content {
-  margin-left: 3.5em;
-}
-
-.position__card-header p,
-.position__card-content p {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 0.2em;
-}
-
-.position__card-header h5,
-.position__card-content h5 {
-  font-weight: 200;
-  font-size: 0.9rem;
-}
-
-.position__card-icon {
-  background-color: rgba(0, 0, 255, 0.464);
-  padding: 0.5em;
+.positioncard__result-icon {
   display: inline-block;
-  border-radius: 0.5em;
+  padding: 0.3em;
+  border-radius: 0.2em;
+  border: none;
+  font-size: 1rem;
+  background-color: var(--focus-outline);
+  color: var(--icon-color);
+}
+
+.positioncard__result-left {
+  padding-right: 0.89em;
+}
+
+.positioncard__result-right {
+}
+
+.positioncard__result-info {
   margin-bottom: 0.5em;
 }
 
-.position__card-icon svg {
-  color: white;
+.positioncard__result-info h5 {
+  font-size: 1.1rem;
+}
+
+.positioncard__result-info p {
+  font-weight: 100;
+  font-size: 0.9rem;
 }

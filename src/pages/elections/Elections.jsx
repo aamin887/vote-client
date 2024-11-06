@@ -7,17 +7,21 @@ import { BsInbox } from "react-icons/bs";
 import useNav from "../../hooks/useNav";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { Loader } from "../../components";
 import { toast } from "react-toastify";
 
 function Elections() {
   const [electionData, setElectionData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+
   const [loading, setLoading] = useState(true);
   const axiosPrivate = useAxiosPrivate();
   const { toogleGridView, handleGridView, handleListView } = useNav();
   const { auth } = useAuth();
+
+  const { searchQuery, currentPage } = useOutletContext();
 
   const organisationId = auth.id;
 
@@ -55,6 +59,7 @@ function Elections() {
         console.log(res.data);
         if (res.status === 200) {
           setElectionData(res.data.elections);
+          setFilteredData(res.data.elections);
         }
       } catch (error) {
         if (error.response.status === 400) {
@@ -66,6 +71,13 @@ function Elections() {
     };
     getAllElections();
   }, []);
+
+  useEffect(() => {
+    const filtered = electionData?.filter((election) =>
+      election?.electionName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredData(filtered);
+  }, [searchQuery]);
 
   return (
     <div className={`elections section__padding-md ${""}`}>
@@ -124,7 +136,7 @@ function Elections() {
             !toogleGridView ? "grid__view" : ""
           }`}
         >
-          {electionData?.map((election, idx) => {
+          {filteredData?.map((election, idx) => {
             return (
               <ElectionCard
                 data={election}

@@ -22,10 +22,6 @@ function CandidateCard({ data }) {
         </div>
         <div className="content">
           <h3>{data?.fullName}</h3>
-          <p>
-            {data?.manifesto.split(" ").slice(0, 5).join(" ").toString()}
-            {data?.manifesto.split(" ").length > 5 ? "...." : ""}
-          </p>
         </div>
       </div>
     </Link>

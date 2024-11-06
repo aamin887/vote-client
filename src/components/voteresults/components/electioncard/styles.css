@@ -2,6 +2,7 @@
   background-color: var(--secondary-color);
   padding: 0.5em;
   border-radius: 0.5em;
+  display: flex;
   transition: all 0.3s ease;
   height: 100%;
 }
@@ -11,10 +12,7 @@
 }
 
 .election__card-header {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 0.8em;
+  margin-right: 0.8em;
 }
 
 .election__card-header,
@@ -24,19 +22,20 @@
 
 .election__card-header p,
 .election__card-content p {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 200;
   margin-bottom: 0.2em;
 }
 
 .election__card-header h5,
 .election__card-content h5 {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
+  margin-bottom: 0.5em;
 }
 
 .election__card-header_icon {
-  background-color: rgba(0, 0, 255, 0.464);
+  background-color: var(--focus-outline);
   padding: 0.5em;
   display: inline-block;
   border-radius: 0.5em;
@@ -44,5 +43,5 @@
 }
 
 .election__card-header_icon svg {
-  color: white;
+  color: var(--icon-color);
 }

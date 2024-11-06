@@ -12,15 +12,16 @@ function ElectionCard({ data }) {
           <span className="election__card-header_icon">
             {<GiVote size={30} />}
           </span>
-
-          <div className="election__card-header_info">
-            <p>Election Name:</p>
-            <h5>{data?.electionName}</h5>
-          </div>
         </div>
         <div className="election__card-content">
-          <p>Close Date:</p>
-          <h5>{data?.endDate}</h5>
+          <div className="election__card-content_info">
+            <h5>Election Name</h5>
+            <p>{data?.electionName}</p>
+          </div>
+          <div className="election__card-content_info">
+            <h5>Close Date</h5>
+            <p>{data?.endDate}</p>
+          </div>
         </div>
       </article>
     </Link>

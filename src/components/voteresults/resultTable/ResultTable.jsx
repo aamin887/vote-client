@@ -1,4 +1,5 @@
 import "./resulttable.css";
+import logo from "../../../assets/img.avif";
 const ResultTable = ({ positionId }) => {
   const candidates = [
     { candidate: "John Doe", votes: 1, voteShare: 1000 },
@@ -18,8 +19,12 @@ const ResultTable = ({ positionId }) => {
         <tbody>
           {candidates.map((row, index) => (
             <tr key={index}>
-              <td>{row.candidate}</td>
-              <td>{row.votes}</td>
+              <td>
+                <img src={logo} alt="imag" />
+                {row.candidate}
+              </td>
+              <td>{row.votes + 1000}</td>
+              {/* <td>{row.votes}</td> */}
               <td>{row.voteShare}</td>
             </tr>
           ))}

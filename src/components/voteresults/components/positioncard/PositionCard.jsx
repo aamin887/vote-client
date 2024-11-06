@@ -1,4 +1,3 @@
-import React from "react";
 import { FaUsersRectangle } from "react-icons/fa6";
 
 import { Link } from "react-router-dom";
@@ -7,20 +6,23 @@ import "./style.css";
 function PositionCard({ data }) {
   return (
     <Link to={`/results/elections/${data?.positionName}/${data?._id}`}>
-      <article className="position__card">
-        <div className="position__card-content">
-          <div className="position__card-header">
-            <span className="position__card-icon">
+      <article className="positioncard__result">
+        <div className="positioncard__result-content">
+          <div className="positioncard__result-left">
+            <span className="positioncard__result-icon">
               {<FaUsersRectangle size={30} />}
             </span>
-            <div className="position__card-header_info">
-              <p>Position</p>
-              <h5>{data?.positionName}</h5>
-            </div>
           </div>
-          <div className="position__card-content">
-            <p>Description</p>
-            <h5>{data?.positionDescription}</h5>
+
+          <div className="positioncard__result-right">
+            <div className="positioncard__result-info">
+              <h5>Position</h5>
+              <p>{data?.positionName}</p>
+            </div>
+            <div className="positioncard__result-info">
+              <h5>Description</h5>
+              <p>{data?.positionDescription}</p>
+            </div>
           </div>
         </div>
       </article>

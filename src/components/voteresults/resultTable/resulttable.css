@@ -16,16 +16,35 @@
 .candidate-table th,
 .candidate-table td {
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--secondary-color);
 }
 
 .candidate-table th {
-  background-color: #f4f4f4;
+  background-color: var(--secondary-color);
   font-weight: bold;
 }
 
+.candidate-table tr {
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
 .candidate-table tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background-color: var(--text-color);
+  color: var(--secondary-color);
+}
+
+.candidate-table tr:hover {
+  transform: scale(1.01);
+}
+
+.candidate-table td img {
+  width: 36px;
+  height: 36px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+
+  vertical-align: middle;
 }
 
 /* Responsive font scaling */

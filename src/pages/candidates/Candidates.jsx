@@ -52,6 +52,8 @@ function Candidates() {
         {candidates?.map((candidate, idx) => (
           <CandidateCard data={candidate} key={idx} />
         ))}
+
+        {searchQuery}
       </div>
     </div>
   );
