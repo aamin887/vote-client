@@ -51,25 +51,6 @@
   --selection-text: #fff;
 }
 
-/* .dark:root {
-
-  --bg-color: #282c36;
-  --primary-color: #1fcc50;
-  --secondary-color: #152021;
-  --card-bg: #2e2e38;
-  --text-color: #e9ecef;
-  --border-color: #343a40;
-  --accent-color: #f2f2f2;
-
-  --hover-primary: #1c73b8;
-  --success-color: #28a745;
-  --warning-color: #ffc107;
-  --error-color: #dc3545;
-  --focus-outline: #4b9cdb;
-  --selection-bg: #3a3a56;
-  --selection-text: #e9ecef;
-} */
-
 ::selection {
   background: var(--selection-bg);
   color: var(--selection-text);
@@ -119,6 +100,8 @@ body {
   color: var(--text-color);
   font-size: 16px;
   font-weight: 500;
+  /* background: var(--bg-color); */
+  /* background-color: var(--bg-color); */
 }
 
 img {
@@ -198,7 +181,6 @@ input::-webkit-inner-spin-button {
 }
 
 a.active {
-  /* background-color: var(--); */
   color: var(--text-color);
   padding: 0.5em;
 }
@@ -207,14 +189,18 @@ a.active {
   opacity: 0.9;
 }
 
+.back-btn {
+  background-color: #28a745;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    background-color: #00523f;
+    background-color: var(--bg-color);
   }
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    background-color: #00523f;
+    background-color: var(--bg-color);
   }
 }

@@ -1,22 +1,17 @@
 import "./createelection.css";
-
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { useState, useRef } from "react";
-import useAuth from "../../hooks/useAuth";
-import { axiosPrivate } from "../../api/axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { DateTimePicker, Loader } from "../../components";
 
 const CreateElection = () => {
+  const axiosPrivate = useAxiosPrivate();
   // textarea reference
   const descRef = useRef();
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
   const location = useLocation();
-
-  const { auth } = useAuth();
-  const organisationId = auth.id;
 
   const from = location.state?.from?.pathname || "/dashboard";
 
@@ -49,19 +44,21 @@ const CreateElection = () => {
   // form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       setLoading(true);
       const res = await axiosPrivate.post("/api/v1/elections", {
-        electionName,
+        name: electionName,
         description,
         startDate,
         endDate,
-        organisation: organisationId,
       });
+
+      console.log(res);
 
       if (res.status === 201) {
         toast.success("Election successfully created");
-        return navigate("/elections");
+        return navigate("/dashboard");
       }
     } catch (error) {
       console.log(error);

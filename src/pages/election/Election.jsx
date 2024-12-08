@@ -1,25 +1,26 @@
 import "./election.css";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { axiosPrivate } from "../../api/axios";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import {
   PositionCard,
   ConfirmationDialog,
   DateTimePicker,
 } from "../../components";
 import { toast } from "react-toastify";
-import useAuth from "../../hooks/useAuth";
 import { Loader } from "../../components";
 import { BsInbox } from "react-icons/bs";
 import { FaTimes } from "react-icons/fa";
 import { format } from "date-fns";
 
 function Election() {
+  const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const descRef = useRef();
-  const params = useParams();
+  const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [electionDetails, setElectionDetails] = useState({});
+  const [electionPoster, setElectionPoster] = useState("");
   const [allPosition, setAllPosition] = useState([]);
   const [toogleEdit, setToogleEdit] = useState(false);
   const [tooglePosition, setTooglePosition] = useState(false);
@@ -27,16 +28,40 @@ function Election() {
     positionName: "",
     positionDescription: "",
   });
-
-  const [electionPoster, setElectionPoster] = useState("");
-
-  const { auth } = useAuth();
-  const organisationId = auth.id;
-
   // confirmation modal
   const [isOpened, setIsOpened] = useState(false);
   const [openPosition, setOpenPosition] = useState(false);
 
+  // get election
+  const getElection = async function (id) {
+    try {
+      // all election details
+      const res = await axiosPrivate.get(`/api/v1/elections/${id}`);
+      // get all position associated with election
+      if (res.status === 200) {
+        const res = await axiosPrivate.get(`/api/v1/positions?election=${id}`);
+        setAllPosition([...res.data]);
+      }
+      setElectionDetails({
+        ...res?.data,
+      });
+      setElectionPoster(res?.data?.posterUrl);
+      setLoading(false);
+    } catch (error) {
+      const statusCode = error.response.data.status;
+      if (statusCode === 401) {
+        return toast.error("not allowed!");
+      } else if (statusCode === 400) {
+        return toast.error("network error");
+      } else {
+        return toast.error("network error");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // delete election
   const deleteElection = async function (id) {
     try {
       setLoading(true);
@@ -44,9 +69,8 @@ function Election() {
       if (res.status === 204) {
         return navigate("/elections");
       }
-      return;
     } catch (error) {
-      const statusCode = error?.response?.data?.status;
+      const statusCode = error?.response?.status;
       if (statusCode === 404) {
         return toast.error("election not found");
       } else if (statusCode == 400) {
@@ -60,19 +84,18 @@ function Election() {
   };
 
   // update profile
-  const handleUpdateProfile = async function (id, formData) {
-    setLoading(true);
+  const updateElection = async function (id, formData) {
     try {
+      setLoading(true);
       const formattedData = new FormData();
-
-      formattedData.append("electionName", formData?.electionName);
+      formattedData.append("name", formData?.name);
       formattedData.append("description", formData?.description);
       formattedData.append("startDate", formData?.startDate);
       formattedData.append("endDate", formData?.endDate);
-      formattedData.append("image", formData?.newPhoto);
+      formattedData.append("image", formData?.image);
 
       const res = await axiosPrivate.put(
-        `/api/v1/elections/${id}?org=${organisationId}`,
+        `/api/v1/elections/${id}`,
         formattedData,
         {
           headers: {
@@ -80,7 +103,7 @@ function Election() {
           },
         }
       );
-      if (res.status === 204) {
+      if (res.status === 200) {
         return toast.success("updated!");
       }
     } catch (error) {
@@ -97,29 +120,30 @@ function Election() {
     }
   };
 
-  const handlePosition = () => {
-    setTooglePosition(!tooglePosition);
-  };
-
+  // change to form data
   const handleChange = (e) => {
     const { name, value, type } = e.target;
-
     if (type === "file") {
       setElectionDetails({ ...electionDetails, [name]: e.target.files[0] });
-
       setElectionPoster(URL.createObjectURL(e.target.files[0]));
     } else {
       setElectionDetails({ ...electionDetails, [name]: value });
     }
   };
 
+  // toogle new position form
+  const handlePositionToogle = function () {
+    return setTooglePosition(!tooglePosition);
+  };
+
+  // handle changes to position form
   const handlePositionChanges = (e) => {
     setNewPosition({ ...newPosition, [e.target.name]: e.target.value });
   };
 
+  // make valid form input el green
   const handleFocus = function () {
     const desValue = descRef.current;
-
     if (desValue.value.length > 0) {
       desValue.classList.add("valid");
     } else {
@@ -128,12 +152,12 @@ function Election() {
   };
 
   // Add logic for editing the profile
-  const handleEditProfile = () => {
+  const handleElectionUpdate = () => {
     if (toogleEdit === false) {
       return setToogleEdit(true);
     }
     if (toogleEdit === true) {
-      handleUpdateProfile(params.id, electionDetails);
+      updateElection(id, electionDetails);
       return setToogleEdit(false);
     }
   };
@@ -146,16 +170,17 @@ function Election() {
       const res = await axiosPrivate.post("/api/v1/positions", {
         position: positionName,
         description: positionDescription,
-        electionId: electionDetails._id,
+        election: id,
       });
 
       if (res.status === 201) {
         toast.success("new position added");
-        setAllPosition((prev) => [...prev, res.data.position]);
+        setAllPosition((prev) => [...prev, res.data]);
         setTooglePosition(!tooglePosition);
         setNewPosition("");
       }
     } catch (error) {
+      console.log(error);
       const statusCode = error.response.status;
       if (statusCode === 401) {
         return toast.error("not allowed!");
@@ -172,17 +197,19 @@ function Election() {
   };
 
   // delete position
-  const deletePosition = async function (id) {
+  const deletePosition = async function (positionId) {
     setLoading(true);
     try {
-      const res = await axiosPrivate.delete(`/api/v1/positions/${id}`);
+      const res = await axiosPrivate.delete(
+        `/api/v1/positions/${positionId}?election=${id}`
+      );
+
       if (res.status === 204) {
         setAllPosition((pos) => {
-          const d = pos.filter((p) => p._id !== id);
+          const d = pos.filter((p) => p._id !== positionId);
           return d;
         });
       }
-      return;
     } catch (error) {
       const statusCode = error?.response?.data?.status;
       if (statusCode === 404) {
@@ -196,45 +223,10 @@ function Election() {
   };
 
   useEffect(() => {
-    const getElection = async function () {
-      try {
-        // all election details
-        const res = await axiosPrivate.get(
-          `/api/v1/elections/${params.id}?org=${organisationId}`
-        );
-        // get all position associated with election
-        console.log(res.data);
-        if (res.status == 200) {
-          const resPosition = await axiosPrivate.get(
-            `/api/v1/positions/?election=${params.id}`
-          );
-          setAllPosition([...resPosition.data]);
-        }
-        setElectionDetails({
-          ...res?.data?.election,
-        });
-
-        setElectionPoster(res?.data?.election?.poster);
-
-        setLoading(false);
-      } catch (error) {
-        const statusCode = error.response.data.status;
-        if (statusCode === 401) {
-          return toast.error("not allowed!");
-        } else if (statusCode === 400) {
-          return toast.error("network error");
-        } else {
-          return toast.error("network error");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getElection();
+    getElection(id);
   }, []);
 
-  const { electionName, description, startDate, endDate } = electionDetails;
+  const { name, description, startDate, endDate, status } = electionDetails;
   const { positionName, positionDescription } = newPosition;
 
   const formattedStartDate = startDate
@@ -245,7 +237,7 @@ function Election() {
     : endDate;
 
   return (
-    <div className="election__page section__padding-md">
+    <div className="election__page">
       {loading && <Loader />}
 
       <ConfirmationDialog
@@ -284,7 +276,7 @@ function Election() {
                   type="file"
                   placeholder="Choose a photo"
                   required
-                  name="newPhoto"
+                  name="image"
                   accept="image/*"
                   onChange={handleChange}
                 />
@@ -295,20 +287,25 @@ function Election() {
           {/* Profile Details */}
           <div className="election__page-profile_right">
             {/* elections name */}
-            <div className="election__page-profile_right-details_fl">
+            <div className="election__page-profile_right-details">
               <div className="election__page-profile-details_control">
                 <span className="details">Name</span>
-                {!toogleEdit && <p>{electionName}</p>}
+                {!toogleEdit && <p>{name}</p>}
                 {toogleEdit && (
                   <input
                     type="text"
-                    name="electionName"
+                    name="name"
                     placeholder="E.g 2022 Leadership"
-                    value={electionName}
+                    value={name}
                     onChange={handleChange}
                     required
                   />
                 )}
+              </div>
+
+              <div className="election__page-profile-details_control">
+                <span className="details">Status</span>
+                <p>{status}</p>
               </div>
             </div>
             {/* elections description */}
@@ -379,7 +376,7 @@ function Election() {
             <div className="election__page-profile_right-btns">
               <button
                 className="election__page-profile_btn-edit btn"
-                onClick={handleEditProfile}
+                onClick={handleElectionUpdate}
                 disabled={tooglePosition}
               >
                 {toogleEdit ? "Save" : "Edit"}
@@ -406,8 +403,8 @@ function Election() {
               </button>
               {!tooglePosition && (
                 <button
-                  className={`btn election__page-content_btn add `}
-                  onClick={handlePosition}
+                  className={`btn election__page-content_btn add`}
+                  onClick={handlePositionToogle}
                 >
                   Create a new Position
                 </button>
@@ -460,7 +457,7 @@ function Election() {
                 <button className="btn add" type="submit">
                   Add position
                 </button>
-                <button className="btn cancel" onClick={handlePosition}>
+                <button className="btn cancel" onClick={handlePositionToogle}>
                   Cancel
                 </button>
               </div>
@@ -502,7 +499,7 @@ function Election() {
                   isOpened={openPosition}
                   id={position._id}
                   key={idx + position._id}
-                  onProceed={deletePosition}
+                  onProceed={() => deletePosition(position._id)}
                   onClose={() => setOpenPosition(false)}
                 >
                   <p>

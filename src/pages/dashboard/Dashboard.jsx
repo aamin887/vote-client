@@ -1,69 +1,45 @@
 import "./dashboard.css";
+
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import useNav from "../../hooks/useNav";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+
 import { IoGrid, IoList } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
-
 import { GiVote } from "react-icons/gi";
-import useAxiosPrivate from "../../hooks/useAxiosPrivate";
-import useAuth from "../../hooks/useAuth";
-import useNav from "../../hooks/useNav";
+import { BsInbox } from "react-icons/bs";
+import { Loader } from "../../components";
+
 import InforCard from "../../components/cards/inforCard/InforCard";
 import CustomAdd from "../../components/customAdd/CustomAdd";
 import ElectionCard from "../../components/cards/ElectionCard/ElectionCard";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-
-import { Loader } from "../../components";
-import { BsInbox } from "react-icons/bs";
 
 function Dashboard() {
+  const axiosPrivate = useAxiosPrivate();
   const { toogleGridView, handleGridView, handleListView } = useNav();
   const [electionData, setElectionData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const axiosPrivate = useAxiosPrivate();
 
-  const { auth } = useAuth();
-
-  const organisationId = auth.id;
-
-  const handleDelete = async function (e, id) {
-    e.stopPropagation();
+  // fetch all elections for the user
+  const getAllElections = async function () {
     try {
-      const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
-      if (res.status === 204) {
-        setElectionData(electionData.filter((data) => data._id !== id));
-        await axiosPrivate.delete(`/api/v1/positions/elections/${id}`);
+      const res = await axiosPrivate.get("/api/v1/elections");
+      if (res.status === 200) {
+        setElectionData(res?.data?.results);
       }
-      setLoading(true);
-      toast.success("deleted");
-      console.log(res);
-      return;
     } catch (error) {
-      console.log(error);
+      const errStatus = error?.response?.status;
+      if (errStatus === 400) {
+        return toast.error("message");
+      }
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    const getAllElections = async function () {
-      try {
-        const res = await axiosPrivate.get(
-          `/api/v1/elections/?org=${organisationId}`
-        );
-        console.log(res.data);
-        if (res.status === 200) {
-          setElectionData(res.data.elections);
-        }
-      } catch (error) {
-        if (error.response.status === 400) {
-          return toast.error("Network error");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
-
     getAllElections();
 
     const handleResize = function () {
@@ -71,10 +47,8 @@ function Dashboard() {
         handleGridView();
       }
     };
-
     // Add event listener for window resize
     window.addEventListener("resize", handleResize);
-
     // Cleanup event listener on component unmount
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -82,7 +56,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className="dashboard section__padding-md">
+    <div className="dashboard ">
       <div className="dashboard__content">
         <div className="dashboard__content-left">
           <div className="dashboard__stats">
@@ -90,19 +64,19 @@ function Dashboard() {
             <InforCard
               icon={<GiVote size={26} />}
               title="Elections"
-              stats={electionData.length}
+              stats={electionData?.length}
             />
             {/* all voters */}
             <InforCard
               icon={<GiVote size={26} />}
               title="Candidates"
-              stats={electionData.length}
+              stats={electionData?.length}
             />
             {/* all candidates */}
             <InforCard
               icon={<GiVote size={26} />}
               title="Voters"
-              stats={electionData.length}
+              stats={electionData?.length}
             />
           </div>
 
@@ -138,14 +112,15 @@ function Dashboard() {
                 </div>
               </div>
             )}
-            {electionData.length > 0 && loading === false && (
+
+            {electionData?.length > 0 && loading === false && (
               <div className="dashboard__content-election_cards">
                 {electionData?.map((election, idx) => {
                   return (
                     <ElectionCard
                       setLoading={setLoading}
                       data={election}
-                      handleDelete={handleDelete}
+                      handleDelete={""}
                       key={idx}
                     />
                   );
@@ -153,7 +128,7 @@ function Dashboard() {
               </div>
             )}
 
-            {electionData.length === 0 && (
+            {electionData?.length === 0 && (
               <div className="dashboard__content-election_empty">
                 <p>{<BsInbox />}</p>
                 <p>

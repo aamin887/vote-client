@@ -1,5 +1,5 @@
 // src/components/FAQ.js
-import React, { useState } from "react";
+import { useState } from "react";
 import "./faq.css";
 
 const FAQ = () => {
@@ -25,12 +25,12 @@ const FAQ = () => {
     },
     {
       question: "Is there a mobile app?",
-      answer: "Yes, our app is available for both iOS and Android devices.",
+      answer:
+        "Unfornately no, our development team will be working on it soon.",
     },
     {
       question: "How can I contact support?",
-      answer:
-        "You can reach our support team via email at support@example.com.",
+      answer: "You can reach our support team via email at support@votes.com.",
     },
   ];
 

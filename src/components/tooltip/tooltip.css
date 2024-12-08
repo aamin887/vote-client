@@ -1,0 +1,42 @@
+/* Container for tooltip */
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Tooltip message */
+.tooltip-message {
+  /* animation: fadeIn 0.2s ease-in-out; */
+  position: absolute;
+  top: 100%;
+  left: 20%;
+  transform: translateX(-50%);
+  margin-bottom: 5px;
+
+  background-color: var(--accent-color);
+  color: white;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease-in-out, visibility 0.2s ease-in-out; /* Smooth appearance */
+}
+
+/* Show the tooltip on hover */
+.tooltip-container:hover .tooltip-message {
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

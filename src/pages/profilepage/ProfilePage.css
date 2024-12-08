@@ -1,0 +1,108 @@
+:root {
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --background-color: #f8f9fa;
+  --text-color: #343a40;
+  --progress-color: #28a745;
+}
+
+.profile-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-section h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-section p {
+  color: var(--secondary);
+  font-size: 1rem;
+}
+
+.statistics-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.stat-card {
+  flex: 1;
+  text-align: center;
+  margin: 0 0.5rem;
+  background-color: var(--background);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.stat-card h4 {
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.stat-subtext {
+  color: var(--secondary);
+  font-size: 0.85rem;
+}
+
+.progress-circle {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border: 5px solid var(--background-color);
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--progress-color) calc(var(--progress) * 1%),
+    var(--background-color) 0
+  );
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
+}
+
+.activity-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.summary-card {
+  text-align: center;
+  background-color: var(--background-color);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.summary-card h4 {
+  margin-bottom: 0.5rem;
+  color: var(--secondary);
+}
+
+.summary-value {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.summary-subtext {
+  color: var(--secondary);
+  font-size: 0.85rem;
+}

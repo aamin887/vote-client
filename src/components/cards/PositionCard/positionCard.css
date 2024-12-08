@@ -9,7 +9,6 @@
   cursor: pointer;
   position: relative;
   flex-direction: column;
-  max-width: 300px;
 }
 
 .positioncard__header,
@@ -22,7 +21,7 @@
 }
 
 .positioncard__header p {
-  font-weight: 200;
+  font-weight: lighter;
 }
 
 .positioncard__footer {
@@ -31,14 +30,14 @@
 }
 
 .positioncard__footer-profile {
-  margin-top: 0.8em;
+  margin-top: 0.1em;
   right: 0;
 }
 
 .positioncard__header h3,
 .positioncard__content h4,
 .positioncard__footer-profile {
-  margin-bottom: 0.5em;
+  margin-bottom: 0em;
   font-size: 0.9rem;
 }
 

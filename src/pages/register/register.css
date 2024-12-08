@@ -4,6 +4,8 @@
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
+  min-height: 100dvh;
+  background-color: #00523f;
 }
 
 .register__site h1,

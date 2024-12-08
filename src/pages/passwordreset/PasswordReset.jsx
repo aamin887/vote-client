@@ -1,6 +1,7 @@
 import "./passwordReset.css";
 import one from "../../assets/Group13.png";
 import axios from "../../api/axios";
+import { requestPasswordChange } from "../../api/actions";
 
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
@@ -12,23 +13,16 @@ import { SlEnvolope } from "react-icons/sl";
 
 function PasswordReset() {
   const refEmail = useRef();
-
   const [showMessage, setShowMessage] = useState(false);
-
   const [validEmail, setValidEmail] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
   });
-
   const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
   const { email } = formData;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("hello");
-
     if (!email) {
       return toast.error("Fill all fields ", {
         toastId: "emptyFields",
@@ -36,32 +30,29 @@ function PasswordReset() {
     }
 
     try {
-      const response = await axios.post("/auth/password-reset", {
-        email,
-      });
+      // const response = await axios.post("/auth/users/request-new-password", {
+      //   email,
+      // });
 
-      console.log(response);
-
-      if (response.status === 204) {
+      const response = await requestPasswordChange(email);
+      if (response.status === 200) {
         setShowMessage(true);
       }
-
       setFormData({
         email: "",
       });
     } catch (error) {
+      console.log(error);
+
+      const errStatus = error?.response.status;
       if (!error?.response) {
         return toast.error("Network error ", {
           toastId: "networkError",
         });
-      } else if (error?.response.status === 404) {
-        return toast.error("Account not found. make sure email is correct!", {
+      } else if (errStatus) {
+        return toast.error("User not found", {
           toastId: "notFound",
         });
-      } else if (error?.response.status === 401) {
-        console.log(error?.response.data.msg);
-      } else {
-        console.log("login failed");
       }
     }
   };

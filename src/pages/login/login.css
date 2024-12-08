@@ -1,9 +1,11 @@
 .login__site {
+  min-height: 100vh;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: space-between;
   color: #fff;
+  background-color: #00523f;
 }
 
 .login__site h1,

@@ -9,7 +9,7 @@ function CandidateCard({ data }) {
         <div className="card-inner">
           <div className="box">
             <div className="imgBox">
-              <img src={data?.profilePhoto || photo} alt="Shower Gel" />
+              <img src={data?.photoUrl || photo} alt="Shower Gel" />
             </div>
             {/* <div className="icon">
               <Link to={`/candidates/${data?._id}`} className="iconBox">

@@ -18,6 +18,8 @@ import {
   Position,
   HelpPage,
   Addition,
+  Verify,
+  ProfilePage,
 } from "./pages";
 
 import { PrivateRoute } from "./components";
@@ -45,6 +47,7 @@ function App() {
             <Route element={<PasswordReset />} path="/password-reset" />
             <Route element={<ChangePassword />} path="/password-change" />
             <Route element={<PasswordRequest />} path="/password-success" />
+            <Route element={<Verify />} path="/verification" />
 
             {/* protected routes */}
             <Route element={<PersistLogin />}>
@@ -52,6 +55,7 @@ function App() {
                 <Route element={<Vote />} path="/votes" />
                 <Route element={<Layout />}>
                   <Route element={<Dashboard />} path="/dashboard" />
+                  <Route element={<ProfilePage />} path="/profile" />
                   {/* elections */}
                   <Route path="elections">
                     {/* index */}
@@ -66,7 +70,7 @@ function App() {
                     {/* adding a candidate */}
                     <Route
                       element={<Addition />}
-                      path="/elections/:electionId/positions/candidates/add"
+                      path="/elections/:id/positions/candidates/add"
                     />
                     {/* view a position */}
                     <Route

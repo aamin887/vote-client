@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import { FaCircleInfo } from "react-icons/fa6";
 
-function OptionsDropdown({ data, handleDelete }) {
+function OptionsDropdown({ data, setShow }) {
   return (
     <div className={`electioncard__options`}>
       <ul>
@@ -26,8 +26,10 @@ function OptionsDropdown({ data, handleDelete }) {
           </li>
         </Link>
         <button
-          onClick={(event) => {
-            handleDelete(data._id);
+          onClick={(e) => {
+            e.preventDefault();
+            setShow(true);
+            return;
           }}
         >
           <li>

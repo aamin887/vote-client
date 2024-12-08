@@ -1,15 +1,20 @@
+import "./adminheader.css";
+import useAuth from "../../hooks/useAuth";
 import { CiSearch } from "react-icons/ci";
 import { FaRegBell, FaMoon } from "react-icons/fa";
 import { TfiShine } from "react-icons/tfi";
 import { IoMdAddCircle } from "react-icons/io";
 import LOGO from "../../assets/logo.png";
-import "./adminheader.css";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import { Tooltip } from "../";
 
 function AdminHeader({ setSearchQuery }) {
   const root = document.documentElement;
   const [darkMode, setDarkMode] = useState(false);
+  const auth = useAuth();
+
+  console.log(auth);
 
   const toogleDark = function () {
     setDarkMode((prev) => !prev);
@@ -50,22 +55,22 @@ function AdminHeader({ setSearchQuery }) {
               autoComplete="off"
               onChange={(e) => setSearchQuery(e.target.value)}
             />
-            <ion-icon name="search-outline">
+            <span name="search-outline">
               <CiSearch style={{ color: "#a9a9a9" }} />
-            </ion-icon>
+            </span>
           </label>
         </div>
         <Link to={"/elections/create"}>
-          <div className="navigation__topnav-right_icons">
-            <IoMdAddCircle
-              size={23}
-              style={{ color: "#fffff" }}
-              className="navigation__topnav-right_icons-add"
-              title="create an election"
-            />
-          </div>
+          <Tooltip message={"Create election"}>
+            <div className="navigation__topnav-right_icons">
+              <IoMdAddCircle
+                size={23}
+                style={{ color: "#fffff" }}
+                className="navigation__topnav-right_icons-add"
+              />
+            </div>
+          </Tooltip>
         </Link>
-
         <div className="navigation__topnav-right_icons" onClick={toogleDark}>
           {darkMode ? (
             <FaMoon size={23} style={{ color: "#fffff" }} />
@@ -73,14 +78,17 @@ function AdminHeader({ setSearchQuery }) {
             <TfiShine size={23} style={{ color: "#fffff" }} />
           )}
         </div>
-
         <div className="navigation__topnav-right_icons">
           <FaRegBell size={23} style={{ color: "#fffff" }} />
         </div>
-
-        <div className="navigation__topnav-right_user">
-          <img src={LOGO} alt="user profile" />
-        </div>
+        {/* <h4>{userName}</h4> */}
+        <Tooltip message={"User profile"}>
+          <NavLink to="/profile">
+            <div className="navigation__topnav-right_user">
+              <img src={LOGO} alt="user profile" />
+            </div>
+          </NavLink>
+        </Tooltip>
       </div>
     </div>
   );

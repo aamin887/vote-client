@@ -1,13 +1,13 @@
 .position__page-profile {
   width: 100%;
-  padding: 20px;
+  padding: 3em 1em;
   margin: auto;
 }
 
 .position__page-profile .back-btn {
   position: absolute;
   right: 6em;
-  top: 5em;
+  top: 8em;
 }
 
 .position__page-profile_left {

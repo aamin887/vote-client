@@ -2,17 +2,21 @@ import "./addition.css";
 
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { axiosPrivate } from "../../api/axios";
+
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
 import { Loader } from "../../components";
 
 function Addition() {
+  const { id } = useParams();
   const { auth } = useAuth();
   const organisationId = auth.id;
 
+  const axiosPrivate = useAxiosPrivate();
+
   const [electionDetails, setElectionDetails] = useState({});
-  const [positions, setPositions] = useState([]);
+  const [positionsList, setPositionsList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
@@ -21,8 +25,6 @@ function Addition() {
     imgfile: "",
     organisation: "",
   });
-
-  const { electionId } = useParams();
 
   const descRef = useRef();
   const navigate = useNavigate();
@@ -46,7 +48,7 @@ function Addition() {
       formattedData.append("position", formData.position);
       formattedData.append("manifesto", formData.manifesto);
       formattedData.append("organisation", formData.organisation);
-      formattedData.append("electionId", electionId);
+      formattedData.append("election", id);
       formattedData.append("image", formData.imgfile);
 
       const res = await axiosPrivate.post("/api/v1/candidates", formattedData, {
@@ -56,7 +58,7 @@ function Addition() {
       });
       if (res.status === 201) {
         toast.success("candidates added successfully");
-        return navigate(`/elections/${electionId}`);
+        return navigate(`/elections/${id}`);
       }
     } catch (error) {
       console.log(error);
@@ -85,36 +87,32 @@ function Addition() {
   };
 
   // list of position options for form
-  const positionSelectionOptions = positions.map((data, idx) => (
+  const positionSelectionOptions = positionsList.map((data, idx) => (
     <option value={data._id} key={idx + "-options"}>
-      {data.positionName}
+      {data.position}
     </option>
   ));
 
-  const {
-    electionName,
-    organisation,
-    startDate,
-    endDate,
-    isActive,
-    description,
-  } = electionDetails;
+  const { name, startDate, endDate, status, description, positions } =
+    electionDetails;
   const { fullName, manifesto, position } = formData;
 
   useEffect(() => {
     const getPositionList = async () => {
       const electionResponse = await axiosPrivate.get(
-        `/api/v1/elections/${electionId}?org=${organisationId}`
+        `/api/v1/elections/${id}`
       );
+      console.log(electionResponse);
+
       if (electionResponse.status === 200) {
-        const res = await axiosPrivate.get(
-          `/api/v1/positions/?election=${electionId}`
-        );
+        const res = await axiosPrivate.get(`/api/v1/positions/?election=${id}`);
+
+        console.log(res.data, "election pos");
         if (res.status === 200) {
-          setPositions(res.data);
+          setPositionsList([...res.data]);
         }
       }
-      setElectionDetails(electionResponse?.data?.election);
+      setElectionDetails(electionResponse?.data);
     };
     getPositionList();
     formData.organisation = organisationId;
@@ -127,7 +125,7 @@ function Addition() {
         <div className="addcandidate__content">
           <div className="addcandidate__modal-title">
             <h2 className="section__heading">
-              You are about add a candidate to {electionName}
+              You are about add a candidate to {name}
             </h2>
             <p className="section__text lead__text">
               Fill in all required field to create election
@@ -146,11 +144,11 @@ function Addition() {
               <div className="addcandidate__form-details">
                 <div className="addcandidate__form-details_control">
                   <span className="details">Name of election</span>
-                  <p>{electionName}</p>
+                  <p>{name}</p>
                 </div>
                 <div className="addcandidate__form-details_control">
-                  <span className="details">Organisation</span>
-                  <p>{organisation}</p>
+                  <span className="details">Status</span>
+                  <p>{status}</p>
                 </div>
               </div>
               <div className="addcandidate__form-details">
@@ -165,13 +163,8 @@ function Addition() {
               </div>
               <div className="addcandidate__form-details">
                 <div className="addcandidate__form-details_control">
-                  <span className="details">Organiser</span>
-                  <p>{organisation}</p>
-                </div>
-                <div className="addcandidate__form-details_control">
-                  <span className="details">Active</span>
-
-                  <p>{isActive?.toString(true)}</p>
+                  <span className="details">Number of positions available</span>
+                  <p>{positions?.length}</p>
                 </div>
               </div>
               <div className="createelection__form-details-fl">
@@ -192,7 +185,7 @@ function Addition() {
                 <div>
                   <div className="addcandidate__form-categories-control">
                     <div className="addcandidate__form-categories-control_details">
-                      <span className="details">Name</span>
+                      <span className="details">Fullname</span>
 
                       <input
                         type="text"

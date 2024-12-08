@@ -2,16 +2,14 @@
   width: 100%;
   height: 100%;
   display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
   overflow-y: scroll;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 5em;
   position: relative;
+  background-color: transparent;
 }
 
 .addcandidate__top {
-  background-color: var(--secondary-color);
-  padding: 0.9em;
   border-radius: 0.5em;
   margin-bottom: 0.8em;
 }
@@ -20,15 +18,15 @@
   max-width: 980px;
   position: relative;
   width: 100%;
-  margin-top: 40px;
-  background: var(--secondary-color);
+  background-color: var(--bg-color);
   padding: 25px 30px;
   border-radius: 5px;
 }
 
 .addcandidate__content h2 {
-  position: relative;
   padding-top: 2em;
+  position: relative;
+  color: var(--text-color);
 }
 
 .addcandidate__content h2::before {
@@ -100,7 +98,7 @@ form .button {
   height: 100%;
   margin-top: 30px;
   color: var(--icon-color);
-  background-color: var(--secondary-color);
+  /* background-color: var(--secondary-color); */
   padding: 0.5em;
   border-radius: 0.3em;
   transform: background 0.3s ease;

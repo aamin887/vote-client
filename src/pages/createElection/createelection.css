@@ -3,9 +3,6 @@
   height: 100%;
   display: flex;
   overflow-y: scroll;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 5em;
   position: relative;
 }
 

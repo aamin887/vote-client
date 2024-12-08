@@ -56,7 +56,7 @@ function ChangePassword() {
     }
     try {
       const response = await axios.post(
-        `/auth/password-new-link?token=${token}&id=${id}`,
+        `/auth/users/change-password?token=${token}&id=${id}`,
         {
           newPassword,
           confirmNewPassword,
@@ -67,7 +67,7 @@ function ChangePassword() {
 
       if (response.status === 204) {
         toast.success("Password change successful ", {
-          toastId: "loginSuccessful",
+          toastId: "success",
         });
         setFormData({
           newPassword: "",
@@ -77,19 +77,24 @@ function ChangePassword() {
         navigate("/password-success", { replace: true });
       }
     } catch (error) {
-      if (!error?.response) {
-        return toast.error("Network error ", {
+      const errStatus = error?.response.status;
+      if (errStatus === 404) {
+        return toast.error("Invalid link ", {
           toastId: "networkError",
         });
-      } else if (error?.response.status === 400) {
+      } else if (errStatus === 400) {
         return toast.error("Check form fields", {
           toastId: "emptyField",
         });
-      } else if (error?.response.status === 403) {
-        toast.error("Password reset link expired", {
+      } else if (errStatus === 403) {
+        toast.error("Link expired or used. Request new link", {
           toastId: "tokenExpired",
         });
         return navigate("/password-reset", { replace: true });
+      } else if (errStatus === 409) {
+        return toast.error("passwords must match", {
+          toastId: "err",
+        });
       } else {
         return toast.error("Network error ", {
           toastId: "networkError",

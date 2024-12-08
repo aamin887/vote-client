@@ -17,10 +17,6 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.customadd__btn:hover p {
-  color: var(--secondary-color);
-}
-
 .customadd__btn-content {
   display: flex;
 }

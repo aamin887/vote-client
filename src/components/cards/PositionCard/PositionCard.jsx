@@ -1,6 +1,5 @@
 import "./positionCard.css";
 import { useNavigate } from "react-router-dom";
-
 import { RiDeleteBin2Fill } from "react-icons/ri";
 import { FaFolderOpen } from "react-icons/fa6";
 
@@ -10,15 +9,10 @@ function PositionCard({ data, isOpened }) {
   return (
     <div className="positioncard">
       <div className="positioncard__header">
-        <h3>{data?.positionName}</h3>
-
+        <h3>{data?.position}</h3>
         <p>
-          {data?.positionDescription
-            .split(" ")
-            .slice(0, 5)
-            .join(" ")
-            .toString()}
-          {data?.positionDescription.split(" ").length > 5 ? "...." : ""}
+          {data?.description.split(" ").slice(0, 5).join(" ").toString()}
+          {data?.description.split(" ").length > 5 ? "...." : ""}
         </p>
       </div>
       {/*  */}

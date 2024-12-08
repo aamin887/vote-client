@@ -12,7 +12,7 @@ function Admin() {
         consequuntur aut ipsam temporibus dignissimos ducimus. Earum veniam
         expedita deserunt molestias totam? Corporis quibusdam officia numquam ab
         eius eligendi tenetur deserunt nam alias fugiat hic laboriosam adipisci
-        cumque molestiae repellendus, obcaecati ex    error cum incidunt magnam!
+        cumque molestiae repellendus, obcaecati ex error cum incidunt magnam!
         Asperiores, in? Cum dolores maiores esse reprehenderit exercitationem at
         voluptatem facere libero. Exercitationem sunt rem, laborum sed ex,
         distinctio omnis fugit quos magnam atque ipsum cum. Eveniet, pariatur!

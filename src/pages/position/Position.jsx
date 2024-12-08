@@ -1,9 +1,10 @@
 import "./position.css";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { axiosPrivate } from "../../api/axios";
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { toast } from "react-toastify";
-import { CandidateCard, Loader } from "../../components";
+import { CandidateCard, Loader, ConfirmationDialog } from "../../components";
+import { FaTimes } from "react-icons/fa";
 
 function Position() {
   const navigate = useNavigate();
@@ -11,20 +12,23 @@ function Position() {
   const params = useParams();
   const [positionDetails, setPositionDetails] = useState({});
   const [loading, setLoading] = useState(true);
-
-  console.log(params.id);
+  const axiosPrivate = useAxiosPrivate();
 
   const [candidates, setCandidates] = useState([]);
   const [toogleEdit, setToogleEdit] = useState(false);
+  const [isOpened, setIsOpened] = useState(false);
 
-  const handleDeleteProfile = async function (id) {
+  const handleDeletePosition = async function (id) {
     try {
-      const res = await axiosPrivate.delete(`/api/v1/positions/${id}`);
-      if (res.status === 204) {
-        await axiosPrivate.delete(`/api/v1/candidates/positions/${id}`);
-        return navigate(`/elections`);
-      }
-      return;
+      const res = await axiosPrivate.delete(
+        `/api/v1/positions/${id}?election=${election}`
+      );
+
+      console.log(res, "delete pos");
+      // if (res.status === 204) {
+      //   await axiosPrivate.delete(`/api/v1/candidates/positions/${id}`);
+      // }
+      return navigate(-1);
     } catch (error) {
       const statusCode = error.response.data.status;
 
@@ -38,9 +42,12 @@ function Position() {
     }
   };
 
-  const handleUpdateProfile = async function (id, formData) {
+  const handleUpdatePosition = async function (id, formData) {
     try {
-      const res = await axiosPrivate.put(`/api/v1/positions/${id}`, formData);
+      const res = await axiosPrivate.put(
+        `/api/v1/positions/${id}?election=${election}`,
+        formData
+      );
       if (res.status === 204) {
         return toast.success("updated!");
       }
@@ -71,53 +78,50 @@ function Position() {
     }
   };
 
-  const handleEditProfile = () => {
+  const handleEditPosition = () => {
     if (toogleEdit === false) {
       return setToogleEdit(true);
     }
     if (toogleEdit === true) {
-      handleUpdateProfile(params.id, positionDetails);
+      handleUpdatePosition(params.id, positionDetails);
       return setToogleEdit(false);
     }
   };
 
-  useEffect(() => {
-    const getPosition = async function () {
-      try {
-        // all election details
-        const res = await axiosPrivate.get(`/api/v1/positions/${params.id}`);
-        console.log(res.data);
-        // get all position associated with election
-        if (res.status == 200) {
-          const resCandidates = await axiosPrivate.get(
-            `/api/v1/candidates/${params.id}`
-          );
-
-          setCandidates([...resCandidates.data]);
-        }
-        setPositionDetails(res?.data);
-      } catch (error) {
-        const statusCode = error?.response?.data?.status;
-        if (statusCode === 401) {
-          return toast.error("not allowed!");
-        } else if (statusCode === 400) {
-          return toast.error("network error");
-        } else {
-          return toast.error("network error");
-        }
-      } finally {
-        setLoading(false);
+  const getPosition = async function () {
+    try {
+      // all election details
+      const res = await axiosPrivate.get(`/api/v1/positions/${params.id}`);
+      // get all position associated with election
+      if (res.status == 200) {
+        const resCandidates = await axiosPrivate.get(
+          `/api/v1/candidates/${res?.data?.election}/${params?.id}`
+        );
+        setCandidates([...resCandidates.data]);
       }
-    };
+      setPositionDetails(res?.data);
+    } catch (error) {
+      const statusCode = error?.response?.data?.status;
+      if (statusCode === 401) {
+        return toast.error("not allowed!");
+      } else if (statusCode === 400) {
+        return toast.error("network error");
+      } else {
+        return toast.error("network error");
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     getPosition();
   }, []);
 
-  const { positionName, positionDescription, votes, electionId } =
-    positionDetails;
+  const { position, description, voters, election } = positionDetails;
 
   return (
-    <div className="position__page section__padding-md">
+    <div className="position__page">
       <div className="position__page-profile">
         <button className="back-btn" onClick={() => navigate(-1)}>
           Go back
@@ -130,12 +134,12 @@ function Position() {
             <div className="position__page-profile_right-details_fl">
               <div className="position__page-profile-details_control">
                 <span className="details">Title</span>
-                <p>{positionDetails?.positionName}</p>
+                <p>{!toogleEdit && positionDetails?.position}</p>
                 {toogleEdit && (
                   <input
                     type="text"
-                    name="positionName"
-                    value={positionName}
+                    name="position"
+                    value={position}
                     onChange={handleChange}
                     required
                   />
@@ -146,12 +150,12 @@ function Position() {
             <div className="position__page-profile_right-details_fl">
               <div className="position__page-profile-details_control">
                 <span className="details">Role of this position?</span>
-                {!toogleEdit && <p>{positionDescription}</p>}
+                {!toogleEdit && <p>{description}</p>}
                 {toogleEdit && (
                   <textarea
-                    name="positionDescription"
+                    name="description"
                     placeholder="E.g 2022 Leadership"
-                    value={positionDescription}
+                    value={description}
                     onChange={handleChange}
                     required
                     ref={descRef}
@@ -169,28 +173,42 @@ function Position() {
               {/* elections end date*/}
               <div className="position__page-profile-details_control">
                 <span className="details">Votes</span>
-                <p>{votes?.length}</p>
+                <p>{voters?.length}</p>
               </div>
             </div>
+
+            <ConfirmationDialog
+              title={`Are you sure?`}
+              icon={<FaTimes />}
+              isOpened={isOpened}
+              id={params.id}
+              onProceed={() => handleDeletePosition(params.id)}
+              onClose={() => setIsOpened(false)}
+            >
+              <p>
+                Do you really want to delete these records? This process cannot
+                be undone.
+              </p>
+            </ConfirmationDialog>
 
             {/* Edit and Delete Buttons */}
             <div className="position__page-profile_right-btns">
               <button
                 className="position__page-profile_btn-edit btn"
-                onClick={handleEditProfile}
+                onClick={handleEditPosition}
               >
                 {toogleEdit ? "Save" : "Edit"}
               </button>
               <button
                 className=" btn election__page-profile_btn cancel"
-                onClick={() => handleDeleteProfile(positionDetails._id)}
+                onClick={() => setIsOpened(true)}
               >
                 Delete
               </button>
               <button
                 className=" btn election__page-profile_btn cancel"
                 onClick={() =>
-                  navigate(`/elections/${electionId}/positions/candidates/add`)
+                  navigate(`/elections/${election}/positions/candidates/add`)
                 }
               >
                 Add candidates
@@ -203,8 +221,8 @@ function Position() {
         <div className="position__page-content">
           <div className="position__page-content_header">
             <div className="election__page-content_header-title">
-              <h5>Positions</h5>
-              <p>These are all the position for this elections</p>
+              <h5>Candidates </h5>
+              <p>These are all the candidates for this position</p>
             </div>
           </div>
 

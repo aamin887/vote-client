@@ -1,8 +1,7 @@
 .dashboard {
   position: relative;
   min-height: 100dvh;
-
-  background-color: transparent;
+  padding: 0.3em 1em;
 }
 
 .dashboard__content {
@@ -20,6 +19,13 @@
   align-items: center;
 }
 
+.dashboard__content-election.grid__view .dashboard__content-election_cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: minmax(200px, auto);
+  gap: 0.6em;
+}
+
 .dashboard__content-election_header {
   display: flex;
   color: var(--text-color);
@@ -30,13 +36,6 @@
   border-radius: 0.4em;
   margin-bottom: 0.6em;
   box-shadow: 0 1px 1px grey;
-}
-
-.dashboard__content-election.grid__view .dashboard__content-election_cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-auto-rows: minmax(200px, auto);
-  gap: 0.6em;
 }
 
 .dashboard__content-election_header-title h5 {
