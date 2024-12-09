@@ -24,10 +24,9 @@ function Position() {
         `/api/v1/positions/${id}?election=${election}`
       );
 
-      console.log(res, "delete pos");
-      // if (res.status === 204) {
-      //   await axiosPrivate.delete(`/api/v1/candidates/positions/${id}`);
-      // }
+      if (res.status === 204) {
+        toast.success("position deleted");
+      }
       return navigate(-1);
     } catch (error) {
       const statusCode = error.response.data.status;

@@ -11,17 +11,10 @@ function CandidateCard({ data }) {
             <div className="imgBox">
               <img src={data?.photoUrl || photo} alt="Shower Gel" />
             </div>
-            {/* <div className="icon">
-              <Link to={`/candidates/${data?._id}`} className="iconBox">
-                {" "}
-                {<FaInfo />}
-                <p>See more</p>
-              </Link>
-            </div> */}
+            <div className="candidate_info">
+              <h5>{data?.fullName}</h5>
+            </div>
           </div>
-        </div>
-        <div className="content">
-          <h3>{data?.fullName}</h3>
         </div>
       </div>
     </Link>

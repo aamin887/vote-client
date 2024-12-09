@@ -1,10 +1,11 @@
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteSweep } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { FaCircleInfo } from "react-icons/fa6";
 
 function OptionsDropdown({ data, setShow }) {
+  const navigate = useNavigate();
   return (
     <div className={`electioncard__options`}>
       <ul>
@@ -17,14 +18,15 @@ function OptionsDropdown({ data, setShow }) {
           </li>
         </Link>
 
-        <Link to={"/elections/:id"}>
-          <li>
-            <span>
-              <FaEdit />
-            </span>
-            <p>Edit </p>
-          </li>
-        </Link>
+        <li
+          onClick={() => navigate(`/elections/${data?._id}`, { state: true })}
+        >
+          <span>
+            <FaEdit />
+          </span>
+          <p>Edit </p>
+        </li>
+
         <button
           onClick={(e) => {
             e.preventDefault();

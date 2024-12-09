@@ -15,9 +15,7 @@ function Candidates() {
   const organisationId = auth.id;
   const getAllCandidates = async function () {
     try {
-      const candidatesResponse = await axiosPrivate.get(
-        `/api/v1/candidates/organisation/${organisationId}`
-      );
+      const candidatesResponse = await axiosPrivate.get(`/api/v1/voters`);
 
       console.log(candidatesResponse.data);
       if (candidatesResponse.status === 200) {

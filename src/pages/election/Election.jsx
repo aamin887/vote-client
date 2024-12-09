@@ -1,6 +1,6 @@
 import "./election.css";
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import {
   PositionCard,
@@ -16,6 +16,7 @@ import { format } from "date-fns";
 function Election() {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
+  const location = useLocation();
   const descRef = useRef();
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
@@ -31,6 +32,8 @@ function Election() {
   // confirmation modal
   const [isOpened, setIsOpened] = useState(false);
   const [openPosition, setOpenPosition] = useState(false);
+
+  console.log(location?.state === true, "location");
 
   // get election
   const getElection = async function (id) {
@@ -209,6 +212,7 @@ function Election() {
           const d = pos.filter((p) => p._id !== positionId);
           return d;
         });
+        toast.success("position deleted");
       }
     } catch (error) {
       const statusCode = error?.response?.data?.status;
@@ -224,6 +228,8 @@ function Election() {
 
   useEffect(() => {
     getElection(id);
+
+    location?.state === true ? setToogleEdit(true) : false;
   }, []);
 
   const { name, description, startDate, endDate, status } = electionDetails;
