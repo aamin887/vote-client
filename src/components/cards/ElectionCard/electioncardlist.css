@@ -1,0 +1,80 @@
+.electioncardlist {
+  background-color: var(--secondary-color);
+  margin-bottom: 0.8em;
+  border-radius: 0.5em;
+  padding: 1em 1.1em;
+  cursor: pointer;
+}
+
+.electioncardlist__title {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  align-content: space-between;
+  margin-bottom: 0.8em;
+}
+
+.electioncardlist__title-text {
+  display: flex;
+}
+
+.electioncardlist__img {
+  background: var(--main-green);
+  margin-right: 01em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.electioncardlist__heading {
+  font-size: 1.2rem;
+}
+
+.electioncardlist__heading h4 {
+  font-size: 0.9rem;
+  
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.electioncardlist__heading small {
+  font-size: 0.9rem;
+  font-weight: 100;
+}
+
+.electioncardlist__title img {
+  width: 3em;
+}
+
+.electioncardlist__title-btn {
+  padding: 0.2em 0.6em;
+  background-color: transparent;
+  border: 1px solid var(--text-color);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  height: 1.5em;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 0.5em;
+}
+
+.electioncardlist__title-btn:hover {
+  scale: 0.9;
+}
+
+.electioncardlist__title-btn svg {
+  font-size: 1.2rem;
+}
+
+.electioncardlist .content {
+  display: none;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.5em;
+}
+
+.electioncardlist .content.show {
+  display: grid;
+}

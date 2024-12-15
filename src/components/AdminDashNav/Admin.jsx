@@ -78,11 +78,11 @@ function AdminNav() {
         </li>
 
         <li>
-          <NavLink to={"/candidates"}>
+          <NavLink to={"/voters"}>
             <span className="icons">
               <FaPeopleGroup />
             </span>
-            <span className="title">Candidates</span>
+            <span className="title">Voters</span>
           </NavLink>
         </li>
 

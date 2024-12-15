@@ -2,9 +2,9 @@ import "./candidatecard.css";
 import photo from "../../assets/User.png";
 import { Link } from "react-router-dom";
 
-function CandidateCard({ data }) {
+function CandidateCard({ url, data }) {
   return (
-    <Link to={`/candidates/${data?._id}`}>
+    <Link to={url || `/candidates/${data?._id}`}>
       <div className="candidate__card ">
         <div className="card-inner">
           <div className="box">

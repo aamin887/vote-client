@@ -18,6 +18,7 @@ export { default as ConfirmationDialog } from "./confirmationDialog/Confirmation
 export { default as OptionsDropdown } from "./optionsdropdown/OptionsDropdown";
 export { default as PageHeader } from "./pageheader/PageHeader";
 export { default as Tooltip } from "./tooltip/Tooltip";
+export { default as ElectionCardList } from "./cards/ElectionCard/ElectionCardList";
 
 // home comp
 export { default as Header } from "./header/Header";

@@ -420,13 +420,22 @@ function Election() {
                   className={`btn election__page-content_btn add`}
                   onClick={() =>
                     navigate(
-                      `/elections/${electionDetails?._id}/positions/candidates/add`
+                      `/elections/${electionDetails?._id}/positions/candidates/register`
                     )
                   }
                 >
-                  Add a candidate
+                  Register a candidate
                 </button>
               )}
+
+              <button
+                className={`btn election__page-content_btn add`}
+                onClick={() =>
+                  navigate(`/elections/${electionDetails?._id}/voters/register`)
+                }
+              >
+                Register a voter
+              </button>
             </div>
           </div>
         </div>

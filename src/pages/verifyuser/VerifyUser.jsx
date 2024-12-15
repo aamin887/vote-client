@@ -1,4 +1,4 @@
-import "./changepassword.css";
+import "./verifyuser.css";
 import one from "../../assets/Group13.png";
 import axios from "../../api/axios";
 
@@ -13,7 +13,7 @@ import {
   IoLockClosedOutline,
 } from "react-icons/io5";
 
-function ChangePassword() {
+function VerifyUser() {
   const refNewPassword = useRef();
   const navigate = useNavigate();
   const [urlQuery, setUrlQuery] = useSearchParams();
@@ -275,4 +275,4 @@ function ChangePassword() {
   );
 }
 
-export default ChangePassword;
+export default VerifyUser;

@@ -52,8 +52,9 @@ function Login() {
     try {
       setLoading(true);
       const response = await handleLogin({ email, password });
-      const { id, email: userEmail, accessToken, verified } = response.data;
-      setAuth({ id, userEmail, accessToken, verified });
+      console.log(response, "login");
+      const { id, email: userEmail, accessToken, terms } = response.data;
+      setAuth({ id, userEmail, accessToken, terms });
       setFormData({
         email: "",
         password: "",
@@ -67,21 +68,19 @@ function Login() {
       navigate(from, { replace: true });
     } catch (error) {
       console.log(error, ";>>>");
-      if (error?.name === "AxiosError") {
-        return toast.error("Network error ", {
-          toastId: "networkError",
-        });
-      }
       const errStatus = error?.response.status;
-      if (errStatus === 400) {
-        return toast.error("fill all fields ", {
-          toastId: "emptyfields",
-        });
+      if (errStatus === 401) {
+        return toast.error(
+          "Your account is not verified. Please verify your email.",
+          {
+            toastId: "emptyfields",
+          }
+        );
       } else if (errStatus === 404 || errStatus === 422) {
         return toast.error("user does not exist", {
           toastId: "invalid",
         });
-      } else if (errStatus === 401) {
+      } else if (errStatus === 400) {
         return toast.error("Incorrect email or password", {
           toastId: "incorrectCredentials",
         });

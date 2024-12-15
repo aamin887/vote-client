@@ -5,6 +5,8 @@ function PrivateRoute() {
   const { auth } = useAuth();
   const location = useLocation();
 
+  console.log(auth, "assa");
+
   if (auth.accessToken) {
     return (
       <>

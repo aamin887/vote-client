@@ -1,6 +1,6 @@
 import "./passwordReset.css";
 import one from "../../assets/Group13.png";
-import axios from "../../api/axios";
+
 import { requestPasswordChange } from "../../api/actions";
 
 import { useEffect, useRef, useState } from "react";
@@ -30,10 +30,6 @@ function PasswordReset() {
     }
 
     try {
-      // const response = await axios.post("/auth/users/request-new-password", {
-      //   email,
-      // });
-
       const response = await requestPasswordChange(email);
       if (response.status === 200) {
         setShowMessage(true);
@@ -71,99 +67,93 @@ function PasswordReset() {
   }, [email]);
 
   return (
-    <div className=" section__padding">
-      <div className="reset__site">
-        {/* right */}
-        <div className="reset__left">
-          <div className="register__right-img">
-            <img src={one} style={{}} alt="illustration" className="noselect" />
-          </div>
-          <div className="reset__right-heading">
-            <h2 className="">Votes</h2>
-            <p className="section__text">
-              Vote today and shape a brighter future
-            </p>
-          </div>
+    <div className="reset__site section__padding">
+      {/* right */}
+      <div className="reset__left">
+        <div className="register__right-img">
+          <img src={one} style={{}} alt="illustration" className="noselect" />
+        </div>
+        <div className="reset__right-heading">
+          <h2 className="">Votes</h2>
+          <p className="section__text">
+            Vote today and shape a brighter future
+          </p>
+        </div>
+      </div>
+
+      <div className="reset__right">
+        <div className="reset__left-header">
+          <h1 className="section__heading title__text">Forgot password?</h1>
+          <p className="section__text lead__text">
+            Don&apos;t worry we can help you out! if you still remember your
+            email address you can quickly reset your password. Just input that
+            information in the fields below and click on the button. This will
+            send you a new email that will link you to the password change
+            website.
+          </p>
         </div>
 
-        <div className="reset__right">
-          <div className="reset__left-header">
-            <h1 className="section__heading title__text">Forgot password?</h1>
-            <p className="section__text lead__text">
-              Don&apos;t worry we can help you out! if you still remember your
-              email address you can quickly reset your password. Just input that
-              information in the fields below and click on the button. This will
-              send you a new email that will link you to the password change
-              website.
+        {showMessage && (
+          <div className="form__control-margin">
+            <p className="form__control-input_instructions">
+              <FaCheck size={20} color="#ffc42a" className="check__icons" />
+              The password reset link has been sent to your email. If you didn’t
+              receive the password reset link, check your email spam.
             </p>
           </div>
+        )}
 
-          {showMessage && (
+        <div className="reset__left-form">
+          <form onSubmit={handleSubmit}>
+            {/* email */}
+            <div className="form__control form__control-margin">
+              <label htmlFor="email" className="form__control-label">
+                Email
+              </label>
+              <div className="form__control-input underline">
+                <span className="form__control-input_icon">
+                  <SlEnvolope color="#fffff" size={32} />
+                </span>
+                <input
+                  type="email"
+                  ref={refEmail}
+                  name="email"
+                  id="email"
+                  value={email}
+                  autoComplete="off"
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
             <div className="form__control-margin">
-              <p className="form__control-input_instructions">
-                <FaCheck size={20} color="#ffc42a" className="check__icons" />
-                The password reset link has been sent to your email. If you
-                didn’t receive the password reset link, check your email spam.
+              <p
+                className={
+                  email && !validEmail
+                    ? "form__control-input_instructions"
+                    : "form__control-input_offscreen"
+                }
+              >
+                <CgDanger size={20} color="#b3790cf" className="error__icons" />
+                <br />
+                Must be a valid email:
+                <br /> E.g example@gmail.com
+                <br />
+                example@yahoo.co.uk
               </p>
             </div>
-          )}
 
-          <div className="reset__left-form">
-            <form onSubmit={handleSubmit}>
-              {/* email */}
-              <div className="form__control form__control-margin">
-                <label htmlFor="email" className="form__control-label">
-                  Email
-                </label>
-                <div className="form__control-input underline">
-                  <span className="form__control-input_icon">
-                    <SlEnvolope color="#fffff" size={32} />
-                  </span>
-                  <input
-                    type="email"
-                    ref={refEmail}
-                    name="email"
-                    id="email"
-                    value={email}
-                    autoComplete="off"
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-              <div className="form__control-margin">
-                <p
-                  className={
-                    email && !validEmail
-                      ? "form__control-input_instructions"
-                      : "form__control-input_offscreen"
-                  }
-                >
-                  <CgDanger
-                    size={20}
-                    color="#b3790cf"
-                    className="error__icons"
-                  />
-                  <br />
-                  Must be a valid email:
-                  <br /> E.g example@gmail.com
-                  <br />
-                  example@yahoo.co.uk
-                </p>
-              </div>
-
-              <div className="form__control">
-                <button type="submit" className="btn auth__btns">
-                  Reset password
-                </button>
-                <p className="form__control-footnote">
-                  Don&rsquo;t have an account?{" "}
-                  <span className="form__control-footnote-link">
-                    <Link to={"/register"}>Signup</Link>
-                  </span>
-                </p>
-              </div>
-            </form>
-          </div>
+            <div className="form__control">
+              <button type="submit" className="btn auth__btns">
+                Reset password
+              </button>
+              <p className="form__control-footnote">
+                Don&rsquo;t have an account?{" "}
+                <span className="form__control-footnote-link">
+                  <Link to={"/register"}>Signup</Link>
+                </span>
+              </p>
+            </div>
+          </form>
         </div>
       </div>
     </div>

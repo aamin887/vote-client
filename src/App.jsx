@@ -17,9 +17,13 @@ import {
   CreateElection,
   Position,
   HelpPage,
-  Addition,
+  RegisterCandidate,
   Verify,
   ProfilePage,
+  RegisterVoter,
+  VerifyUser,
+  Voters,
+  VoterProfile,
 } from "./pages";
 
 import { PrivateRoute } from "./components";
@@ -48,6 +52,7 @@ function App() {
             <Route element={<ChangePassword />} path="/password-change" />
             <Route element={<PasswordRequest />} path="/password-success" />
             <Route element={<Verify />} path="/verification" />
+            <Route element={<VerifyUser />} path="/verify-user/:userId" />
 
             {/* protected routes */}
             <Route element={<PersistLogin />}>
@@ -67,10 +72,22 @@ function App() {
                     />
                     {/* election by id */}
                     <Route element={<Election />} path="/elections/:id" />
+                    {/* candidates details */}
+                    <Route
+                      element={<Election />}
+                      path="/elections/:electionId/voters"
+                    />
                     {/* adding a candidate */}
                     <Route
-                      element={<Addition />}
-                      path="/elections/:id/positions/candidates/add"
+                      element={<RegisterCandidate />}
+                      path="/elections/:id/positions/candidates/register"
+                    />
+                    {/* all candidates */}
+                    {/* <Route element={<Voters />} path="/voters" /> */}
+                    {/* adding a voter */}
+                    <Route
+                      element={<RegisterVoter />}
+                      path="/elections/:electionId/voters/register"
                     />
                     {/* view a position */}
                     <Route
@@ -78,11 +95,16 @@ function App() {
                       path="/elections/positions/:id"
                     />
                   </Route>
+
                   {/* candidates details */}
                   <Route
                     element={<CandidateDetails />}
                     path="/candidates/:candidateId"
                   />
+                  {/* all votes */}
+                  <Route element={<Voters />} path="/voters" />
+                  <Route element={<VoterProfile />} path="/voters/:voterId" />
+
                   {/* all candidates */}
                   <Route element={<Candidates />} path="/candidates" />
 

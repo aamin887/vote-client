@@ -1,7 +1,8 @@
 import "./candidates.css";
 import { CandidateCard, Loader } from "../../components";
 import useAuth from "../../hooks/useAuth";
-import { axiosPrivate } from "../../api/axios";
+
+import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { BsInbox } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
@@ -11,11 +12,14 @@ function Candidates() {
   const [candidates, setCandidates] = useState([]);
   const [loading, setLoading] = useState(true);
   const { searchQuery, currentPage } = useOutletContext();
+  const axiosPrivate = useAxiosPrivate();
 
   const organisationId = auth.id;
   const getAllCandidates = async function () {
     try {
-      const candidatesResponse = await axiosPrivate.get(`/api/v1/voters`);
+      const candidatesResponse = await axiosPrivate.get(
+        `/api/v1/candidates/elections/67541b60af1e5fe9d655a8ce`
+      );
 
       console.log(candidatesResponse.data);
       if (candidatesResponse.status === 200) {
@@ -33,7 +37,7 @@ function Candidates() {
   }, []);
 
   return (
-    <div className="candidates section__padding-md">
+    <div className="candidates ">
       {candidates.length === 0 && (
         <div className="candidates__content-empty">
           <p>

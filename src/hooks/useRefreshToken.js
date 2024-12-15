@@ -14,6 +14,7 @@ function useRefreshToken() {
         accessToken: response?.data?.newAccessToken,
         email: response?.data?.email,
         id: response?.data?.id,
+        terms: response?.data?.terms,
       };
     });
 

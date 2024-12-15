@@ -5,7 +5,7 @@
   align-items: flex-start;
   justify-content: space-between;
   color: #fff;
-  background-color: #00523f;
+  background-color: var(--main-green);
 }
 
 .login__site h1,

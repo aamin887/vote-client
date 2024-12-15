@@ -224,7 +224,7 @@ function Election() {
 
               <div className="candidatedetails__page-profile-details_control">
                 <span className="details">Email</span>
-                <p>{email}</p>
+                {!toogleEdit && <p>{email}</p>}
 
                 {toogleEdit && (
                   <input
