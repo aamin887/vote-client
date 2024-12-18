@@ -1,12 +1,13 @@
 import axios from "axios";
-import useAxiosPrivate from "../hooks/useAxiosPrivate";
+
+console.log(import.meta.env.VITE_API);
 
 export default axios.create({
-  baseURL: "http://localhost:5001",
+  baseURL: "https://vote-server-ahg0.onrender.com",
 });
 
 export const axiosPrivate = axios.create({
-  baseURL: "http://localhost:5001",
+  baseURL: "https://vote-server-ahg0.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },
