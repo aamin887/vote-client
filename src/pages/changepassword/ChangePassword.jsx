@@ -77,6 +77,8 @@ function ChangePassword() {
         navigate("/password-success", { replace: true });
       }
     } catch (error) {
+      console.log(error);
+
       const errStatus = error?.response.status;
       if (errStatus === 404) {
         return toast.error("Invalid link ", {
@@ -109,26 +111,17 @@ function ChangePassword() {
 
   const checkToken = async function () {
     try {
-      const response = await axios.post(`/auth/token`, {
-        token,
-      });
-
-      if (response.status === 429) {
-        toast.warn("Reset used, request a new one", {
-          toastId: "usedToken",
-        });
-        return navigate("/login", { replace: true });
-      }
+      await axios.get(`/auth/users/token?token=${token}`);
     } catch (error) {
       if (error.response.status) {
-        toast.warn("Reset link expired");
+        toast.warn("Invalid token");
         navigate("/login");
       }
     }
   };
 
   useEffect(() => {
-    // checkToken();
+    checkToken();
   }, []);
 
   useEffect(() => {
@@ -145,7 +138,6 @@ function ChangePassword() {
             a new password. We strongly advise you to store it safely.
           </p>
         </div>
-
         <div className="changepassword__left-form">
           <form onSubmit={handleSubmit}>
             {/* email */}

@@ -14,7 +14,6 @@ import {
   IoEyeOffOutline,
   IoLockClosedOutline,
 } from "react-icons/io5";
-import { FaRegUser } from "react-icons/fa";
 import { toast } from "react-toastify";
 
 function Register() {
@@ -25,10 +24,8 @@ function Register() {
   const [togglePassword, setPTogglePassword] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
   const [validPassword, setValidPassword] = useState(false);
-  const [validFullName, setValidFullName] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
-    fullName: "",
     password: "",
     confirmPassword: "",
   });
@@ -38,18 +35,18 @@ function Register() {
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
   const UNIQUE_REGEX = /^[A-Z][a-z]+(?: [A-Z][a-z]+)*$/;
 
-  const { email, fullName, password, confirmPassword } = formData;
+  const { email, password, confirmPassword } = formData;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email || !fullName || !password || !confirmPassword) {
+    if (!email || !password || !confirmPassword) {
       return toast.error("Fill all fields", {
         toastId: "emptyFields",
       });
     }
 
-    if (!validEmail || !validFullName || !validPassword) {
+    if (!validEmail || !validPassword) {
       return toast.error("Make sure all fields are valid", {
         toastId: "emptyFields",
       });
@@ -59,7 +56,6 @@ function Register() {
       setLoading(true);
       const response = await handleSignup({
         email,
-        fullName,
         password,
         confirmPassword,
       });
@@ -71,7 +67,6 @@ function Register() {
 
         setFormData({
           email: "",
-          fullName: "",
           password: "",
           confirmPassword: "",
         });
@@ -124,8 +119,7 @@ function Register() {
   useEffect(() => {
     setValidEmail(EMAIL_REGEX.test(email));
     setValidPassword(PASSWORD_REGEX.test(password));
-    setValidFullName(UNIQUE_REGEX.test(fullName));
-  }, [email, fullName, password]);
+  }, [email, password]);
 
   return (
     <div className="register__site section__padding">
@@ -137,46 +131,6 @@ function Register() {
         {loading && <Loader />}
         <div className="register__left-form">
           <form onSubmit={handleSubmit} autoComplete="off">
-            {/* unique number */}
-            <div className="form__control form__control-margin">
-              <label htmlFor="fullName" className="form__control-label">
-                Fullname
-              </label>
-              <div className="form__control-input underline">
-                <span className="form__control-input_icon">
-                  <FaRegUser color="#fffff" size={32} />
-                </span>
-                <input
-                  type="text"
-                  name="fullName"
-                  id="fullName"
-                  value={fullName}
-                  autoComplete="off"
-                  onChange={handleChange}
-                />
-              </div>
-            </div>
-            <div className="form__control-margin">
-              <p
-                className={
-                  fullName && !validFullName
-                    ? "form__control-input_instructions"
-                    : "form__control-input_offscreen"
-                }
-              >
-                <CgDanger
-                  size={20}
-                  color={"#b3790c"}
-                  className="error__icons"
-                />
-                <br />
-                Must be atleast 3 characters:
-                <br /> E.g: John Doe,
-                <br /> John Doe Johnson,
-                <br />
-                John-Doe Johnson
-              </p>
-            </div>
             {/* email */}
             <div className="form__control form__control-margin">
               <label htmlFor="email" className="form__control-label">

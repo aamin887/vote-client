@@ -1,8 +1,9 @@
 // auth
-export { default as PasswordReset } from "./passwordreset/PasswordReset";
-export { default as Register } from "./register/Register";
 export { default as Login } from "./login/Login";
-export { default as PasswordRequest } from "./success/PasswordRequest";
+export { default as Register } from "./register/Register";
+
+export { default as PasswordRequest } from "./passwordrequest/PasswordRequest.jsx";
+export { default as PasswordSuccess } from "./success/PasswordSuccess.jsx";
 export { default as ChangePassword } from "./changepassword/ChangePassword";
 
 // dashboard

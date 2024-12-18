@@ -20,8 +20,6 @@ function ElectionCardList({ data }) {
       console.log(res, "voter");
       if (res?.status === 200) {
         setVoters(res?.data);
-
-        console.log(voters);
       }
     } catch (error) {
       console.log(error);

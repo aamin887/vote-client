@@ -1,4 +1,4 @@
-import "./passwordReset.css";
+import "./passwordrequest.css";
 import one from "../../assets/Group13.png";
 
 import { requestPasswordChange } from "../../api/actions";
@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 import { SlEnvolope } from "react-icons/sl";
 
-function PasswordReset() {
+function PasswordRequest() {
   const refEmail = useRef();
   const [showMessage, setShowMessage] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
@@ -31,7 +31,8 @@ function PasswordReset() {
 
     try {
       const response = await requestPasswordChange(email);
-      if (response.status === 200) {
+
+      if (response.status === 201) {
         setShowMessage(true);
       }
       setFormData({
@@ -40,6 +41,7 @@ function PasswordReset() {
     } catch (error) {
       console.log(error);
 
+      console.log("assas");
       const errStatus = error?.response.status;
       if (!error?.response) {
         return toast.error("Network error ", {
@@ -160,4 +162,4 @@ function PasswordReset() {
   );
 }
 
-export default PasswordReset;
+export default PasswordRequest;

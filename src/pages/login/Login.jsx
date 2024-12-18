@@ -208,7 +208,7 @@ function Login() {
                 <label htmlFor="remember_me">Remember me</label>
               </div>
               <div className="form__control-reset">
-                <Link to={"/password-reset"}>Forget password</Link>
+                <Link to={"/change-password"}>Forget password</Link>
               </div>
             </div>
 

@@ -60,6 +60,11 @@ function RegisterVoter() {
 
       if (res.status === 201) {
         toast.success("Voter added successfully");
+        setFormData({
+          fullName: "",
+          email: "",
+          imgfile: "",
+        });
         // return navigate(`/voters/${res?.data?._id}`);
       }
     } catch (error) {

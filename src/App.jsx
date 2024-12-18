@@ -3,7 +3,7 @@ import {
   Home,
   Login,
   Register,
-  PasswordReset,
+  PasswordRequest,
   ResultVote,
   Vote,
   Dashboard,
@@ -12,7 +12,7 @@ import {
   Candidates,
   Election,
   ChangePassword,
-  PasswordRequest,
+  // PasswordRequest,
   CandidateDetails,
   CreateElection,
   Position,
@@ -48,9 +48,11 @@ function App() {
             {/* authentications */}
             <Route element={<Login />} path="/login" />
             <Route element={<Register />} path="/register" />
-            <Route element={<PasswordReset />} path="/password-reset" />
-            <Route element={<ChangePassword />} path="/password-change" />
-            <Route element={<PasswordRequest />} path="/password-success" />
+            <Route element={<PasswordRequest />} path="/change-password" />
+            <Route element={<ChangePassword />} path="/new-password" />
+
+            {/* <Route element={<PasswordRequest />} path="/password-success" /> */}
+
             <Route element={<Verify />} path="/verification" />
             <Route element={<VerifyUser />} path="/verify-user/:userId" />
 

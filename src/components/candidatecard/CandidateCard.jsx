@@ -9,7 +9,10 @@ function CandidateCard({ url, data }) {
         <div className="card-inner">
           <div className="box">
             <div className="imgBox">
-              <img src={data?.photoUrl || photo} alt="Shower Gel" />
+              <img
+                src={data?.photoUrl || "https://via.placeholder.com/150"}
+                alt={`voter thumbnail for ${data?.fullName}`}
+              />
             </div>
             <div className="candidate_info">
               <h5>{data?.fullName}</h5>

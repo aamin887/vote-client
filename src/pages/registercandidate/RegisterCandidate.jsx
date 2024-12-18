@@ -58,6 +58,7 @@ function RegisterCandidate() {
       });
       if (res.status === 201) {
         toast.success("candidates added successfully");
+
         return navigate(`/elections/${id}`);
       }
     } catch (error) {

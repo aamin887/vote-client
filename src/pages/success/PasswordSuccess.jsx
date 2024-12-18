@@ -3,7 +3,7 @@ import error from "../../assets/404.png";
 
 import { useLocation, useNavigate } from "react-router-dom";
 
-function PasswordRequest() {
+function PasswordSuccess() {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -36,4 +36,4 @@ function PasswordRequest() {
   );
 }
 
-export default PasswordRequest;
+export default PasswordSuccess;
