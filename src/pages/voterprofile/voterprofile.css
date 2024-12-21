@@ -120,3 +120,7 @@
 .btns-inline button:hover {
   background-color: var(--btn-hover);
 }
+
+.election__page-profile_photo-selector select {
+  width: 100%;
+}

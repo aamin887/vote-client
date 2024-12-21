@@ -1,26 +1,30 @@
 import "./electionCard.css";
-import ProfileImage from "../../profileImage/ProfileImage";
+import { useState } from "react";
+import { format } from "date-fns";
+
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { IoMdAddCircle } from "react-icons/io";
-import { ConfirmationDialog } from "../../../components";
-import { useState } from "react";
+import { FaTimes, FaEdit } from "react-icons/fa";
+import { FaCircleInfo } from "react-icons/fa6";
+import { MdDeleteSweep } from "react-icons/md";
 
-import { format } from "date-fns";
-import OptionsDropdown from "../../optionsdropdown/OptionsDropdown";
-import { FaTimes } from "react-icons/fa";
+import useDateDiff from "../../../hooks/useDateDiff";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
+import { ConfirmationDialog } from "../../../components";
+import ProfileImage from "../../profileImage/ProfileImage";
 
 function ElectionCard({ data }) {
-  const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const [options, setOptions] = useState(false);
+  const [show, setShow] = useState(false);
   const axiosPrivate = useAxiosPrivate();
 
   // delete an election
   const handleDeleteElection = async function (id) {
     try {
-      const res = axiosPrivate.delete(`/api/v1/elections/${id}`);
-      console.log(res);
+      const res = await axiosPrivate.delete(`/api/v1/elections/${id}`);
+      console.log(res, "asas===>");
       return navigate("/elections");
     } catch (error) {
       const statusCode = error.response.status;
@@ -36,45 +40,75 @@ function ElectionCard({ data }) {
     }
   };
 
-  const date_diff_indays = function (date1, date2) {
-    const dt1 = new Date(data?.startDate);
-    const dt2 = new Date(data?.endDate);
-    let remains = Math.floor(
-      (Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) -
-        Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) /
-        (1000 * 60 * 60 * 24)
-    );
-
-    return remains > 1
-      ? `${remains} days remaining`
-      : `${remains} day remaining`;
-  };
-
-  const [options, setOption] = useState(false);
-  const showOptions = function () {
-    setOption(true);
-  };
-
-  const closeShowOptions = function () {
-    setOption(false);
-  };
-
+  const dateDiff = useDateDiff(data?.startDate, data?.endDate);
   return (
-    <div
-      className="electioncard"
-      onMouseLeave={closeShowOptions}
-      onClick={closeShowOptions}
-    >
-      {/* options */}
+    <Link to={`/elections/${data?._id}`}>
+      <ConfirmationDialog
+        title={`Are you sure?`}
+        icon={<FaTimes />}
+        isOpened={show}
+        id={data?._id}
+        onProceed={handleDeleteElection}
+        onClose={() => setShow(false)}
+      >
+        <p>
+          Do you really want to delete {data?.name} election? This process
+          cannot be undone.
+        </p>
+      </ConfirmationDialog>
+      <div className="electioncard">
+        {options && (
+          <div className={`electioncard__options`}>
+            <ul>
+              <Link to={`/elections/${data?._id}`}>
+                <li>
+                  <span>
+                    <FaCircleInfo />
+                  </span>
+                  <p>View </p>
+                </li>
+              </Link>
 
-      {options && <OptionsDropdown data={data} setShow={setShow} />}
-      {/* end options */}
-      <div onMouseEnter={showOptions}>
-        <span className="electioncard__options-btn">
+              <li
+                onClick={() =>
+                  navigate(`/elections/${data?._id}`, { state: true })
+                }
+              >
+                <span>
+                  <FaEdit />
+                </span>
+                <p>Edit </p>
+              </li>
+
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShow(true);
+                  return;
+                }}
+              >
+                <li>
+                  <span>
+                    <MdDeleteSweep />
+                  </span>
+                  <p>Delete </p>
+                </li>
+              </button>
+            </ul>
+          </div>
+        )}
+
+        <span
+          className="electioncard__options-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            setOptions(!options);
+          }}
+        >
           <BsThreeDotsVertical />
         </span>
-      </div>
-      <Link to={`/elections/${data?._id}`}>
+
         <div className="electioncard__header">
           <h3>{data?.name}</h3>
         </div>
@@ -86,19 +120,17 @@ function ElectionCard({ data }) {
         {/*  */}
         <div className=" electioncard__footer">
           <div className="electioncard__footer-profile">
-            {/* <div className="electioncard__footer-profile_img"> */}
             {<ProfileImage />}
-            {/* </div> */}
             <Link title="Add a candidate" to={"/add-candidates"}>
               {<IoMdAddCircle size={20} />}
             </Link>
           </div>
           <div className="electioncard__footer-remaining">
-            <p>{date_diff_indays()}</p>
+            <p>{dateDiff}</p>
           </div>
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 }
 

@@ -20,6 +20,7 @@ function Dashboard() {
   const axiosPrivate = useAxiosPrivate();
   const { toogleGridView, handleGridView, handleListView } = useNav();
   const [electionData, setElectionData] = useState([]);
+  const [stats, setStats] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // fetch all elections for the user
@@ -39,8 +40,22 @@ function Dashboard() {
     }
   };
 
+  // fetch all elections for the user
+  const getStats = async function () {
+    try {
+      const res = await axiosPrivate.get("/api/v1/stats");
+      setStats(res?.data);
+    } catch (error) {
+      const errStatus = error?.response?.status;
+      if (errStatus === 400) {
+        return toast.error("message");
+      }
+    }
+  };
+
   useEffect(() => {
     getAllElections();
+    getStats();
 
     const handleResize = function () {
       if (window.innerWidth <= 620) {
@@ -64,19 +79,19 @@ function Dashboard() {
             <InforCard
               icon={<GiVote size={26} />}
               title="Elections"
-              stats={electionData?.length}
+              stats={stats.elections}
             />
             {/* all voters */}
             <InforCard
               icon={<GiVote size={26} />}
               title="Candidates"
-              stats={electionData?.length}
+              stats={stats.candidates}
             />
             {/* all candidates */}
             <InforCard
               icon={<GiVote size={26} />}
               title="Voters"
-              stats={electionData?.length}
+              stats={stats.voters}
             />
           </div>
 

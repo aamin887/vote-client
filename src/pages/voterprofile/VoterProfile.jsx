@@ -11,8 +11,11 @@ const VoterProfile = () => {
   const [profileInfo, setProfileInfo] = useState({});
   const [voterPhoto, setVoterPhoto] = useState();
   const [editInfo, setEditInfo] = useState(false);
+  const [validTel, setValidTel] = useState(false);
   const [loading, setLoading] = useState(false);
   const { voterId } = useParams();
+
+  const phoneRegex = /^(\+?\d{1,4}[\s-]?)?(\(?\d{3}\)?[\s-]?)?[\d\s-]{7,}$/;
 
   function getLastUpdatedMessage(lastUpdated) {
     // Ensure lastUpdated is a valid Date object
@@ -91,6 +94,10 @@ const VoterProfile = () => {
 
   const { fullName, tel, gender } = profileInfo;
 
+  useEffect(() => {
+    setValidTel(phoneRegex.test(tel));
+  }, [tel]);
+
   return (
     <div className="voters__profile">
       {loading && <Loader />}
@@ -153,6 +160,7 @@ const VoterProfile = () => {
                 />
               </div>
             )}
+            {!validTel && <p>lorem opsi </p>}
           </div>
 
           <div className="voter__profile-control">
@@ -160,13 +168,23 @@ const VoterProfile = () => {
             {!editInfo && <h4>{profileInfo?.gender || "Empty **"}</h4>}
             {editInfo && (
               <div className="election__page-profile_photo-selector">
-                <input
+                {/* <input
                   type="text"
                   placeholder="Enter the gender orientation"
                   name="gender"
                   value={gender}
                   onChange={handleChange}
-                />
+                /> */}
+
+                <select name="gender" value={gender} onChange={handleChange}>
+                  {/* <option value={""} key={"empty_option"}>
+                    {"Select a position"}
+                  </option> */}
+                  <option value={""}>{"Select a gender"}</option>
+                  <option value={"male"}>{"Male"}</option>
+                  <option value={"female"}>{"Female"}</option>
+                  <option value={"other"}>{"Other"}</option>
+                </select>
               </div>
             )}
           </div>

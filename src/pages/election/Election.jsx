@@ -73,6 +73,8 @@ function Election() {
         return navigate("/elections");
       }
     } catch (error) {
+      console.log(error);
+
       const statusCode = error?.response?.status;
       if (statusCode === 404) {
         return toast.error("election not found");

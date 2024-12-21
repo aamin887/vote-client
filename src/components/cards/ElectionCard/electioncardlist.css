@@ -22,9 +22,11 @@
   background: var(--main-green);
   margin-right: 01em;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  overflow: hidden;
+  height: 3em;
+  width: 3em;
+  object-fit: contain;
 }
 
 .electioncardlist__heading {
@@ -33,7 +35,7 @@
 
 .electioncardlist__heading h4 {
   font-size: 0.9rem;
-  
+
   font-weight: 500;
   letter-spacing: 0.1em;
 }
@@ -44,7 +46,7 @@
 }
 
 .electioncardlist__title img {
-  width: 3em;
+  width: 4em;
 }
 
 .electioncardlist__title-btn {

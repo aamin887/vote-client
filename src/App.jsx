@@ -12,7 +12,7 @@ import {
   Candidates,
   Election,
   ChangePassword,
-  // PasswordRequest,
+  PasswordSuccess,
   CandidateDetails,
   CreateElection,
   Position,
@@ -50,8 +50,7 @@ function App() {
             <Route element={<Register />} path="/register" />
             <Route element={<PasswordRequest />} path="/change-password" />
             <Route element={<ChangePassword />} path="/new-password" />
-
-            {/* <Route element={<PasswordRequest />} path="/password-success" /> */}
+            <Route element={<PasswordSuccess />} path="/password-success" />
 
             <Route element={<Verify />} path="/verification" />
             <Route element={<VerifyUser />} path="/verify-user/:userId" />

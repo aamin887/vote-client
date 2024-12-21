@@ -5,13 +5,10 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { toast } from "react-toastify";
-import useAuth from "../../hooks/useAuth";
 import { Loader } from "../../components";
 
 function RegisterCandidate() {
   const { id } = useParams();
-  const { auth } = useAuth();
-  const organisationId = auth.id;
 
   const axiosPrivate = useAxiosPrivate();
 
@@ -63,7 +60,7 @@ function RegisterCandidate() {
       }
     } catch (error) {
       console.log(error);
-      const statusCode = error.response.data.status;
+      const statusCode = error;
       if (statusCode === 404) {
         return toast.error("not found");
       } else if (statusCode === 403) {
@@ -79,7 +76,6 @@ function RegisterCandidate() {
   //👇🏻 updates an item within the list
   const handleChange = (e) => {
     const { name, value, type } = e.target;
-
     if (type === "file") {
       setFormData({ ...formData, [name]: e.target.files[0] });
     } else {
@@ -116,7 +112,6 @@ function RegisterCandidate() {
       setElectionDetails(electionResponse?.data);
     };
     getPositionList();
-    formData.organisation = organisationId;
   }, []);
 
   return (

@@ -11,12 +11,21 @@
   position: relative;
   transition: all 0.3s ease;
 }
+/* .electioncard__footer  */
 
 .electioncard__options-btn {
   position: absolute;
+  display: inline-block;
+  border: 1.5px solid var(--bg-color);
+  border-radius: 0.5em;
   right: 10px;
   top: 10px;
+  padding: 0.6em;
   transition: all 0.3s ease;
+}
+
+.electioncard__options-btn svg {
+  color: var(--text-color);
 }
 
 /* option */
@@ -24,11 +33,11 @@
   position: absolute;
   border: 1px solid whitesmoke;
   right: 25px;
-  top: 15px;
+  top: 50px;
   z-index: 2;
+  color: var(--text-color);
 
   transform: display 0.3s ease;
-  color: var(--secondary-color);
   background-color: var(--bg-color);
   border-radius: 0.5em;
   overflow: hidden;
@@ -36,10 +45,16 @@
 }
 
 .electioncard__options ul li {
-  padding: 0.2em 0.5em;
+  padding: 0.5em 0.5em;
   display: flex;
   align-items: center;
   font-size: 0.7rem;
+}
+
+.electioncard__options button {
+  background: transparent;
+  border: none;
+  color: var(--text-color);
 }
 
 .electioncard__options ul li span {
@@ -66,6 +81,9 @@
   transform: scale(0.99);
 }
 
+.electioncard__footer {
+  width: 100%;
+}
 /* grid view */
 
 .grid__view .electioncard {
@@ -75,9 +93,9 @@
   flex-direction: column;
 }
 
-/* .electioncard__footer-remaining {
+.electioncard__footer-remaining {
   background-color: var(--marker-color);
-} */
+}
 
 .grid__view .electioncard__header,
 .grid__view .electioncard__content,
@@ -121,6 +139,7 @@
 .grid__view .electioncard__footer-remaining p {
   font-weight: bolder;
 }
+
 /* grid view */
 
 .electioncard__header h3,

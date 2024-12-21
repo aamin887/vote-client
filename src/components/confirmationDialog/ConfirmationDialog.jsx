@@ -37,7 +37,8 @@ function ConfirmationDialog({
     onClose();
   };
 
-  const handleDelete = () => {
+  const handleDelete = (e) => {
+    e.preventDefault();
     onProceed(id);
     onClose();
   };

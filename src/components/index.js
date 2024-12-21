@@ -15,7 +15,7 @@ export { default as AddCandidateForm } from "./addCandidate/AddCandidate";
 export { default as ElectionCard } from "./cards/ElectionCard/ElectionCard";
 export { default as DateTimePicker } from "./datetime/Datetimepicker";
 export { default as ConfirmationDialog } from "./confirmationDialog/ConfirmationDialog";
-export { default as OptionsDropdown } from "./optionsdropdown/OptionsDropdown";
+
 export { default as PageHeader } from "./pageheader/PageHeader";
 export { default as Tooltip } from "./tooltip/Tooltip";
 export { default as ElectionCardList } from "./cards/ElectionCard/ElectionCardList";
