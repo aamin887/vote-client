@@ -13,6 +13,7 @@ import useDateDiff from "../../../hooks/useDateDiff";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { ConfirmationDialog } from "../../../components";
 import ProfileImage from "../../profileImage/ProfileImage";
+import { toast } from "react-toastify";
 
 function ElectionCard({ data }) {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ function ElectionCard({ data }) {
     }
   };
 
-  const dateDiff = useDateDiff(data?.startDate, data?.endDate);
+  const dateDiff = useDateDiff(data?.endDate);
   return (
     <Link to={`/elections/${data?._id}`}>
       <ConfirmationDialog
@@ -57,6 +58,10 @@ function ElectionCard({ data }) {
         </p>
       </ConfirmationDialog>
       <div className="electioncard">
+        <div className="electioncard__footer-remaining">
+          {dateDiff != "Time expired" ? "Time remaining" : ""}
+          <p>{dateDiff}</p>
+        </div>
         {options && (
           <div className={`electioncard__options`}>
             <ul>
@@ -115,7 +120,7 @@ function ElectionCard({ data }) {
         {/*  */}
         <div className="electioncard__content ">
           <h4>Election Date</h4>
-          <p>{format(data?.startDate, "MMMM do, yyyy")}</p>
+          <p>{format(data?.endDate, "MMMM do, yyyy")}</p>
         </div>
         {/*  */}
         <div className=" electioncard__footer">
@@ -124,9 +129,6 @@ function ElectionCard({ data }) {
             <Link title="Add a candidate" to={"/add-candidates"}>
               {<IoMdAddCircle size={20} />}
             </Link>
-          </div>
-          <div className="electioncard__footer-remaining">
-            <p>{dateDiff}</p>
           </div>
         </div>
       </div>

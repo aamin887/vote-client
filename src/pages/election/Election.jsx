@@ -2,13 +2,14 @@ import "./election.css";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
+import { BsInfoCircle } from "react-icons/bs";
 import {
   PositionCard,
   ConfirmationDialog,
   DateTimePicker,
 } from "../../components";
 import { toast } from "react-toastify";
-import { Loader } from "../../components";
+import { Loader, Tooltip } from "../../components";
 import { BsInbox } from "react-icons/bs";
 import { FaTimes } from "react-icons/fa";
 import { format } from "date-fns";
@@ -337,7 +338,14 @@ function Election() {
             <div className="election__page-profile_right-details">
               {/* elections start date*/}
               <div className="election__page-profile-details_control">
-                <span className="details">Start Date</span>
+                <p className="details">
+                  Open Nominations
+                  <Tooltip message={"When to start accepting candidates"}>
+                    <span className="details__icon">
+                      <BsInfoCircle />
+                    </span>
+                  </Tooltip>
+                </p>
                 {!toogleEdit && <p>{formattedStartDate}</p>}
                 {toogleEdit && (
                   // <input
@@ -359,7 +367,14 @@ function Election() {
               </div>
               {/* elections end date*/}
               <div className="election__page-profile-details_control">
-                <span className="details">Close Date</span>
+                <p className="details">
+                  Date of Election
+                  <Tooltip message={"Day of election with 11 days duration."}>
+                    <span className="details__icon">
+                      <BsInfoCircle />
+                    </span>
+                  </Tooltip>
+                </p>
                 {!toogleEdit && <p>{formattedEndDate}</p>}
                 {toogleEdit && (
                   // <input

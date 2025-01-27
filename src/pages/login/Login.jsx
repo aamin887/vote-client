@@ -43,6 +43,8 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(import.meta.env.VITE_API, "link");
+
     if (!email || !password) {
       return toast.error("Fill all fields", {
         toastId: "emptyFields",
@@ -52,7 +54,7 @@ function Login() {
     try {
       setLoading(true);
       const response = await handleLogin({ email, password });
-      console.log(response, "login");
+      console.log(response, "login", import.meta.env.VITE_API);
       const { id, email: userEmail, accessToken, terms } = response.data;
       setAuth({ id, userEmail, accessToken, terms });
       setFormData({

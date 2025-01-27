@@ -166,14 +166,10 @@ function Dashboard() {
           <div className="dashboard__content-logs">
             <div className="logs__card">
               <div className="logs__card-title">
-                <h5>Recent Activities</h5>
+                <h5>Upcoming Elections</h5>
               </div>
               <div className="logs__card-content">
                 <ul>
-                  <li>
-                    <h6>Amin</h6>
-                    <p>Created a new election</p>
-                  </li>
                   <li>
                     <h6>Amin</h6>
                     <p>Created a new election</p>

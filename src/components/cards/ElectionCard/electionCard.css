@@ -177,10 +177,13 @@
   background-color: var(--marker-color);
   padding: 0.3em;
   border-radius: 0.5em;
+  max-width: 90%;
   color: var(--bg-color);
-  font-weight: bolder;
+  font-weight: lighter;
 }
 
 .electioncard__footer-remaining p {
-  font-weight: bolder;
+  font-weight: lighter;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.7rem;
 }

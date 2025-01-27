@@ -261,7 +261,6 @@ const VoterProfile = () => {
         </div>
       </div>
       <div className="btns-inline">
-        <button className="">Remove voter</button>
         <button
           className=""
           onClick={() => {
@@ -273,6 +272,14 @@ const VoterProfile = () => {
           }}
         >
           Update Details
+        </button>
+        <button
+          className="cancel"
+          onClick={() => {
+            editInfo ? setEditInfo(false) : "";
+          }}
+        >
+          {editInfo ? "Cancel" : "Delete"}
         </button>
       </div>
     </div>

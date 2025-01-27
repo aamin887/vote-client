@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { Tooltip } from "../";
 
-function AdminHeader({ setSearchQuery }) {
+function AdminHeader({ setSearchQuery, isMobile }) {
   const root = document.documentElement;
   const [darkMode, setDarkMode] = useState(false);
   const auth = useAuth();
@@ -40,6 +40,23 @@ function AdminHeader({ setSearchQuery }) {
 
   return (
     <div className="navigation__topnav">
+      {isMobile && (
+        <div
+          style={{
+            position: "fixed",
+            top: "60px",
+            left: 0,
+            width: "100%",
+            backgroundColor: "#ffcc00",
+            color: "#000",
+            textAlign: "center",
+            padding: "10px",
+            zIndex: 1000,
+          }}
+        >
+          For the best view and experience, please use a desktop device.
+        </div>
+      )}
       <div className="navigation__topnav-left">
         <div className="navigation__topnav-left_title">
           <h1 className="title__text">Dashboard</h1>

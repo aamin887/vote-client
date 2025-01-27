@@ -12,8 +12,8 @@
 }
 
 .customadd__btn:hover {
-  background-color: var(--hover-primary);
   transform: translateY(-2px);
+  color: var(--text-color);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 

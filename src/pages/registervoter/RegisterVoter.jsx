@@ -65,7 +65,7 @@ function RegisterVoter() {
           email: "",
           imgfile: "",
         });
-        // return navigate(`/voters/${res?.data?._id}`);
+        return navigate(0);
       }
     } catch (error) {
       console.log(error, "newelikg");
