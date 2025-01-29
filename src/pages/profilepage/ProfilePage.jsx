@@ -1,4 +1,4 @@
-import "./profilepage.css";
+import "./styles.css";
 
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
 import { formatDistanceToNow, format } from "date-fns";
