@@ -14,11 +14,6 @@ function Verify() {
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // check database for token to allow access to this page
-  // create an endpoint on server to check tokens
-  // if no token redirect to login page
-  //
-
   const verification = async function () {
     try {
       setIsLoading(true);
