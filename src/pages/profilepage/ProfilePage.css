@@ -58,7 +58,6 @@
   color: var(--accent-color);
 }
 
-
 .user__profile-stats,
 .user__profile-info {
   display: grid;

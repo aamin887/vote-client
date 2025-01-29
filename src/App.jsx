@@ -52,7 +52,7 @@ function App() {
             <Route element={<ChangePassword />} path="/new-password" />
             <Route
               element={<PasswordSuccess />}
-              path="/password-success/:token"
+              path="/password-success/:tokenß"
             />
 
             <Route element={<Verify />} path="/verification" />
