@@ -33,7 +33,6 @@ function Register() {
   const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const PASSWORD_REGEX =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
-  const UNIQUE_REGEX = /^[A-Z][a-z]+(?: [A-Z][a-z]+)*$/;
 
   const { email, password, confirmPassword } = formData;
 
@@ -61,9 +60,12 @@ function Register() {
       });
 
       if (response.status === 201) {
-        toast.success("Account successfully created.", {
-          toastId: "success",
-        });
+        toast.success(
+          "A verification email has been sent to your email address. Please check your inbox and follow the instructions to activate your account.",
+          {
+            toastId: "success",
+          }
+        );
 
         setFormData({
           email: "",
@@ -74,26 +76,25 @@ function Register() {
         navigate("/login", { replace: true });
       }
     } catch (error) {
-      const errStatus = error?.response?.status;
+      console.log(error);
 
-      if (errStatus === 500) {
-        return toast.error("Internal error ", {
+      const errStatus = error?.response?.status;
+      const errMessgae = error?.response?.data?.message;
+
+      if (errStatus === 400) {
+        return toast.error("Invalid email or password. Please try again.", {
           toastId: "networkError",
         });
-      } else if (errStatus === 400) {
-        return toast.error("Fill all fields", {
-          toastId: "emptyFields",
-        });
       } else if (errStatus === 409) {
-        return toast.error("User already taken!", {
-          toastId: "userTaken",
+        return toast.error(errMessgae, {
+          toastId: "emptyFields",
         });
       } else if (errStatus === 422) {
         return toast.error("passwords do not match ", {
           toastId: "networkError",
         });
       } else {
-        return toast.error("Network error ", {
+        return toast.error("Internal error", {
           toastId: "networkError",
         });
       }
@@ -267,21 +268,6 @@ function Register() {
                 Passwords must match
               </p>
             </div>
-
-            {/* <div className="form__control form__control-margin inline">
-                <div className="form__control-checkbox">
-                  <input
-                    type="checkbox"
-                    name="remember_me"
-                    id="remember_me"
-                    onChange={handleChange}
-                  />
-                  <label htmlFor="remember_me">Remember me</label>
-                </div>
-                <div className="form__control-reset">
-                  <Link to={"/password-reset"}>Forget password</Link>
-                </div>
-              </div> */}
 
             <div className="form__control">
               <button type="submit" className="btn auth__btns">

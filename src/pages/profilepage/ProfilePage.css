@@ -1,108 +1,131 @@
-:root {
-  --primary: #007bff;
-  --secondary: #6c757d;
-  --background-color: #f8f9fa;
-  --text-color: #343a40;
-  --progress-color: #28a745;
-}
-
-.profile-container {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  background: #fff;
+.user__profile {
+  width: 100%;
+  max-width: 2500px;
+  padding: 5em 6em;
+  background: var(--secondary-color);
   border-radius: 10px;
+  margin-bottom: 2em;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.welcome-section h1 {
-  font-size: 2rem;
+.user__profile-message h1 {
+  font-size: 1.2rem;
   margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-.welcome-section p {
-  color: var(--secondary);
+.user__profile-message h1 span {
+  color: var(--text-color);
   font-size: 1rem;
 }
 
-.statistics-section {
+.voters__profile-message p {
+  color: var(--accent-color);
+  font-size: 1rem;
+}
+
+.user__profile-info_container,
+.user__profile-info {
   display: flex;
   justify-content: space-between;
+  gap: 1em;
   margin-top: 2rem;
 }
 
-.stat-card {
+.user__profile-img {
+  width: 250px;
+}
+
+.user__profile-info_card {
   flex: 1;
-  text-align: center;
-  margin: 0 0.5rem;
-  background-color: var(--background);
-  padding: 1rem;
-  border-radius: 10px;
+  text-align: left;
 }
 
-.stat-card h4 {
-  margin-bottom: 0.5rem;
-  color: var(--secondary);
+.user__profile-control {
+  margin-bottom: 1.3em;
 }
 
-.stat-value {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0.5rem 0;
-}
-
-.stat-subtext {
-  color: var(--secondary);
-  font-size: 0.85rem;
-}
-
-.progress-circle {
-  position: relative;
-  width: 80px;
-  height: 80px;
-  margin: 0 auto;
-  border: 5px solid var(--background-color);
-  border-radius: 50%;
-  background: conic-gradient(
-    var(--progress-color) calc(var(--progress) * 1%),
-    var(--background-color) 0
-  );
-}
-
-.progress-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.user__profile-info_card h4 {
   font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-color);
 }
 
-.activity-summary {
+.user__profile-info_card p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+
+.user__profile-stats,
+.user__profile-info {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
   margin-top: 2rem;
 }
 
-.summary-card {
+.user__profile-stats_card {
   text-align: center;
-  background-color: var(--background-color);
+  background-color: var(--bg-color);
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   padding: 1rem;
   border-radius: 10px;
 }
 
-.summary-card h4 {
+.user__profile-stats_card h4 {
   margin-bottom: 0.5rem;
-  color: var(--secondary);
+  color: var(--text-color);
+}
+
+.user__profile-stats_card p {
+  color: var(--accent-color);
 }
 
 .summary-value {
   font-size: 2rem;
   font-weight: bold;
-  margin: 0.5rem 0;
 }
 
-.summary-subtext {
-  color: var(--secondary);
+.user__profile-stats_subtext {
+  color: var(--text-color);
+  margin-bottom: 1em 0;
   font-size: 0.85rem;
+}
+
+.btns-inline {
+  margin-top: 2em;
+  display: flex;
+  gap: 0.8em;
+}
+
+.btns-inline button {
+  display: inline;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  color: black;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background-color: var(--btn-color);
+  font-size: 1.2rem;
+}
+
+.btns-inline button.cancel {
+  background-color: var(--error-color);
+}
+
+.btns-inline button:hover {
+  background-color: var(--btn-hover);
+}
+
+.election__page-profile_photo-selector select {
+  width: 100%;
 }

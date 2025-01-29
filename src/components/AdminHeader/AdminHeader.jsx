@@ -12,9 +12,7 @@ import { Tooltip } from "../";
 function AdminHeader({ setSearchQuery, isMobile }) {
   const root = document.documentElement;
   const [darkMode, setDarkMode] = useState(false);
-  const auth = useAuth();
-
-  console.log(auth);
+  const { auth } = useAuth();
 
   const toogleDark = function () {
     setDarkMode((prev) => !prev);
@@ -22,7 +20,6 @@ function AdminHeader({ setSearchQuery, isMobile }) {
 
   useEffect(() => {
     const themed = localStorage.getItem("theme");
-    console.log("s");
     if (themed) {
       setDarkMode(true);
     }
@@ -100,7 +97,7 @@ function AdminHeader({ setSearchQuery, isMobile }) {
         </div>
         {/* <h4>{userName}</h4> */}
         <Tooltip message={"User profile"}>
-          <NavLink to="/profile">
+          <NavLink to={`/profile/${auth?.id}`}>
             <div className="navigation__topnav-right_user">
               <img src={LOGO} alt="user profile" />
             </div>

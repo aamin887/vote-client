@@ -37,16 +37,12 @@ function Login() {
   });
 
   const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
   const { email, password } = formData;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log(import.meta.env.VITE_API, "link");
-
     if (!email || !password) {
-      return toast.error("Fill all fields", {
+      return toast.error("Enter your email and password", {
         toastId: "emptyFields",
       });
     }
@@ -54,37 +50,39 @@ function Login() {
     try {
       setLoading(true);
       const response = await handleLogin({ email, password });
-      console.log(response, "login", import.meta.env.VITE_API);
       const { id, email: userEmail, accessToken, terms } = response.data;
       setAuth({ id, userEmail, accessToken, terms });
       setFormData({
         email: "",
         password: "",
       });
-
       if (response.status === 200) {
-        toast.success("welcome", {
+        toast.success("Welcome to your dashboard", {
           toastId: "success",
         });
       }
       navigate(from, { replace: true });
     } catch (error) {
       console.log(error, ";>>>");
-      const errStatus = error?.response.status;
-      if (errStatus === 401) {
-        return toast.error(
-          "Your account is not verified. Please verify your email.",
-          {
-            toastId: "emptyfields",
-          }
-        );
-      } else if (errStatus === 404 || errStatus === 422) {
-        return toast.error("user does not exist", {
+      const errStatus = error?.response?.status;
+      if (errStatus === 400) {
+        return toast.error("Enter your email and password", {
+          toastId: "emptyFields",
+        });
+      } else if (errStatus === 401) {
+        return toast.error("Invalid email or password. Please try again.", {
           toastId: "invalid",
         });
-      } else if (errStatus === 400) {
-        return toast.error("Incorrect email or password", {
-          toastId: "incorrectCredentials",
+      } else if (errStatus === 403) {
+        return toast.error(
+          "User account is not verified. Please verify your account to access your dashboard.",
+          {
+            toastId: "unverified",
+          }
+        );
+      } else if (errStatus === 429) {
+        return toast.error("Too many login attempts. Please try again later.", {
+          toastId: "toomany",
         });
       } else {
         return toast.error("Network error ", {

@@ -39,17 +39,15 @@ function PasswordRequest() {
         email: "",
       });
     } catch (error) {
-      console.log(error);
-
-      console.log("assas");
       const errStatus = error?.response.status;
-      if (!error?.response) {
-        return toast.error("Network error ", {
-          toastId: "networkError",
+
+      if (errStatus === 401) {
+        return toast.error("Invalid email", {
+          toastId: "invalid",
         });
-      } else if (errStatus) {
-        return toast.error("User not found", {
-          toastId: "notFound",
+      } else {
+        return toast.error("Internal error", {
+          toastId: "error",
         });
       }
     }

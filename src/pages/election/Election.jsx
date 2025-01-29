@@ -1,4 +1,5 @@
 import "./election.css";
+import dummy from "../../assets/dummy.png";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import useAxiosPrivate from "../../hooks/useAxiosPrivate";
@@ -275,10 +276,7 @@ function Election() {
           </button>
           {/* Profile Image */}
           <div className="election__page-profile_photo">
-            <img
-              src={electionPoster || "https://via.placeholder.com/150"}
-              alt="Profile"
-            />
+            <img src={electionPoster || dummy} alt="Profile" />
             {toogleEdit && (
               <div className="election__page-profile_photo-selector">
                 <input

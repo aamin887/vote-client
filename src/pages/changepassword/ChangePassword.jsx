@@ -65,7 +65,7 @@ function ChangePassword() {
 
       console.log(response);
 
-      if (response.status === 204) {
+      if (response.status === 200) {
         toast.success("Password change successful ", {
           toastId: "success",
         });
@@ -74,7 +74,9 @@ function ChangePassword() {
           confirmNewPassword: "",
         });
 
-        navigate("/password-success", { replace: true });
+        navigate(`/password-success/${response?.data?.token}`, {
+          replace: true,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -111,10 +113,12 @@ function ChangePassword() {
 
   const checkToken = async function () {
     try {
-      await axios.get(`/auth/users/token?token=${token}`);
+      const res = await axios.get(`/auth/users/token?token=${token}`);
     } catch (error) {
-      if (error.response.status) {
-        toast.warn("Invalid token");
+      if (error) {
+        toast.warn("Please request a new password reset link and try again", {
+          toastId: "invalid",
+        });
         navigate("/login");
       }
     }

@@ -1,30 +1,44 @@
 import "./style.css";
-import error from "../../assets/404.png";
-
-import { useLocation, useNavigate } from "react-router-dom";
+import newpassword from "../../assets/newpassword.png";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "../../api/axios";
+import { toast } from "react-toastify";
 
 function PasswordSuccess() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // check database for token to allow access to this page
-  // create an endpoint on server to check tokens
-  // if no token redirect to login page
-  //
+  const { token } = useParams();
+
+  const checkToken = async function () {
+    try {
+      const res = await axios.get(`/auth/users/token?token=${token}`);
+    } catch (error) {
+      console.log(error);
+
+      if (error.response.status) {
+        toast.warn("Invalid token");
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkToken();
+  }, []);
 
   const handleNavigate = () => {
     navigate("/login", { replace: true });
   };
 
-  console.log(location);
   return (
     <div className="success section__padding">
       <div className="success__content">
         <div className="success__content-img section__margin">
-          <img src={error} alt="" />
+          <img src={newpassword} alt="" />
           <h2 className="section__heading">Success</h2>
           <p className="section__text lead__text">
-            We have succsefuly created your new password. Head back to the login
+            We have succsefuly created your new password. Go back to the login
             page to get access your account
           </p>
           <button onClick={() => handleNavigate()} className="btn auth__btns">

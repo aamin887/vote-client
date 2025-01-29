@@ -50,7 +50,10 @@ function App() {
             <Route element={<Register />} path="/register" />
             <Route element={<PasswordRequest />} path="/change-password" />
             <Route element={<ChangePassword />} path="/new-password" />
-            <Route element={<PasswordSuccess />} path="/password-success" />
+            <Route
+              element={<PasswordSuccess />}
+              path="/password-success/:token"
+            />
 
             <Route element={<Verify />} path="/verification" />
             <Route element={<VerifyUser />} path="/verify-user/:userId" />
@@ -61,7 +64,7 @@ function App() {
                 <Route element={<Vote />} path="/votes" />
                 <Route element={<Layout />}>
                   <Route element={<Dashboard />} path="/dashboard" />
-                  <Route element={<ProfilePage />} path="/profile" />
+                  <Route element={<ProfilePage />} path="/profile/:userId" />
                   {/* elections */}
                   <Route path="elections">
                     {/* index */}
